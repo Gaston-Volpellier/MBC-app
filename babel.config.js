@@ -4,8 +4,14 @@ module.exports = {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: ['./src'],
+        cwd: 'babelrc',
+        extensions: ['.ts', '.tsx', '.js', '.ios.js', '.android.js'],
+        alias: {
+          '@app': './app',
+        },
       },
     ],
+    'jest-hoist',
+    'react-native-reanimated/plugin',
   ],
 };

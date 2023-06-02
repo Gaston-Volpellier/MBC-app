@@ -1,25 +1,24 @@
 import React from 'react';
-import {
-  Image,
-  View,
-  ActivityIndicator,
-  Button,
-  Text,
-  Pressable,
-  ScrollView,
-} from 'react-native';
+import {Image, View, Text, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import componentStyles from '../styles/components';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {fontColors} from '../styles/variables';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Header(): JSX.Element {
+export default function Header(props): JSX.Element {
   return (
     <View style={componentStyles.headerContainer}>
-      <Text>Menu</Text>
+      <Pressable>
+        <Icon name="md-menu-sharp" size={24} color={fontColors.primary} />
+      </Pressable>
       <Image
         source={require('../../assets/images/MBC_logo.png')}
         style={styles.mainLogo}
       />
-      <Text>Icon</Text>
+      <Pressable>
+        <Icon name="person-circle" size={42} color={fontColors.terciary} />
+      </Pressable>
     </View>
   );
 }
