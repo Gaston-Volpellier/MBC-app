@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
-import {fontColors} from './variables';
+import {backgroundColors, fontColors} from './variables';
 
 const fonts = StyleSheet.create({
-  mainFont: {
+  main: {
     fontWeight: '400',
     fontSize: 30,
     lineHeight: 34,
@@ -11,20 +11,44 @@ const fonts = StyleSheet.create({
     textTransform: 'uppercase',
     fontFamily: 'Anton',
   },
-  primaryFont: {
+  primary: {
     fontWeight: '400',
     fontSize: 18,
     textAlign: 'center',
-    fontFamily: 'Bree Serif',
+    fontFamily: 'BreeSerif',
     color: fontColors.primary,
   },
-  primaryWhiteFont: {
+  primaryWhite: {
     fontWeight: '400',
     fontSize: 16,
     textAlign: 'center',
-    fontFamily: 'Bree Serif',
+    fontFamily: 'BreeSerif',
     color: fontColors.secondary,
     textTransform: 'uppercase',
+  },
+  secondary: {
+    fontWeight: '400',
+    fontSize: 20,
+    // lineHeight: 21,
+    textAlign: 'center',
+    color: fontColors.primary,
+    textTransform: 'uppercase',
+    fontFamily: 'Anton',
+  },
+  secondarySmall: {
+    fontWeight: '400',
+    fontSize: 20,
+    // lineHeight: 21,
+    color: fontColors.primary,
+    textTransform: 'uppercase',
+    fontFamily: 'Anton',
+  },
+  terciary: {
+    fontWeight: '400',
+    fontSize: 14,
+    // lineHeight: 15,
+    color: fontColors.terciary,
+    fontFamily: 'BreeSerif',
   },
   underlined: {
     textDecorationLine: 'underline',

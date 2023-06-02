@@ -12,8 +12,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: backgroundColors.primary,
+    paddingBottom: 50,
+  },
+  horizontalPadding: {
     paddingHorizontal: 30,
-    paddingBottom: 34,
   },
   centerContainer: {
     alignItems: 'center',
@@ -27,11 +29,11 @@ const styles = StyleSheet.create({
     height: 59,
     width: 128,
   },
-  loggingLogo: {
+  loginLogo: {
     marginTop: 50,
     marginBottom: 41,
   },
-  loggingSection: {
+  loginSection: {
     marginBottom: 30,
   },
   spinner: {
@@ -40,6 +42,10 @@ const styles = StyleSheet.create({
   },
   pressableText: {
     alignItems: 'center',
+  },
+  homePadding: {
+    paddingTop: 35,
+    paddingBottom: 29,
   },
 });
 
