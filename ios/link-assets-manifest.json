@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Anton.ttf",
+      "sha1": "a3651b13ddfd77fc2a203b847ded929c8dae878a"
+    },
+    {
+      "path": "assets/fonts/BreeSerif.ttf",
+      "sha1": "ea3f71be40587c7cd87daefd082ef53ce916b3cd"
+    }
+  ]
+}
