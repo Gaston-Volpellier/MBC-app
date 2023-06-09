@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors} from './variables';
+import {colors} from './variables';
 
 const componentStyles = StyleSheet.create({
   primaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
-    borderColor: backgroundColors.terciary,
+    borderColor: colors.primary,
+    backgroundColor: colors.quaternary,
     borderWidth: 2,
     borderRadius: 30,
     alignItems: 'center',
@@ -13,28 +14,26 @@ const componentStyles = StyleSheet.create({
   secondaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
-    backgroundColor: backgroundColors.terciary,
+    backgroundColor: colors.primary,
     borderRadius: 30,
     alignItems: 'center',
   },
   terciaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
-    borderColor: backgroundColors.terciary,
-    borderWidth: 2,
     borderRadius: 30,
     alignItems: 'center',
   },
   whiteButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
-    backgroundColor: backgroundColors.secondary,
+    backgroundColor: colors.secondary,
     borderRadius: 30,
     alignItems: 'center',
     marginBottom: 18,
   },
   navigationContainer: {
-    backgroundColor: backgroundColors.terciary,
+    backgroundColor: colors.primary,
     position: 'absolute',
     bottom: 23,
     left: 30,
@@ -42,13 +41,22 @@ const componentStyles = StyleSheet.create({
     borderRadius: 20,
     height: 83,
   },
-  paddingRegular: {
-    paddingBottom: 14,
+  loadingContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.secondary,
+    justifyContent: 'center',
+  },
+  mainContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.quaternary,
+    paddingBottom: 50,
   },
   headerContainer: {
     width: '100%',
     height: 90,
-    backgroundColor: backgroundColors.secondary,
+    backgroundColor: colors.secondary,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 30,
@@ -67,6 +75,9 @@ const componentStyles = StyleSheet.create({
     width: '100%',
     marginBottom: 40,
   },
+  sectionSizeLarge: {
+    height: 417,
+  },
   sectionOptions: {
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -79,11 +90,24 @@ const componentStyles = StyleSheet.create({
     height: 180,
     borderRadius: 20,
   },
+  imageContainerLarge: {
+    width: '100%',
+    height: 220,
+    borderRadius: 20,
+  },
   imageFormat: {
     width: '100%',
     height: '100%',
     overflow: 'hidden',
     borderRadius: 20,
+    position: 'relative',
+  },
+  imageFormatAlt: {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     position: 'relative',
   },
   imageDescription: {
@@ -93,17 +117,43 @@ const componentStyles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: backgroundColors.primary,
+    backgroundColor: colors.quaternary,
     overflow: 'hidden',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  imageTitle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.quaternary,
+    overflow: 'hidden',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  cardThumbnailPill: {
+    position: 'absolute',
+    top: 25,
+    left: 40,
+    borderRadius: 14,
+    textTransform: 'uppercase',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    minWidth: 103,
+    textAlign: 'center',
   },
   bottomLableFont: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 14,
-    // lineHeight: 21,
     textTransform: 'uppercase',
+  },
+  drawerStyle: {
+    width: '100%',
+    backgroundColor: colors.secondary,
   },
 });
 

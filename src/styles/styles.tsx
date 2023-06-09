@@ -1,21 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors} from './variables';
+import {backgroundColors, colors} from './variables';
 
 const styles = StyleSheet.create({
-  loadingContainer: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: backgroundColors.secondary,
-    justifyContent: 'center',
-  },
-  mainContainer: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: backgroundColors.primary,
-    paddingBottom: 50,
-  },
   horizontalPadding: {
     paddingHorizontal: 30,
+  },
+  paddingRegular: {
+    paddingBottom: 14,
   },
   centerContainer: {
     alignItems: 'center',
@@ -46,6 +37,15 @@ const styles = StyleSheet.create({
   homePadding: {
     paddingTop: 35,
     paddingBottom: 29,
+  },
+  previewScreen: {
+    backgroundColor: colors.quaternary,
+    height: '100%',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  borderRadius: {
+    borderRadius: 20,
   },
 });
 

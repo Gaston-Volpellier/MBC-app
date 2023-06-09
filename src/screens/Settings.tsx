@@ -1,11 +1,16 @@
 import React from 'react';
-import {Image, View, Text, Button} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import styles from '../styles/styles';
+import fonts from '../styles/fonts';
+import componentStyles from '../styles/components';
 
-export default function Settings(): JSX.Element {
+export default function Settings({navigation}): JSX.Element {
   return (
-    <View>
-      <Text>Settings</Text>
+    <View style={styles.previewScreen}>
+      <Text style={[fonts.primary, {marginBottom: 25}]}>Settings</Text>
+      <Pressable onPress={() => navigation.goBack()}>
+        <Text style={componentStyles.secondaryButton}>Go back</Text>
+      </Pressable>
     </View>
   );
 }

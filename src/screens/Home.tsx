@@ -5,8 +5,9 @@ import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import Header from '../components/Header';
 import ImageSection from '../components/ImageSection';
+import {colors, fontColors} from '../styles/variables';
 
-export default function Home(): JSX.Element {
+export default function Home({navigation}: Props): JSX.Element {
   const image1 = 'Rectangle2.png';
   const image2 = 'Rectangle3.png';
   const image3 = 'Rectangle4.png';
@@ -14,10 +15,18 @@ export default function Home(): JSX.Element {
 
   return (
     <View>
-      <Header />
-      <ScrollView style={[styles.mainContainer]}>
+      <Header
+        openDrawer={() => navigation.openDrawer()}
+        closeDrawer={() => navigation.closeDrawer()}
+      />
+      <ScrollView style={[componentStyles.mainContainer]}>
         <Text
-          style={[fonts.main, styles.horizontalPadding, styles.homePadding]}>
+          style={[
+            fonts.secondaryMain,
+            styles.horizontalPadding,
+            styles.homePadding,
+            fontColors.primary,
+          ]}>
           NI EN TINDER, NI EN BUMBLE, NI EN HAPPN.. ACÁ SÍ VAS A ENCONTRAR TU
           MATCH PERFECTO
         </Text>
@@ -46,7 +55,7 @@ export default function Home(): JSX.Element {
               imageDescription="CONOCÉ NUESTROS LOCALES"
             />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate('Offers')}>
+          <Pressable onPress={() => navigation.navigate('Stores')}>
             <ImageSection
               title="Tienda online"
               image={require('../../assets/images/' + image4)}
