@@ -1,23 +1,22 @@
 import React from 'react';
-import {Image, View, Text, Pressable} from 'react-native';
+import {Image, View, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import componentStyles from '../styles/components';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {fontColors} from '../styles/variables';
-import {useNavigation} from '@react-navigation/native';
+import {Ionicons} from '../libs/vector-icons';
+import {colors} from '../styles/variables';
 
-export default function Header(props): JSX.Element {
+export default function Header({openDrawer, closeDrawer}): JSX.Element {
   return (
     <View style={componentStyles.headerContainer}>
-      <Pressable>
-        <Icon name="md-menu-sharp" size={24} color={fontColors.primary} />
+      <Pressable onPress={openDrawer}>
+        <Ionicons name="md-menu-sharp" size={24} color={colors.primary} />
       </Pressable>
       <Image
         source={require('../../assets/images/MBC_logo.png')}
         style={styles.mainLogo}
       />
       <Pressable>
-        <Icon name="person-circle" size={42} color={fontColors.terciary} />
+        <Ionicons name="person-circle" size={42} color={colors.terciary} />
       </Pressable>
     </View>
   );

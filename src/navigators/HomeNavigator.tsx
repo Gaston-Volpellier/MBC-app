@@ -5,7 +5,14 @@ import Offers from '../screens/Offers';
 import Coupons from '../screens/Coupons';
 import Stores from '../screens/Stores';
 
-const Stack = createNativeStackNavigator();
+type NativeStackParamList = {
+  Home: undefined;
+  Offers: undefined;
+  Coupons: undefined;
+  Stores: undefined;
+};
+
+const Stack = createNativeStackNavigator<NativeStackParamList>();
 
 export default function HomeNavigator(): JSX.Element {
   return (
