@@ -3,6 +3,7 @@ import {Image, View, Text} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
+import {fontColors} from '../styles/variables';
 
 interface ImageInterface {
   image: NodeRequire;
@@ -20,8 +21,8 @@ export default function ImageSection({
   return (
     <View style={[componentStyles.sectionContainer, styles.horizontalPadding]}>
       <View style={[componentStyles.sectionOptions]}>
-        <Text style={fonts.secondarySmall}>{title}</Text>
-        <Text style={fonts.terciary}>Ver todo</Text>
+        <Text style={[fonts.secondary, fontColors.primary]}>{title}</Text>
+        <Text style={[fonts.terciary, fontColors.terciary]}>Ver todo</Text>
       </View>
       <View style={componentStyles.imageContainer}>
         <Image
@@ -30,7 +31,9 @@ export default function ImageSection({
           alt={altDescription}
         />
         <View style={componentStyles.imageDescription}>
-          <Text style={fonts.secondary}>{imageDescription}</Text>
+          <Text style={[fonts.secondarySmaller, fontColors.primary]}>
+            {imageDescription}
+          </Text>
         </View>
       </View>
     </View>
