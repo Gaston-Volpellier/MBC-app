@@ -22,7 +22,9 @@ export default function ImageSection({
     <View style={[componentStyles.sectionContainer, styles.horizontalPadding]}>
       <View style={[componentStyles.sectionOptions]}>
         <Text style={[fonts.secondary, fontColors.primary]}>{title}</Text>
-        <Text style={[fonts.terciary, fontColors.terciary]}>Ver todo</Text>
+        <Text style={[fonts.primarySmaller, fontColors.terciary]}>
+          Ver todo
+        </Text>
       </View>
       <View style={componentStyles.imageContainer}>
         <Image
