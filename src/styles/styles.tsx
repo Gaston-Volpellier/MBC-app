@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors, colors} from './variables';
+import {colors} from './variables';
 
 const styles = StyleSheet.create({
   horizontalPadding: {
@@ -44,8 +44,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
   },
+  horizontalAlign: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
   borderRadius: {
     borderRadius: 20,
+  },
+  textAlignC: {
+    textAlign: 'center',
+  },
+  mb10: {
+    marginBottom: 10,
+  },
+  mb14: {
+    marginBottom: 14,
+  },
+  mb20: {
+    marginBottom: 20,
+  },
+  mb30: {
+    marginBottom: 30,
+  },
+  mb40: {
+    marginBottom: 40,
+  },
+  mb50: {
+    marginBottom: 50,
   },
 });
 
