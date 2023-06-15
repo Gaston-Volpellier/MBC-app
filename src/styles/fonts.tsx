@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors, fontColors} from './variables';
 
 const fonts = StyleSheet.create({
   primary: {
@@ -12,14 +11,21 @@ const fonts = StyleSheet.create({
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 16,
-    textAlign: 'center',
-    textTransform: 'uppercase',
+  },
+  primarySmaller: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 14,
+  },
+  primaryLarge: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 20,
   },
   secondary: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 20,
-    textAlign: 'center',
     textTransform: 'uppercase',
   },
   secondarySmall: {
@@ -41,21 +47,26 @@ const fonts = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
   },
+  secondaryVeryLarge: {
+    fontFamily: 'Anton',
+    fontWeight: '400',
+    fontSize: 40,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
   secondaryMain: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 30,
     textAlign: 'center',
     textTransform: 'uppercase',
-    lineHeight: 35,
   },
-  terciary: {
-    fontFamily: 'BreeSerif',
-    fontWeight: '400',
-    fontSize: 14,
-  },
+
   underlined: {
     textDecorationLine: 'underline',
+  },
+  lh35: {
+    lineHeight: 35,
   },
 });
 

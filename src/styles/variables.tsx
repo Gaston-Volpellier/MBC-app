@@ -1,17 +1,18 @@
 import {StyleSheet} from 'react-native';
 
 export const colors = {
-  //black
   primary: '#000000',
-  //white
   secondary: '#FFFFFF',
-  //orange
   terciary: '#FA821E',
-  //yellow
+  terciaryLight: '#FFE8D4',
   quaternary: '#F0BE1E',
+  gray: '#A9A9A9',
   darkGray: '#1F1F1F',
+  lightGray: '#E3E3E3',
+  lightGrayAlt: '#E4E4E4',
   success: '#1BA048',
   danger: '#CB1A1A',
+  backdrop: 'rgba(243, 243, 243, 0.96)',
 };
 
 export const backgroundColors = StyleSheet.create({
@@ -35,6 +36,9 @@ export const backgroundColors = StyleSheet.create({
   },
   danger: {
     backgroundColor: colors.danger,
+  },
+  lightGray: {
+    backgroundColor: colors.lightGray,
   },
 });
 
