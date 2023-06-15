@@ -5,7 +5,7 @@ import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import Header from '../components/Header';
 import ImageSectionAlt from '../components/ImageSectionAlt';
-import {fontColors} from '../styles/variables';
+import {backgroundColors, fontColors} from '../styles/variables';
 
 export default function Offers({navigation}: Props): JSX.Element {
   const image1 = 'MBC_ofertas1.png';
@@ -20,7 +20,8 @@ export default function Offers({navigation}: Props): JSX.Element {
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
       />
-      <ScrollView style={[componentStyles.mainContainer]}>
+      <ScrollView
+        style={[componentStyles.mainContainer, backgroundColors.quaternary]}>
         <Text
           style={[
             fonts.secondaryMain,
@@ -30,37 +31,47 @@ export default function Offers({navigation}: Props): JSX.Element {
           ]}>
           DEJATE SORPRENDER POR ESTAS OFERTAS EXCLUSIVAS
         </Text>
-        <View style={componentStyles.cardContainer}>
-          <ImageSectionAlt
-            image={require('../../assets/images/' + image1)}
-            altDescription="Section image"
-            title="2X1 EN IPA"
-            description="TODOS LOS DÍAS DE 16 A 20 HS"
-          />
-          <ImageSectionAlt
-            image={require('../../assets/images/' + image2)}
-            altDescription="Section image"
-            title="5X4 EN GOLDEN"
-            description="TODOS LOS DÍAS DE 16 A 20 HS"
-          />
-          <ImageSectionAlt
-            image={require('../../assets/images/' + image3)}
-            altDescription="Section image"
-            title="2X1 EN HAMBURGUESAS"
-            description="TODOS LOS DÍAS DESDE LAS 19 HS"
-          />
-          <ImageSectionAlt
-            image={require('../../assets/images/' + image4)}
-            altDescription="Section image"
-            title="20% EN TODOS LOS TRAGOS"
-            description="TODOS LOS DÍAS DESDE LAS 18 HS"
-          />
-          <ImageSectionAlt
-            image={require('../../assets/images/' + image5)}
-            altDescription="Section image"
-            title="SEMANA DEL NACHO"
-            description="50% OFF EN NACHOS CON QUESO"
-          />
+        <View style={[componentStyles.cardContainer, styles.horizontalPadding]}>
+          <View style={componentStyles.sectionContainer}>
+            <ImageSectionAlt
+              image={require('../../assets/images/' + image1)}
+              altDescription="Section image"
+              title="2X1 EN IPA"
+              description="TODOS LOS DÍAS DE 16 A 20 HS"
+            />
+          </View>
+          <View style={componentStyles.sectionContainer}>
+            <ImageSectionAlt
+              image={require('../../assets/images/' + image2)}
+              altDescription="Section image"
+              title="5X4 EN GOLDEN"
+              description="TODOS LOS DÍAS DE 16 A 20 HS"
+            />
+          </View>
+          <View style={componentStyles.sectionContainer}>
+            <ImageSectionAlt
+              image={require('../../assets/images/' + image3)}
+              altDescription="Section image"
+              title="2X1 EN HAMBURGUESAS"
+              description="TODOS LOS DÍAS DESDE LAS 19 HS"
+            />
+          </View>
+          <View style={componentStyles.sectionContainer}>
+            <ImageSectionAlt
+              image={require('../../assets/images/' + image4)}
+              altDescription="Section image"
+              title="20% EN TODOS LOS TRAGOS"
+              description="TODOS LOS DÍAS DESDE LAS 18 HS"
+            />
+          </View>
+          <View style={componentStyles.sectionContainer}>
+            <ImageSectionAlt
+              image={require('../../assets/images/' + image5)}
+              altDescription="Section image"
+              title="SEMANA DEL NACHO"
+              description="50% OFF EN NACHOS CON QUESO"
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

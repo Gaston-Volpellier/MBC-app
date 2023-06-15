@@ -50,19 +50,29 @@ export default function StoresSection({
             style={[
               fonts.secondarySmall,
               fontColors.secondary,
-              {textAlign: 'center', marginBottom: 7},
+              styles.textAlignC,
+              {marginBottom: 7},
             ]}>
             {openingHours}
           </Text>
-          <Text style={[fonts.primary, fontColors.secondary]}>{address}</Text>
           <Text
-            style={[fonts.primary, fontColors.secondary, {marginBottom: 16}]}>
+            style={[fonts.primary, styles.textAlignC, fontColors.secondary]}>
+            {address}
+          </Text>
+          <Text
+            style={[
+              fonts.primary,
+              styles.textAlignC,
+              fontColors.secondary,
+              {marginBottom: 16},
+            ]}>
             {city}
           </Text>
           <Pressable style={styles.pressableText}>
             <Text
               style={[
                 fonts.primary,
+                styles.textAlignC,
                 fontColors.quaternary,
                 fonts.underlined,
                 {marginBottom: 17},
@@ -77,7 +87,12 @@ export default function StoresSection({
               ,
               {marginBottom: 24, marginHorizontal: 24},
             ]}>
-            <Text style={[fonts.primarySmall, fontColors.primary]}>
+            <Text
+              style={[
+                fonts.primarySmall,
+                styles.textAlignC,
+                fontColors.primary,
+              ]}>
               RESERVÁ MESA
             </Text>
           </Pressable>

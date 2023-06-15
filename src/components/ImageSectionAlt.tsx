@@ -4,6 +4,7 @@ import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, fontColors} from '../styles/variables';
+import PillComponent from './StatusPill';
 
 interface ImageInterface {
   image: NodeRequire;
@@ -21,55 +22,34 @@ export default function ImageSectionAlt({
   status,
 }: ImageInterface): JSX.Element {
   return (
-    <View style={[componentStyles.sectionContainer, styles.horizontalPadding]}>
-      <View style={componentStyles.imageContainerLarge}>
-        <Image
-          style={[componentStyles.imageFormat]}
-          source={image}
-          alt={altDescription}
-        />
-        {status ? (
-          status == 1 ? (
-            <Text
-              style={[
-                componentStyles.cardThumbnailPill,
-                fonts.terciary,
-                fontColors.secondary,
-                backgroundColors.succsess,
-              ]}>
-              Activo
-            </Text>
-          ) : (
-            <Text
-              style={[
-                componentStyles.cardThumbnailPill,
-                fonts.terciary,
-                fontColors.secondary,
-                backgroundColors.danger,
-              ]}>
-              Vencido
-            </Text>
-          )
-        ) : null}
-        <View
-          style={[componentStyles.imageDescription, {alignItems: 'center'}]}>
-          <Text
-            style={[
-              fonts.secondaryLarge,
-              fontColors.primary,
-              {margin: 0, padding: 0},
-            ]}>
-            {title}
-          </Text>
-          <Text
-            style={[
-              fonts.terciary,
-              fontColors.primary,
-              {margin: 0, padding: 0},
-            ]}>
-            {description}
-          </Text>
+    <View style={componentStyles.imageContainerLarge}>
+      <Image
+        style={[componentStyles.imageFormat]}
+        source={image}
+        alt={altDescription}
+      />
+      {status ? (
+        <View style={[componentStyles.cardThumbnailPosition]}>
+          <PillComponent status={status} />
         </View>
+      ) : null}
+      <View style={[componentStyles.imageDescription, {alignItems: 'center'}]}>
+        <Text
+          style={[
+            fonts.secondaryLarge,
+            fontColors.primary,
+            {margin: 0, padding: 0},
+          ]}>
+          {title}
+        </Text>
+        <Text
+          style={[
+            fonts.primarySmaller,
+            fontColors.primary,
+            {margin: 0, padding: 0, marginBottom: 3},
+          ]}>
+          {description}
+        </Text>
       </View>
     </View>
   );

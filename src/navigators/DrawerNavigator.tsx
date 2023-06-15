@@ -5,19 +5,20 @@ import Settings from '../screens/Settings';
 import BottomNavigator from './BottomNavigator';
 import componentStyles from '../styles/components';
 import MenuDrawer from '../components/MenuDrawer';
+import SettingsNavigator from './SettingsNavigator';
 
 type RootStackParamList = {
   Home_bottom: undefined;
   Offers_bottom: undefined;
   Coupons_bottom: undefined;
   Stores_bottom: undefined;
-  Profile: undefined;
-  Settings: undefined;
+  Settings_Profile: undefined;
+  Settings_Settings: undefined;
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
-export default function DrawerNavigator() {
+export default function DrawerNavigator(props) {
   return (
     <Drawer.Navigator
       initialRouteName="Home_bottom"
@@ -25,7 +26,12 @@ export default function DrawerNavigator() {
         headerShown: false,
         drawerStyle: componentStyles.drawerStyle,
       }}
-      drawerContent={props => <MenuDrawer {...props} />}>
+      drawerContent={props => (
+        <MenuDrawer
+          {...props}
+          closeDrawer={() => props.navigation.closeDrawer()}
+        />
+      )}>
       <Drawer.Screen
         name="Home_bottom"
         options={{drawerLabel: 'Home'}}
@@ -51,14 +57,16 @@ export default function DrawerNavigator() {
         component={BottomNavigator}
       />
       <Drawer.Screen
-        name="Profile"
+        name="Settings_Profile"
         options={{drawerLabel: 'Perfil y Cuenta'}}
-        component={Profile}
+        initialParams={{routeName: 'Profile'}}
+        component={SettingsNavigator}
       />
       <Drawer.Screen
-        name="Settings"
+        name="Settings_Settings"
         options={{drawerLabel: 'Ajustes'}}
-        component={Settings}
+        initialParams={{routeName: 'Settings'}}
+        component={SettingsNavigator}
       />
     </Drawer.Navigator>
   );
