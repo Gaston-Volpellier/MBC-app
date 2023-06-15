@@ -5,7 +5,7 @@ import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import Header from '../components/Header';
 import ImageSection from '../components/ImageSection';
-import {colors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 
 export default function Home({navigation}: Props): JSX.Element {
   const image1 = 'Rectangle2.png';
@@ -19,13 +19,15 @@ export default function Home({navigation}: Props): JSX.Element {
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
       />
-      <ScrollView style={[componentStyles.mainContainer]}>
+      <ScrollView
+        style={[componentStyles.mainContainer, backgroundColors.quaternary]}>
         <Text
           style={[
             fonts.secondaryMain,
             styles.horizontalPadding,
             styles.homePadding,
             fontColors.primary,
+            fonts.lh35,
           ]}>
           NI EN TINDER, NI EN BUMBLE, NI EN HAPPN.. ACÁ SÍ VAS A ENCONTRAR TU
           MATCH PERFECTO

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
-import {fontColors} from '../styles/variables';
+import {backgroundColors, fontColors} from '../styles/variables';
 import componentStyles from '../styles/components';
 import Header from '../components/Header';
 import StoresSection from '../components/StoresSection';
@@ -17,7 +17,8 @@ export default function Stores({navigation}: Props): JSX.Element {
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
       />
-      <ScrollView style={[componentStyles.mainContainer]}>
+      <ScrollView
+        style={[componentStyles.mainContainer, backgroundColors.quaternary]}>
         <Text
           style={[
             fonts.secondaryMain,
