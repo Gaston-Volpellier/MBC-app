@@ -1,19 +1,27 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
+import {AntDesign} from '../libs/vector-icons';
 
 export default function Privacy(props): JSX.Element {
   return (
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Politicas de privacidad"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => props.navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => props.navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

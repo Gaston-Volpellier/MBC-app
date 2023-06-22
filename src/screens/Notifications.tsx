@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView, Switch} from 'react-native';
+import {View, Text, ScrollView, Switch, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
-import {Entypo} from '../libs/vector-icons';
+import {Entypo, Ionicons} from '../libs/vector-icons';
 
 export default function Notifications(props, {navigation}: Props): JSX.Element {
   const [promos, setPromos] = useState(false);
@@ -17,8 +17,16 @@ export default function Notifications(props, {navigation}: Props): JSX.Element {
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Notificaciones"
-        iconPrimary="arrow-back-circle"
-        iconSecondary=""
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <Ionicons
+              name="arrow-back-circle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

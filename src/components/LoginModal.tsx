@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, Text, Image, View} from 'react-native';
 import {backgroundColors, fontColors} from '../styles/variables';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -21,9 +21,13 @@ export default function LoginModal({toggleModal, modalVisible}): JSX.Element {
         </Text>
         <View style={styles.loginSection}>
           <Pressable
-            style={componentStyles.whiteButton}
+            style={[componentStyles.whiteButton, styles.horizontalAlignAlt]}
             // onPress={() => authenticate(true)}
           >
+            <Image
+              source={require('../../assets/images/Google_logo.png')}
+              style={{height: 25, width: 25}}
+            />
             <Text
               style={[
                 fonts.primarySmall,

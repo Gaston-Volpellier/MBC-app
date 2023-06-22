@@ -26,7 +26,8 @@ export default function Login(props): JSX.Element {
         </View>
       </View>
       <View style={styles.loginSection}>
-        <Text style={[fonts.secondaryMain, fontColors.primary]}>
+        <Text
+          style={[fonts.secondaryMain, fontColors.primary, styles.textAlignC]}>
           BIENVENID@ AL PARAÍSO DE LA BIRRA, LOS TRAGOS Y LA RICA COMIDA 🙌🏻
         </Text>
       </View>
@@ -37,8 +38,12 @@ export default function Login(props): JSX.Element {
       </View>
       <View style={styles.loginSection}>
         <Pressable
-          style={componentStyles.whiteButton}
+          style={[componentStyles.whiteButton, styles.horizontalAlignAlt]}
           onPress={() => authenticate(true)}>
+          <Image
+            source={require('../../assets/images/Google_logo.png')}
+            style={{height: 25, width: 25}}
+          />
           <Text
             style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
             CONTINUÁ CON GOOGLE

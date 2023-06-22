@@ -5,15 +5,23 @@ import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
+import {AntDesign} from '../libs/vector-icons';
 
 export default function Recovery({navigation}: Props): JSX.Element {
   return (
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="RECUPERÁ TU USUARIO Y/O CONTRASEÑA"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[
@@ -21,10 +29,19 @@ export default function Recovery({navigation}: Props): JSX.Element {
           styles.horizontalPadding,
           backgroundColors.secondary,
         ]}>
-        <Text style={[fonts.primaryLarge, fontColors.primary, styles.mb20]}>
-          Por favor ingresá el código que te enviamos por e-mail:
+        <Text style={[fonts.primary, fontColors.primary, styles.mb20]}>
+          Por favor ingresá tu E-Mail. Te enviaremos un código para recuperar tu
+          contraseña.
         </Text>
 
+        <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
+          TU E-MAIL
+        </Text>
+        <Text style={[fonts.primaryLarge, fontColors.primary, styles.mb20]}>
+          juan@lopez.com
+        </Text>
+
+        <View style={[componentStyles.blackLine, styles.mb30]} />
         <View style={{marginTop: 'auto', marginBottom: 150}}>
           <Pressable
             style={[

@@ -5,15 +5,23 @@ import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
+import {AntDesign} from '../libs/vector-icons';
 
 export default function EditProfile({navigation}: Props): JSX.Element {
   return (
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="EDITAR PERFIL"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
-import {Entypo} from '../libs/vector-icons';
+import {AntDesign, Entypo} from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -12,9 +12,16 @@ export default function Settings({navigation}): JSX.Element {
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Ajustes"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

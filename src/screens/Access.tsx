@@ -3,20 +3,29 @@ import {View, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
 import {useNavigation} from '@react-navigation/native';
+import {AntDesign, EvilIcons} from '../libs/vector-icons';
 
 export default function Access(props): JSX.Element {
   const authenticate = props.authenticate;
   const navigation = useNavigation();
+
   return (
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="ACCEDÉ A TU CUENTA"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[
@@ -47,6 +56,7 @@ export default function Access(props): JSX.Element {
             style={[
               componentStyles.secondaryButton,
               backgroundColors.quaternary,
+              {marginBottom: 25},
             ]}
             onPress={() => authenticate(true)}>
             <Text

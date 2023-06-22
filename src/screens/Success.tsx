@@ -12,21 +12,23 @@ export default function Success(props): JSX.Element {
   const navigation = useNavigation();
   return (
     <View style={backgroundColors.secondary}>
-      <HeaderSecondary
-        title="¡REGISTRO EXITOSO!"
-        iconPrimary=""
-        iconSecondary=""
-      />
+      <HeaderSecondary title="¡REGISTRO EXITOSO!" />
       <ScrollView
         style={[
           componentStyles.mainContainer,
           styles.horizontalPadding,
           backgroundColors.secondary,
         ]}>
-        <Text style={[fonts.primary, fontColors.primary, styles.mb20]}>
-          Tu cuenta ha sido creada con éxito. Hemos enviado un mail a
-          lorem@ipsum.com para verificar tu correo. Por favor confirmalo para
-          empezar.
+        <Text
+          style={[
+            fonts.primary,
+            fontColors.primary,
+            styles.mb20,
+            styles.textAlignC,
+          ]}>
+          Tu cuenta ha sido creada con éxito.{'\n'}
+          {'\n'}Hemos enviado un mail a lorem@ipsum.com para verificar tu
+          correo. Por favor confirmalo para empezar.
         </Text>
 
         <Pressable
