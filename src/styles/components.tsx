@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from './variables';
+import {backgroundColors, colors} from './variables';
 
 const componentStyles = StyleSheet.create({
   primaryButton: {
@@ -50,7 +50,6 @@ const componentStyles = StyleSheet.create({
   mainContainer: {
     width: '100%',
     height: '100%',
-    backgroundColor: colors.quaternary,
     paddingBottom: 50,
   },
   headerContainer: {
@@ -134,10 +133,24 @@ const componentStyles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
-  cardThumbnailPill: {
+  cardThumbnailPosition: {
     position: 'absolute',
     top: 25,
     left: 40,
+  },
+
+  cardThumbnailPositionRight: {
+    position: 'absolute',
+    top: 25,
+    right: 40,
+  },
+  cardThumbnailCentral: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{translateX: -60}, {translateY: -20}],
+  },
+  cardThumbnailPill: {
     borderRadius: 14,
     textTransform: 'uppercase',
     paddingVertical: 6,
@@ -154,6 +167,78 @@ const componentStyles = StyleSheet.create({
   drawerStyle: {
     width: '100%',
     backgroundColor: colors.secondary,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colors.terciary,
+    overflow: 'hidden',
+  },
+  modalView: {
+    backgroundColor: colors.quaternary,
+    width: '100%',
+    maxHeight: '90%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 30,
+    paddingHorizontal: 30,
+    paddingBottom: 36,
+  },
+  qrModalContainer: {
+    paddingTop: 14,
+    paddingHorizontal: 31,
+  },
+  QRContainer: {
+    backgroundColor: colors.lightGray,
+    padding: 23,
+    marginBottom: 13,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  QRFormat: {
+    height: 171,
+    width: 171,
+  },
+  CheckIcon: {
+    height: 71,
+    width: 71,
+  },
+  IconSizeRegular: {
+    height: 35,
+  },
+  IconSizeLarge: {
+    height: 41,
+  },
+  backDrop: {
+    backgroundColor: colors.backdrop,
+    flex: 1,
+  },
+  backDropBlack: {
+    backgroundColor: colors.black,
+    flex: 1,
+  },
+  grayLine: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: colors.lightGray,
+  },
+  blackLine: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: colors.primary,
+  },
+  switchSize: {
+    transform: [{scaleX: 1.2}, {scaleY: 1.2}],
+  },
+  popupContainer: {
+    width: 330,
+    borderRadius: 20,
+    overflow: 'hidden',
   },
 });
 

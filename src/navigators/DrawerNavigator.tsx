@@ -6,6 +6,9 @@ import BottomNavigator from './BottomNavigator';
 import componentStyles from '../styles/components';
 import MenuDrawer from '../components/MenuDrawer';
 import SettingsNavigator from './SettingsNavigator';
+import fonts from '../styles/fonts';
+import {colors, fontColors} from '../styles/variables';
+import {View, Text} from 'react-native';
 
 type RootStackParamList = {
   Home_bottom: undefined;
@@ -34,37 +37,103 @@ export default function DrawerNavigator(props) {
       )}>
       <Drawer.Screen
         name="Home_bottom"
-        options={{drawerLabel: 'Home'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Home
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'HomeNavigator'}}
         component={BottomNavigator}
       />
       <Drawer.Screen
         name="Offers_bottom"
-        options={{drawerLabel: 'Ofertas'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Ofertas
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'Offers'}}
         component={BottomNavigator}
       />
       <Drawer.Screen
         name="Coupons_bottom"
-        options={{drawerLabel: 'Mis Cupones'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Mis cupones
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'Coupons'}}
         component={BottomNavigator}
       />
       <Drawer.Screen
         name="Stores_bottom"
-        options={{drawerLabel: 'Locales'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Locales
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'Stores'}}
         component={BottomNavigator}
       />
       <Drawer.Screen
         name="Settings_Profile"
-        options={{drawerLabel: 'Perfil y Cuenta'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Perfil y cuenta
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'Profile'}}
         component={SettingsNavigator}
       />
       <Drawer.Screen
         name="Settings_Settings"
-        options={{drawerLabel: 'Ajustes'}}
+        options={{
+          drawerLabel: ({focused}) => (
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                focused ? fonts.underlined : null,
+                focused ? fontColors.terciary : fontColors.primary,
+              ]}>
+              Ajustes
+            </Text>
+          ),
+        }}
         initialParams={{routeName: 'Settings'}}
         component={SettingsNavigator}
       />
