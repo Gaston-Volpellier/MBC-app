@@ -1,25 +1,35 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors, fontColors} from './variables';
 
 const fonts = StyleSheet.create({
   primary: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 18,
-    textAlign: 'center',
   },
   primarySmall: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 16,
-    textAlign: 'center',
-    textTransform: 'uppercase',
+  },
+  primarySmaller: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 14,
+  },
+  primary12: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 12,
+  },
+  primaryLarge: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 20,
   },
   secondary: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 20,
-    textAlign: 'center',
     textTransform: 'uppercase',
   },
   secondarySmall: {
@@ -38,6 +48,19 @@ const fonts = StyleSheet.create({
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 24,
+    textTransform: 'uppercase',
+  },
+  secondaryVeryLarge: {
+    fontFamily: 'Anton',
+    fontWeight: '400',
+    fontSize: 40,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  secondary50: {
+    fontFamily: 'Anton',
+    fontWeight: '400',
+    fontSize: 50,
     textAlign: 'center',
     textTransform: 'uppercase',
   },
@@ -45,17 +68,14 @@ const fonts = StyleSheet.create({
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 30,
-    textAlign: 'center',
     textTransform: 'uppercase',
-    lineHeight: 35,
   },
-  terciary: {
-    fontFamily: 'BreeSerif',
-    fontWeight: '400',
-    fontSize: 14,
-  },
+
   underlined: {
     textDecorationLine: 'underline',
+  },
+  lh35: {
+    lineHeight: 35,
   },
 });
 
