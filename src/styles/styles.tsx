@@ -48,13 +48,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
   horizontalAlignAlt: {
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
   borderRadius: {
     borderRadius: 20,

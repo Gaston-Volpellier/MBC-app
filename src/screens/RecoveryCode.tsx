@@ -6,6 +6,7 @@ import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
 import {AntDesign} from '../libs/vector-icons';
+import RecoveryCodeForm from '../components/form/RecoveryCodeForm';
 
 export default function RecoveryCode({navigation}: Props): JSX.Element {
   return (
@@ -33,24 +34,7 @@ export default function RecoveryCode({navigation}: Props): JSX.Element {
           Por favor ingresá el código que te enviamos por e-mail:
         </Text>
 
-        <View>
-          <Text style={[fonts.primaryLarge, fontColors.primary, styles.mb20]}>
-            4 4 4 4
-          </Text>
-        </View>
-
-        <Pressable
-          style={[
-            componentStyles.secondaryButton,
-            backgroundColors.quaternary,
-            {marginBottom: 150},
-          ]}
-          onPress={() => navigation.navigate('PasswordReset')}>
-          <Text
-            style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
-            CONTINUAR
-          </Text>
-        </Pressable>
+        <RecoveryCodeForm />
       </ScrollView>
     </View>
   );

@@ -6,6 +6,7 @@ import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
 import {AntDesign} from '../libs/vector-icons';
+import RecoveryForm from '../components/form/RecoveryForm';
 
 export default function Recovery({navigation}: Props): JSX.Element {
   return (
@@ -34,31 +35,7 @@ export default function Recovery({navigation}: Props): JSX.Element {
           contraseña.
         </Text>
 
-        <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
-          TU E-MAIL
-        </Text>
-        <Text style={[fonts.primaryLarge, fontColors.primary, styles.mb20]}>
-          juan@lopez.com
-        </Text>
-
-        <View style={[componentStyles.blackLine, styles.mb30]} />
-        <View style={{marginTop: 'auto', marginBottom: 150}}>
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              backgroundColors.quaternary,
-            ]}
-            onPress={() => navigation.navigate('RecoveryCode')}>
-            <Text
-              style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-              ]}>
-              CONTINUAR
-            </Text>
-          </Pressable>
-        </View>
+        <RecoveryForm navigation={navigation} />
       </ScrollView>
     </View>
   );

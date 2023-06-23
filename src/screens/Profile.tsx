@@ -27,7 +27,7 @@ export default function Profile({navigation}): JSX.Element {
             <EvilIcons
               name="gear"
               size={35}
-              color={colors.terciary}
+              color={colors.primary}
               style={componentStyles.IconSizeRegular}
             />
           </Pressable>

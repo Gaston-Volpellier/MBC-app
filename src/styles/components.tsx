@@ -240,6 +240,17 @@ const componentStyles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
   },
+  recoveryCodeContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  recoveryCodeInput: {
+    position: 'absolute',
+    height: 0,
+    width: 0,
+    opacity: 0,
+  },
 });
 
 export default componentStyles;
