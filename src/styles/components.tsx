@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from './variables';
+import {backgroundColors, colors} from './variables';
 
 const componentStyles = StyleSheet.create({
   primaryButton: {
@@ -138,6 +138,19 @@ const componentStyles = StyleSheet.create({
     top: 25,
     left: 40,
   },
+
+  cardThumbnailPositionRight: {
+    position: 'absolute',
+    top: 25,
+    right: 40,
+  },
+  cardThumbnailCentral: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{translateX: -60}, {translateY: -20}],
+  },
+
   cardThumbnailPill: {
     borderRadius: 14,
     textTransform: 'uppercase',
@@ -182,19 +195,40 @@ const componentStyles = StyleSheet.create({
     paddingHorizontal: 31,
   },
   QRContainer: {
-    backgroundColor: '#E2E2E2',
+
+    backgroundColor: colors.lightGray,
     padding: 23,
     marginBottom: 13,
     alignItems: 'center',
+    borderRadius: 10,
+
   },
   QRFormat: {
     height: 171,
     width: 171,
   },
+
+  CheckIcon: {
+    height: 71,
+    width: 71,
+  },
+  IconSizeRegular: {
+    height: 35,
+  },
+  IconSizeLarge: {
+    height: 41,
+  },
+
   backDrop: {
     backgroundColor: colors.backdrop,
     flex: 1,
   },
+
+  backDropBlack: {
+    backgroundColor: colors.black,
+    flex: 1,
+  },
+
   grayLine: {
     width: '100%',
     borderBottomWidth: 1,
@@ -208,6 +242,24 @@ const componentStyles = StyleSheet.create({
   switchSize: {
     transform: [{scaleX: 1.2}, {scaleY: 1.2}],
   },
+
+  popupContainer: {
+    width: 330,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  recoveryCodeContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  recoveryCodeInput: {
+    position: 'absolute',
+    height: 0,
+    width: 0,
+    opacity: 0,
+  },
+
 });
 
 export default componentStyles;

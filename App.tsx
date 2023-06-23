@@ -13,7 +13,10 @@ function App(): JSX.Element {
     <NavigationContainer>
       {/* <Loading /> */}
       {isAuthenticated ? (
-        <DrawerNavigator />
+        <DrawerNavigator
+          authenticated={isAuthenticated}
+          authenticate={setIsAuthenticated}
+        />
       ) : (
         <LoginNavigator authenticate={setIsAuthenticated} />
       )}

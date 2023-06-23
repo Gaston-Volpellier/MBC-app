@@ -40,7 +40,12 @@ export default function StoresSection({
             alt={altDescription}
           />
           <View style={componentStyles.imageTitle}>
-            <Text style={[fonts.secondaryLarge, fontColors.primary]}>
+            <Text
+              style={[
+                fonts.secondaryLarge,
+                styles.textAlignC,
+                fontColors.primary,
+              ]}>
               {title}
             </Text>
           </View>

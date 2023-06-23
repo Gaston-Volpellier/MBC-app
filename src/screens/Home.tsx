@@ -27,6 +27,7 @@ export default function Home({navigation}: Props): JSX.Element {
             styles.horizontalPadding,
             styles.homePadding,
             fontColors.primary,
+            styles.textAlignC,
             fonts.lh35,
           ]}>
           NI EN TINDER, NI EN BUMBLE, NI EN HAPPN.. ACÁ SÍ VAS A ENCONTRAR TU

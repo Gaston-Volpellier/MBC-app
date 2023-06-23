@@ -5,7 +5,6 @@ const fonts = StyleSheet.create({
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 18,
-    textAlign: 'center',
   },
   primarySmall: {
     fontFamily: 'BreeSerif',
@@ -17,6 +16,13 @@ const fonts = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
   },
+
+  primary12: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 12,
+  },
+
   primaryLarge: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
@@ -44,7 +50,6 @@ const fonts = StyleSheet.create({
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 24,
-    textAlign: 'center',
     textTransform: 'uppercase',
   },
   secondaryVeryLarge: {
@@ -54,11 +59,19 @@ const fonts = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
   },
+
+  secondary50: {
+    fontFamily: 'Anton',
+    fontWeight: '400',
+    fontSize: 50,
+
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
   secondaryMain: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 30,
-    textAlign: 'center',
     textTransform: 'uppercase',
   },
 

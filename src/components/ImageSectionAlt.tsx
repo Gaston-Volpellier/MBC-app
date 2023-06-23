@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, View, Text} from 'react-native';
-import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {fontColors} from '../styles/variables';
 import PillComponent from './StatusPill';
+import styles from '../styles/styles';
 
 interface ImageInterface {
   image: NodeRequire;
@@ -37,6 +37,7 @@ export default function ImageSectionAlt({
         <Text
           style={[
             fonts.secondaryLarge,
+            styles.textAlignC,
             fontColors.primary,
             {margin: 0, padding: 0},
           ]}>

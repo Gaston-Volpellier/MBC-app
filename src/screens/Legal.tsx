@@ -1,19 +1,27 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
+import {AntDesign} from '../libs/vector-icons';
 
 export default function Legal({navigation}): JSX.Element {
   return (
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Legales"
-        iconPrimary="close-o"
-        iconSecondary=""
-        primaryAction={() => navigation.goBack()}
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

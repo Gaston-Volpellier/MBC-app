@@ -12,8 +12,16 @@ export default function DeleteAccount(props, {navigation}: Props): JSX.Element {
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Borrar cuenta"
-        iconPrimary="close-o"
-        iconSecondary=""
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

@@ -1,6 +1,12 @@
 import React from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
-import {Entypo, FontAwesome5, Fontisto} from '../libs/vector-icons';
+import {
+  AntDesign,
+  Entypo,
+  EvilIcons,
+  FontAwesome5,
+  Fontisto,
+} from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -16,9 +22,26 @@ export default function Profile({navigation}): JSX.Element {
     <View style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Perfil y cuenta"
-        iconPrimary="close-o"
-        iconSecondary="gear"
-        secondaryAction={() => navigation.navigate('Settings')}
+        iconLeft={
+          <Pressable onPress={() => navigation.navigate('Settings')}>
+            <EvilIcons
+              name="gear"
+              size={35}
+              color={colors.primary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
+        iconRight={
+          <Pressable onPress={() => navigation.goBack()}>
+            <AntDesign
+              name="closecircle"
+              size={35}
+              color={colors.terciary}
+              style={componentStyles.IconSizeRegular}
+            />
+          </Pressable>
+        }
       />
       <ScrollView
         style={[

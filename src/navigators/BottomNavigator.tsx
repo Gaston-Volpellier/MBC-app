@@ -1,13 +1,13 @@
 import React from 'react';
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Offers from '../screens/Offers';
 import Stores from '../screens/Stores';
 import Coupons from '../screens/Coupons';
 import HomeNavigator from '../navigators/HomeNavigator';
 import componentStyles from '../styles/components';
-import {colors} from '../styles/variables';
-import {Ionicons} from '../libs/vector-icons';
+import {colors, fontColors} from '../styles/variables';
+import {Ionicons, MaterialCommunityIcons} from '../libs/vector-icons';
+import {View, Text} from 'react-native';
 
 type BottomStackParamList = {
   HomeNavigator: undefined;
@@ -26,45 +26,103 @@ export default function BottomNavigator({route}): JSX.Element {
       initialRouteName={routeName}
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarStyle: componentStyles.navigationContainer,
-        tabBarLabelStyle: componentStyles.bottomLableFont,
-        tabBarActiveTintColor: colors.quaternary,
-        tabBarInactiveTintColor: colors.secondary,
-        tabBarIcon: ({color, size, focused}) => {
-          let iconName;
-
-          if (route.name === 'HomeNavigator') {
-            iconName = focused ? 'home-sharp' : 'md-home-outline';
-          } else if (route.name === 'Offers') {
-            iconName = focused ? 'gift-sharp' : 'md-gift-outline';
-          } else if (route.name === 'Coupons') {
-            iconName = focused ? 'ios-card' : 'ios-card-outline';
-          } else if (route.name === 'Stores') {
-            iconName = focused ? 'ios-location-sharp' : 'ios-location-outline';
-          }
-
-          return <Ionicons name={iconName} size={22} color={color} />;
-        },
       })}>
       <Tab.Screen
         name="HomeNavigator"
-        options={{tabBarLabel: 'Home'}}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <Ionicons
+                name={focused ? 'home-sharp' : 'md-home-outline'}
+                size={22}
+                color={focused ? colors.quaternary : colors.secondary}
+              />
+              <Text
+                style={[
+                  componentStyles.bottomLableFont,
+                  {textAlign: 'center'},
+                  {color: focused ? colors.quaternary : colors.secondary},
+                ]}>
+                Home
+              </Text>
+            </View>
+          ),
+        }}
         component={HomeNavigator}
       />
       <Tab.Screen
         name="Offers"
-        options={{tabBarLabel: 'Ofertas'}}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <Ionicons
+                name={focused ? 'gift-sharp' : 'md-gift-outline'}
+                size={22}
+                color={focused ? colors.quaternary : colors.secondary}
+              />
+              <Text
+                style={[
+                  componentStyles.bottomLableFont,
+                  {textAlign: 'center'},
+                  {color: focused ? colors.quaternary : colors.secondary},
+                ]}>
+                OFERTAS
+              </Text>
+            </View>
+          ),
+        }}
         component={Offers}
       />
       <Tab.Screen
         name="Coupons"
-        options={{tabBarLabel: 'Mis Cupones'}}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <MaterialCommunityIcons
+                name={
+                  focused
+                    ? 'credit-card-multiple'
+                    : 'credit-card-multiple-outline'
+                }
+                size={22}
+                color={focused ? colors.quaternary : colors.secondary}
+              />
+              <Text
+                style={[
+                  componentStyles.bottomLableFont,
+                  {textAlign: 'center'},
+                  {color: focused ? colors.quaternary : colors.secondary},
+                ]}>
+                Mis cupones
+              </Text>
+            </View>
+          ),
+        }}
         component={Coupons}
       />
       <Tab.Screen
         name="Stores"
-        options={{tabBarLabel: 'Locales'}}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <Ionicons
+                name={focused ? 'ios-location' : 'ios-location-outline'}
+                size={22}
+                color={focused ? colors.quaternary : colors.secondary}
+              />
+              <Text
+                style={[
+                  componentStyles.bottomLableFont,
+                  {textAlign: 'center'},
+                  {color: focused ? colors.quaternary : colors.secondary},
+                ]}>
+                Locales
+              </Text>
+            </View>
+          ),
+        }}
         component={Stores}
       />
     </Tab.Navigator>

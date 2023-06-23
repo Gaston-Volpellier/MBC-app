@@ -6,7 +6,7 @@ import componentStyles from '../styles/components';
 import {backgroundColors, fontColors} from '../styles/variables';
 import Header from '../components/Header';
 import ImageSectionAlt from '../components/ImageSectionAlt';
-import QrCoupon from '../components/QrModal';
+import CouponModal from '../components/CouponModal';
 
 export default function Coupons({navigation}: Props): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,7 +36,7 @@ export default function Coupons({navigation}: Props): JSX.Element {
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
       />
-      <QrCoupon
+      <CouponModal
         toggleModal={setModalVisible}
         modalVisible={modalVisible}
         modalData={modalData}
@@ -49,18 +49,24 @@ export default function Coupons({navigation}: Props): JSX.Element {
             styles.horizontalPadding,
             styles.homePadding,
             fontColors.primary,
+            styles.textAlignC,
             fonts.lh35,
           ]}>
           MIS CUPONES
         </Text>
-        <View style={[componentStyles.cardContainer, styles.horizontalPadding]}>
+        <View
+          style={[
+            componentStyles.cardContainer,
+            styles.horizontalPadding,
+            styles.mb20,
+          ]}>
           <Pressable
             onPress={() => {
               handleModalData(
                 '20% EN TODOS LOS TRAGOS',
                 '#144 712 83241',
                 'Disponible hasta las 20.32 del 12/03/2023',
-                2,
+                1,
               );
             }}
             style={styles.mb20}>

@@ -6,6 +6,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
+import Feather from 'react-native-vector-icons/Feather';
+
+
 export {
   Ionicons,
   AntDesign,
@@ -14,4 +17,5 @@ export {
   EvilIcons,
   FontAwesome5,
   Fontisto,
+  Feather,
 };

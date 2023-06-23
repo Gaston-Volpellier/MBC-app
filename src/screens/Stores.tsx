@@ -24,6 +24,7 @@ export default function Stores({navigation}: Props): JSX.Element {
             fonts.secondaryMain,
             styles.horizontalPadding,
             styles.homePadding,
+            styles.textAlignC,
             fontColors.primary,
           ]}>
           Locales MBC

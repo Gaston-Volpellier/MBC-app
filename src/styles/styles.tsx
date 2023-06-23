@@ -48,7 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap',
+  },
+  horizontalAlignAlt: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+
   },
   borderRadius: {
     borderRadius: 20,
@@ -56,6 +61,21 @@ const styles = StyleSheet.create({
   textAlignC: {
     textAlign: 'center',
   },
+
+  justifyC: {
+    justifyContent: 'center',
+  },
+  itemsC: {
+    alignItems: 'center',
+  },
+  shadow: {
+    shadowColor: colors.black,
+    shadowOffset: {width: 10, height: 10},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+
   mb10: {
     marginBottom: 10,
   },

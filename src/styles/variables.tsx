@@ -13,6 +13,7 @@ export const colors = {
   success: '#1BA048',
   danger: '#CB1A1A',
   backdrop: 'rgba(243, 243, 243, 0.96)',
+  black: '#020202',
 };
 
 export const backgroundColors = StyleSheet.create({
@@ -54,5 +55,11 @@ export const fontColors = StyleSheet.create({
   },
   quaternary: {
     color: colors.quaternary,
+  },
+  danger: {
+    color: colors.danger,
+  },
+  lightGray: {
+    color: '#CCCCCC',
   },
 });
