@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
+
   },
   borderRadius: {
     borderRadius: 20,
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
   textAlignC: {
     textAlign: 'center',
   },
+
   justifyC: {
     justifyContent: 'center',
   },

@@ -150,6 +150,7 @@ const componentStyles = StyleSheet.create({
     left: '50%',
     transform: [{translateX: -60}, {translateY: -20}],
   },
+
   cardThumbnailPill: {
     borderRadius: 14,
     textTransform: 'uppercase',
@@ -194,16 +195,19 @@ const componentStyles = StyleSheet.create({
     paddingHorizontal: 31,
   },
   QRContainer: {
+
     backgroundColor: colors.lightGray,
     padding: 23,
     marginBottom: 13,
     alignItems: 'center',
     borderRadius: 10,
+
   },
   QRFormat: {
     height: 171,
     width: 171,
   },
+
   CheckIcon: {
     height: 71,
     width: 71,
@@ -214,14 +218,17 @@ const componentStyles = StyleSheet.create({
   IconSizeLarge: {
     height: 41,
   },
+
   backDrop: {
     backgroundColor: colors.backdrop,
     flex: 1,
   },
+
   backDropBlack: {
     backgroundColor: colors.black,
     flex: 1,
   },
+
   grayLine: {
     width: '100%',
     borderBottomWidth: 1,
@@ -235,6 +242,7 @@ const componentStyles = StyleSheet.create({
   switchSize: {
     transform: [{scaleX: 1.2}, {scaleY: 1.2}],
   },
+
   popupContainer: {
     width: 330,
     borderRadius: 20,
@@ -251,6 +259,7 @@ const componentStyles = StyleSheet.create({
     width: 0,
     opacity: 0,
   },
+
 });
 
 export default componentStyles;

@@ -16,11 +16,13 @@ const fonts = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
   },
+
   primary12: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 12,
   },
+
   primaryLarge: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
@@ -57,10 +59,12 @@ const fonts = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
   },
+
   secondary50: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 50,
+
     textAlign: 'center',
     textTransform: 'uppercase',
   },
