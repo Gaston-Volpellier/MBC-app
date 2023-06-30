@@ -1,6 +1,6 @@
 # MBC-app
 
-MBC-app is a @@work in process@@ mobile application for a beer company developed in React Native [![ReactNative](https://skills.thijs.gg/icons?i=react)](https://skills.thijs.gg).
+MBC-app is a **work in process** mobile application for a beer company developed in React Native [![ReactNative](https://skills.thijs.gg/icons?i=react)](https://skills.thijs.gg).
 
 ## Installation
 
