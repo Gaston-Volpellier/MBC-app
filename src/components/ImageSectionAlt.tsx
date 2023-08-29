@@ -7,7 +7,8 @@ import PillComponent from './StatusPill';
 import styles from '../styles/styles';
 
 interface ImageInterface {
-  image: NodeRequire;
+  image?: NodeRequire;
+  imageURL?: string;
   title: string;
   altDescription: string;
   description: string;
@@ -17,17 +18,26 @@ interface ImageInterface {
 export default function ImageSectionAlt({
   image,
   title,
+  imageURL,
   altDescription,
   description,
   status,
 }: ImageInterface): JSX.Element {
   return (
     <View style={componentStyles.imageContainerLarge}>
-      <Image
-        style={[componentStyles.imageFormat]}
-        source={image}
-        alt={altDescription}
-      />
+      {image ? (
+        <Image
+          style={[componentStyles.imageFormatAlt]}
+          source={image}
+          alt={altDescription}
+        />
+      ) : (
+        <Image
+          style={[componentStyles.imageFormatAlt]}
+          source={{uri: imageURL}}
+          alt={altDescription}
+        />
+      )}
       {status ? (
         <View style={[componentStyles.cardThumbnailPosition]}>
           <PillComponent status={status} />

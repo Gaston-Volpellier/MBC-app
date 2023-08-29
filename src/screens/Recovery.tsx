@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -10,7 +10,7 @@ import RecoveryForm from '../components/form/RecoveryForm';
 
 export default function Recovery({navigation}: Props): JSX.Element {
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="RECUPERÁ TU USUARIO Y/O CONTRASEÑA"
         iconRight={
@@ -37,6 +37,6 @@ export default function Recovery({navigation}: Props): JSX.Element {
 
         <RecoveryForm navigation={navigation} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

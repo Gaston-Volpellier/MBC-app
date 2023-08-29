@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import {SafeAreaView, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
 import {AntDesign} from '../libs/vector-icons';
 
 export default function Legal({navigation}): JSX.Element {
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Legales"
         iconRight={
@@ -59,6 +59,6 @@ export default function Legal({navigation}): JSX.Element {
           fugiat quo voluptas nulla pariatur?
         </Text>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

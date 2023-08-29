@@ -2,8 +2,9 @@ import React from 'react';
 import {Modal, Text, View, Pressable, Image, ScrollView} from 'react-native';
 import componentStyles from '../styles/components';
 import styles from '../styles/styles';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 import fonts from '../styles/fonts';
+import {AntDesign, FontAwesome} from '../libs/vector-icons';
 
 export default function PopUpContainer({
   togglePopUp,
@@ -28,10 +29,35 @@ export default function PopUpContainer({
               style={{width: 330, height: 350}}
               source={require('../../assets/images/popup_Image.png')}
             />
+            <Pressable
+              onPress={() => togglePopUp(!popUpVisible)}
+              style={componentStyles.cardThumbnailPositionRight}>
+              <View
+                style={{
+                  position: 'relative',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: 40,
+                  height: 40,
+                }}>
+                <FontAwesome
+                  name="circle"
+                  size={40}
+                  color={colors.quaternary}
+                />
+                <AntDesign
+                  name="close"
+                  size={25}
+                  color={colors.secondary}
+                  style={{position: 'absolute', zIndex: 99}}
+                />
+              </View>
+            </Pressable>
             <View
               style={[
                 backgroundColors.quaternary,
-                {paddingHorizontal: 38, paddingVertical: 33},
+                styles.horizontalPadding,
+                {paddingVertical: 33},
               ]}>
               <Text
                 style={[
@@ -52,18 +78,23 @@ export default function PopUpContainer({
                 ]}>
                 Lorem ipsum dolor et sim
               </Text>
-              <Pressable
-                style={[componentStyles.primaryButton]}
-                onPress={() => togglePopUp(!popUpVisible)}>
-                <Text
+              <View style={{alignItems: 'center'}}>
+                <Pressable
                   style={[
-                    fonts.primarySmall,
-                    styles.textAlignC,
-                    fontColors.primary,
-                  ]}>
-                  CALL TO ACTION
-                </Text>
-              </Pressable>
+                    componentStyles.primaryButton,
+                    backgroundColors.quaternary,
+                  ]}
+                  onPress={() => togglePopUp(!popUpVisible)}>
+                  <Text
+                    style={[
+                      fonts.primarySmall,
+                      styles.textAlignC,
+                      fontColors.primary,
+                    ]}>
+                    CALL TO ACTION
+                  </Text>
+                </Pressable>
+              </View>
             </View>
           </ScrollView>
         </View>

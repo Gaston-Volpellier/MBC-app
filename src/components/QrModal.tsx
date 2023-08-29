@@ -1,19 +1,12 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  Image,
-  View,
-  ScrollView,
-  ActivityIndicator,
-  Pressable,
-} from 'react-native';
+import {Text, Image, View, ScrollView, Pressable} from 'react-native';
 import {fontColors} from '../styles/variables';
 import PillComponent from './StatusPill';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import styles from '../styles/styles';
-import ModalContainer from './ModalContainer';
 import {useNavigation} from '@react-navigation/native';
+import Spinner from './Spinner';
 
 export default function QrCoupon(props): JSX.Element {
   const [qrLoading, setQrLoading] = useState(false);
@@ -21,6 +14,14 @@ export default function QrCoupon(props): JSX.Element {
 
   const modalData = props.modalData;
   const status = props.modalData.status;
+
+  // for testing purposes
+  const useCoupon = () => {
+    if (status === 1) {
+      setQrLoading(true);
+      //Validate coupon on the api
+    }
+  };
 
   return (
     <ScrollView style={componentStyles.qrModalContainer}>
@@ -52,13 +53,9 @@ export default function QrCoupon(props): JSX.Element {
       </Text>
       <View style={[componentStyles.QRContainer]}>
         {qrLoading ? (
-          <ActivityIndicator
-            size={64}
-            style={componentStyles.QRFormat}
-            color="gray"
-          />
+          <Spinner />
         ) : (
-          <View>
+          <Pressable onPress={useCoupon}>
             <Image
               style={componentStyles.QRFormat}
               source={require('../../assets/images/qr/QR.png')}
@@ -69,7 +66,7 @@ export default function QrCoupon(props): JSX.Element {
                 <PillComponent status={2} />
               </View>
             ) : null}
-          </View>
+          </Pressable>
         )}
       </View>
 
@@ -117,7 +114,7 @@ export default function QrCoupon(props): JSX.Element {
             ]}>
             VÁLIDO POR 24 HS
           </Text>
-          <View style={[styles.mb10, {flexGrow: 0}]}>
+          <View style={[styles.mb10, styles.centerContainer]}>
             <PillComponent status={1} />
           </View>
           <Text

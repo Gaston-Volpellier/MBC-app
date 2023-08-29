@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Pressable} from 'react-native';
+import {SafeAreaView, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
@@ -9,7 +9,7 @@ import NewPasswordForm from '../components/form/NewPasswordForm';
 
 export default function PasswordReset({navigation}: Props): JSX.Element {
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="CREÁ TU NUEVA CONTRASEÑA"
         iconRight={
@@ -31,6 +31,6 @@ export default function PasswordReset({navigation}: Props): JSX.Element {
         ]}>
         <NewPasswordForm />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
