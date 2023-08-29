@@ -19,12 +19,14 @@ export default function ImageSection({
   imageDescription,
 }: ImageInterface): JSX.Element {
   return (
-    <View style={[componentStyles.sectionContainer, styles.horizontalPadding]}>
+    <View style={[styles.mb20, styles.horizontalPadding]}>
       <View style={[componentStyles.sectionOptions]}>
         <Text style={[fonts.secondary, fontColors.primary]}>{title}</Text>
-        <Text style={[fonts.primarySmaller, fontColors.terciary]}>
-          Ver todo
-        </Text>
+        {title !== 'Tienda online' ? (
+          <Text style={[fonts.primarySmaller, fontColors.terciary]}>
+            Ver todo
+          </Text>
+        ) : null}
       </View>
       <View style={componentStyles.imageContainer}>
         <Image

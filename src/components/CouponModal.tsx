@@ -4,13 +4,13 @@ import UsedCoupon from './UsedCoupon';
 import QrCoupon from './QrModal';
 
 export default function CouponModal(props): JSX.Element {
-  const [isUsed, setIsUsed] = useState(false);
+  // for testing purposes
   const toggleModal = props.toggleModal;
   const modalVisible = props.modalVisible;
 
   return (
     <ModalContainer toggleModal={toggleModal} modalVisible={modalVisible}>
-      {isUsed ? <UsedCoupon /> : <QrCoupon modalData={props.modalData} />}
+      {props.status ? <UsedCoupon /> : <QrCoupon modalData={props.modalData} />}
     </ModalContainer>
   );
 }

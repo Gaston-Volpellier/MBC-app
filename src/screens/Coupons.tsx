@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView, Pressable, Alert} from 'react-native';
+import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, fontColors} from '../styles/variables';
+import {backgroundColors, colors, fontColors} from '../styles/variables';
 import Header from '../components/Header';
 import ImageSectionAlt from '../components/ImageSectionAlt';
 import CouponModal from '../components/CouponModal';
+import {useData} from '../utils/DataProvider';
 
 export default function Coupons({navigation}: Props): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,6 +17,8 @@ export default function Coupons({navigation}: Props): JSX.Element {
     expiration: '',
     status: 0,
   });
+  const [filter, setFilter] = useState(0);
+  const {couponsList} = useData();
 
   const handleModalData = (title, number, expiration, status) => {
     setModalData({
@@ -27,11 +30,8 @@ export default function Coupons({navigation}: Props): JSX.Element {
     setModalVisible(!modalVisible);
   };
 
-  const image1 = 'MBC_ofertas4.png';
-  const image2 = 'MBC_ofertas5.png';
-
   return (
-    <View>
+    <SafeAreaView>
       <Header
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
@@ -60,44 +60,81 @@ export default function Coupons({navigation}: Props): JSX.Element {
             styles.horizontalPadding,
             styles.mb20,
           ]}>
-          <Pressable
-            onPress={() => {
-              handleModalData(
-                '20% EN TODOS LOS TRAGOS',
-                '#144 712 83241',
-                'Disponible hasta las 20.32 del 12/03/2023',
-                1,
-              );
-            }}
-            style={styles.mb20}>
-            <ImageSectionAlt
-              image={require('../../assets/images/' + image1)}
-              altDescription="Section image"
-              title="20% EN TODOS LOS TRAGOS"
-              description="TODOS LOS DÍAS DESDE LAS 18 HS"
-              status={1}
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              handleModalData(
-                '2X1 EN HAMBURGUESAS',
-                '#111 11 11111',
-                'Disponible hasta las 00.32 del 15/05/02',
-                2,
-              );
-            }}
-            style={styles.mb20}>
-            <ImageSectionAlt
-              image={require('../../assets/images/' + image2)}
-              altDescription="Section image"
-              title="2X1 EN HAMBURGUESAS"
-              description="TODOS LOS DÍAS DESDE LAS 19 HS"
-              status={2}
-            />
-          </Pressable>
+          <ScrollView style={[{flexDirection: 'row'}, styles.mb20]} horizontal>
+            <Pressable
+              onPress={() => setFilter(0)}
+              style={[
+                componentStyles.carouselButton,
+                filter === 0
+                  ? backgroundColors.primary
+                  : backgroundColors.secondary,
+              ]}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  filter === 0 ? fontColors.secondary : fontColors.primary,
+                ]}>
+                Todos
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setFilter(1)}
+              style={[
+                componentStyles.carouselButton,
+                filter === 1
+                  ? backgroundColors.primary
+                  : backgroundColors.secondary,
+              ]}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  filter === 1 ? fontColors.secondary : fontColors.primary,
+                ]}>
+                Activos
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setFilter(2)}
+              style={[
+                componentStyles.carouselButton,
+                filter === 2
+                  ? backgroundColors.primary
+                  : backgroundColors.secondary,
+              ]}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  filter === 2 ? fontColors.secondary : fontColors.primary,
+                ]}>
+                Inactivos
+              </Text>
+            </Pressable>
+          </ScrollView>
+          {couponsList.map(coupon =>
+            filter == 0 || filter == coupon.status ? (
+              <Pressable
+                key={coupon.id}
+                onPress={() => {
+                  handleModalData(
+                    coupon.title,
+                    coupon.number,
+                    coupon.expiration,
+                    coupon.status,
+                  );
+                }}
+                style={styles.mb20}>
+                <ImageSectionAlt
+                  image={coupon.image}
+                  altDescription={coupon.altDescription}
+                  title={coupon.title}
+                  description={coupon.description}
+                  status={coupon.status}
+                />
+              </Pressable>
+            ) : null,
+          )}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

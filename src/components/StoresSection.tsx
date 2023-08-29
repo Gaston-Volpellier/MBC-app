@@ -1,42 +1,38 @@
 import React, {useState} from 'react';
-import {Image, View, Text, Pressable} from 'react-native';
+import {Image, View, Text, Pressable, Linking} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, fontColors} from '../styles/variables';
 
 interface StoresInterface {
-  image: NodeRequire;
+  imageURL: String;
   altDescription: string;
   title: string;
   openingHours: string;
   address: string;
   city: string;
   location: string;
+  link: string;
 }
 
 export default function StoresSection({
-  image,
   title,
   openingHours,
   address,
   city,
   location,
+  imageURL,
   altDescription,
+  link,
 }: StoresInterface): JSX.Element {
   return (
-    <View
-      style={[
-        componentStyles.sectionContainer,
-        styles.horizontalPadding,
-        componentStyles.sectionSizeLarge,
-        {marginBottom: 65},
-      ]}>
+    <View style={[styles.horizontalPadding, styles.mb20]}>
       <View style={[backgroundColors.darkGray, styles.borderRadius]}>
-        <View style={[componentStyles.imageContainer, {marginBottom: 24}]}>
+        <View style={[componentStyles.imageContainer, styles.mb20]}>
           <Image
             style={[componentStyles.imageFormatAlt]}
-            source={image}
+            source={{uri: imageURL}}
             alt={altDescription}
           />
           <View style={componentStyles.imageTitle}>
@@ -50,7 +46,7 @@ export default function StoresSection({
             </Text>
           </View>
         </View>
-        <View>
+        <View style={styles.paddingRegular}>
           <Text
             style={[
               fonts.secondarySmall,
@@ -73,7 +69,9 @@ export default function StoresSection({
             ]}>
             {city}
           </Text>
-          <Pressable style={styles.pressableText}>
+          <Pressable
+            style={styles.pressableText}
+            onPress={() => Linking.openURL(location)}>
             <Text
               style={[
                 fonts.primary,
@@ -85,22 +83,23 @@ export default function StoresSection({
               VER EN MAPA
             </Text>
           </Pressable>
-          <Pressable
-            style={[
-              componentStyles.terciaryButton,
-              backgroundColors.quaternary,
-              ,
-              {marginBottom: 24, marginHorizontal: 24},
-            ]}>
-            <Text
+          <View style={[styles.mb20, styles.itemsC]}>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-              ]}>
-              RESERVÁ MESA
-            </Text>
-          </Pressable>
+                componentStyles.terciaryButton,
+                backgroundColors.quaternary,
+              ]}
+              onPress={() => Linking.openURL(link)}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                ]}>
+                RESERVÁ MESA
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>

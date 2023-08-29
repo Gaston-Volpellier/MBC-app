@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
 import {AntDesign, Entypo} from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
@@ -9,7 +9,7 @@ import HeaderSecondary from '../components/HeaderSecondary';
 
 export default function Settings({navigation}): JSX.Element {
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Ajustes"
         iconRight={
@@ -93,6 +93,6 @@ export default function Settings({navigation}): JSX.Element {
 
         <View style={[componentStyles.grayLine, styles.mb20]} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

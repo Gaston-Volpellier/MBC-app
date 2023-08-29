@@ -1,17 +1,16 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import {SafeAreaView, Text, ScrollView, Pressable} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
-import {backgroundColors, colors, fontColors} from '../styles/variables';
+import {backgroundColors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
-import {useNavigation} from '@react-navigation/native';
 
-export default function Success(props): JSX.Element {
-  const authenticate = props.authenticate;
-  const navigation = useNavigation();
+export default function Success({route, navigation}): JSX.Element {
+  const email = route.params.email;
+
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary title="¡REGISTRO EXITOSO!" />
       <ScrollView
         style={[
@@ -27,8 +26,8 @@ export default function Success(props): JSX.Element {
             styles.textAlignC,
           ]}>
           Tu cuenta ha sido creada con éxito.{'\n'}
-          {'\n'}Hemos enviado un mail a lorem@ipsum.com para verificar tu
-          correo. Por favor confirmalo para empezar.
+          {'\n'}Hemos enviado un mail a {email} para verificar tu correo. Por
+          favor confirmalo para empezar.
         </Text>
 
         <Pressable
@@ -37,13 +36,13 @@ export default function Success(props): JSX.Element {
             backgroundColors.quaternary,
             {marginBottom: 150},
           ]}
-          onPress={() => authenticate(true)}>
+          onPress={() => navigation.navigate('Login')}>
           <Text
             style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
             VERIFICAR CORREO
           </Text>
         </Pressable>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

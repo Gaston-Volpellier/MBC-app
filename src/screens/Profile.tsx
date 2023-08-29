@@ -1,42 +1,50 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
-import {
-  AntDesign,
-  Entypo,
-  EvilIcons,
-  FontAwesome5,
-  Fontisto,
-} from '../libs/vector-icons';
+import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
+import {AntDesign, FontAwesome} from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import HeaderSecondary from '../components/HeaderSecondary';
 import ImageSectionAlt from '../components/ImageSectionAlt';
+import {useSession} from '../utils/SessionProvider';
+import {CustomAppIcon} from '../libs/Custom.App.Icon';
 
-export default function Profile({navigation}): JSX.Element {
+export default function Profile(props): JSX.Element {
   const image1 = 'MBC_ofertas4.png';
   const image2 = 'MBC_ofertas5.png';
 
+  const {logout, userName, email, phone, birthDate} = useSession();
+
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Perfil y cuenta"
         iconLeft={
-          <Pressable onPress={() => navigation.navigate('Settings')}>
-            <EvilIcons
-              name="gear"
-              size={35}
-              color={colors.primary}
-              style={componentStyles.IconSizeRegular}
-            />
+          <Pressable onPress={() => props.navigation.navigate('Settings')}>
+            <View
+              style={{
+                position: 'relative',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: 40,
+                height: 40,
+              }}>
+              <FontAwesome name="circle" size={40} color={colors.lightGray} />
+              <CustomAppIcon
+                name="gear"
+                size={18}
+                color={colors.primary}
+                style={{position: 'absolute', zIndex: 99}}
+              />
+            </View>
           </Pressable>
         }
         iconRight={
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => props.navigation.goBack()}>
             <AntDesign
               name="closecircle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />
@@ -58,8 +66,8 @@ export default function Profile({navigation}): JSX.Element {
           <Text style={[fonts.secondary, fontColors.primary, styles.mb14]}>
             Datos Personales
           </Text>
-          <Pressable onPress={() => navigation.navigate('Edit_Profile')}>
-            <FontAwesome5 name="pen-alt" size={20} color={colors.primary} />
+          <Pressable onPress={() => props.navigation.navigate('Edit_Profile')}>
+            <CustomAppIcon name="pen" size={18} color={colors.primary} />
           </Pressable>
         </View>
         <View style={[componentStyles.grayLine, styles.mb14]} />
@@ -71,44 +79,43 @@ export default function Profile({navigation}): JSX.Element {
             styles.mb20,
             {textAlign: 'left'},
           ]}>
-          Juan Pablo Gómez
+          {userName}
         </Text>
         <View
           style={[{flexDirection: 'row', alignItems: 'center'}, styles.mb20]}>
-          <Fontisto
-            name="email"
-            size={20}
+          <FontAwesome
+            name="envelope-o"
+            size={22}
             color={colors.primary}
             style={{marginEnd: 17}}
           />
-          <Text style={[fonts.primaryLarge, fontColors.primary]}>
-            jpgomez@gmail.com
-          </Text>
+          <Text style={[fonts.primarySmall, fontColors.primary]}>{email}</Text>
         </View>
         <View
           style={[{flexDirection: 'row', alignItems: 'center'}, styles.mb20]}>
-          <Entypo
+          <CustomAppIcon
             name="phone"
-            size={20}
+            size={22}
             color={colors.primary}
             style={{marginEnd: 17}}
           />
+
           <Text
             style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
-            +54 555 5555
+            {phone ? phone : '- - - -'}
           </Text>
         </View>
         <View
           style={[{flexDirection: 'row', alignItems: 'center'}, styles.mb20]}>
-          <Fontisto
-            name="person"
-            size={20}
+          <CustomAppIcon
+            name="bday"
+            size={22}
             color={colors.primary}
             style={{marginEnd: 17}}
           />
           <Text
             style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
-            23/12/1987
+            {birthDate}
           </Text>
         </View>
         <View style={[componentStyles.grayLine, styles.mb14]} />
@@ -142,12 +149,18 @@ export default function Profile({navigation}): JSX.Element {
             backgroundColors.lightGray,
             {marginBottom: 150},
           ]}>
-          <Text
-            style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
-            CERRAR SESIÓN
-          </Text>
+          <Pressable onPress={() => logout()}>
+            <Text
+              style={[
+                fonts.primarySmall,
+                styles.textAlignC,
+                fontColors.primary,
+              ]}>
+              CERRAR SESIÓN
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

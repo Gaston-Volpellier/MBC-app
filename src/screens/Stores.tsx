@@ -1,18 +1,39 @@
-import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, ScrollView, SafeAreaView} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import {backgroundColors, fontColors} from '../styles/variables';
 import componentStyles from '../styles/components';
 import Header from '../components/Header';
 import StoresSection from '../components/StoresSection';
+import * as api from '../services/api';
+import Spinner from '../components/Spinner';
 
 export default function Stores({navigation}: Props): JSX.Element {
-  const image1 = 'MBC_carrasco.png';
-  const image2 = 'MBC_carrasco.png';
+  const [isLoading, setIsLoading] = useState(true);
+  const [storesList, setStoresList] = useState();
+
+  const getStores = async () => {
+    try {
+      const data = await api.fetchStores();
+
+      if (data?.error == false) {
+        setStoresList(data.locales);
+        setIsLoading(false);
+      } else {
+        console.log('Data error: ', data);
+      }
+    } catch (error) {
+      console.log('Error fetching stores: ', error);
+    }
+  };
+
+  useEffect(() => {
+    getStores();
+  }, []);
 
   return (
-    <View>
+    <SafeAreaView>
       <Header
         openDrawer={() => navigation.openDrawer()}
         closeDrawer={() => navigation.closeDrawer()}
@@ -26,30 +47,34 @@ export default function Stores({navigation}: Props): JSX.Element {
             styles.homePadding,
             styles.textAlignC,
             fontColors.primary,
+            styles.textAlignC,
+            fonts.lh35,
           ]}>
           Locales MBC
         </Text>
         <View style={[componentStyles.cardContainer]}>
-          <StoresSection
-            image={require('../../assets/images/' + image1)}
-            altDescription="Section image"
-            title="MBC CARRASCO"
-            openingHours="Martes a sábados 19 a 01 hs"
-            address="Av. Lorem Ipsum 19123."
-            city="Carrasco, Montevideo"
-            location="1"
-          />
-          <StoresSection
-            image={require('../../assets/images/' + image1)}
-            altDescription="Section image"
-            title="MBC CARRASCO"
-            openingHours="Martes a sábados 19 a 01 hs"
-            address="Av. Lorem Ipsum 19123."
-            city="Carrasco, Montevideo"
-            location="1"
-          />
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <View>
+              {storesList &&
+                storesList.map(store => (
+                  <StoresSection
+                    key={store.id}
+                    imageURL={store.imagen}
+                    altDescription="Section image"
+                    title={store.nombre}
+                    openingHours={store.horario}
+                    address={store.direccion}
+                    city="Carrasco, Montevideo"
+                    location={store.link}
+                    link={store.link_reserva}
+                  />
+                ))}
+            </View>
+          )}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

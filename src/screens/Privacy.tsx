@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Pressable} from 'react-native';
+import {Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -9,7 +9,7 @@ import {AntDesign} from '../libs/vector-icons';
 
 export default function Privacy(props): JSX.Element {
   return (
-    <View style={backgroundColors.secondary}>
+    <SafeAreaView style={backgroundColors.secondary}>
       <HeaderSecondary
         title="Politicas de privacidad"
         iconRight={
@@ -59,6 +59,6 @@ export default function Privacy(props): JSX.Element {
           fugiat quo voluptas nulla pariatur?
         </Text>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

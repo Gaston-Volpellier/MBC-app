@@ -6,7 +6,7 @@ import componentStyles from '../styles/components';
 import styles from '../styles/styles';
 import {useNavigation} from '@react-navigation/native';
 
-export default function UsedCoupon(): JSX.Element {
+export default function UsedCoupon(props): JSX.Element {
   const navigation = useNavigation();
 
   return (
@@ -17,18 +17,22 @@ export default function UsedCoupon(): JSX.Element {
           source={require('../../assets/images/Coupon_check.png')}
         />
       </View>
-      <Text style={[fonts.secondaryVeryLarge, fontColors.primary, styles.mb14]}>
-        CUPÓN UTILIZADO
-      </Text>
-      <Text
-        style={[
-          fonts.primary,
-          styles.textAlignC,
-          fontColors.primary,
-          styles.mb40,
-        ]}>
-        ¡MUCHAS GRACIAS!
-      </Text>
+      {/* for testing purposes */}
+      <Pressable onPress={() => props.setIsUsed(false)}>
+        <Text
+          style={[fonts.secondaryVeryLarge, fontColors.primary, styles.mb14]}>
+          CUPÓN UTILIZADO
+        </Text>
+        <Text
+          style={[
+            fonts.primary,
+            styles.textAlignC,
+            fontColors.primary,
+            styles.mb40,
+          ]}>
+          ¡MUCHAS GRACIAS!
+        </Text>
+      </Pressable>
       <Pressable onPress={() => navigation.navigate('Offers')}>
         <Text
           style={[
