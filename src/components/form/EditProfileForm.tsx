@@ -1,56 +1,75 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable, Button} from 'react-native';
+import {View, Text, TextInput, Pressable, Platform} from 'react-native';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import styles from '../../styles/styles';
 import fonts from '../../styles/fonts';
 import componentStyles from '../../styles/components';
 import {backgroundColors, colors, fontColors} from '../../styles/variables';
-import {Formik} from 'formik';
-import {Feather} from '../../libs/vector-icons';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import {CustomAppIcon} from '../../libs/Custom.App.Icon';
+import {useSession} from '../../utils/SessionProvider';
 
 interface EditProfileFormValues {
   name: string;
   email: string;
-  birthdate: any;
+  birthDate: string;
   phone: string;
 }
 
-const initialValues: EditProfileFormValues = {
-  name: '',
-  email: '',
-  birthdate: '',
-  phone: '',
-};
-
 export default function EditProfileForm(props): JSX.Element {
-  const [date, setDate] = useState(new Date());
-  const [text, setText] = useState('Empty');
+  const {
+    handleSubmit,
+    values,
+    setFieldValue,
+    handleChange,
+    handleBlur,
+    errors,
+    isValid,
+    editMsg,
+    errorMsg,
+  } = props;
+
+  const {birthDate} = useSession();
+
   const [showCalendar, setShowCalendar] = useState(false);
-
-  const onBirthDayChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-
-    let tempDate = new Date(currentDate);
-    setText(
-      tempDate.getDate() +
-        '/' +
-        (tempDate.getMonth() + 1) +
-        '/' +
-        tempDate.getFullYear(),
-    );
-    setShowCalendar(false);
-    console.log('Date: ', tempDate);
+  const [date, setDate] = useState(new Date());
+  const [newDate, setNewDate] = useState(birthDate);
+  const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
   };
 
+  const onDateChange = (event: any, selectedDate: any) => {
+    if (event.type == 'set') {
+      const currentDate = selectedDate;
+      setDate(currentDate);
+
+      if (Platform.OS === 'android') {
+        toggleCalendar();
+        setNewDate(formatDate(currentDate));
+        setFieldValue('birthDate', formatDate(currentDate));
+      }
+    } else {
+      toggleCalendar();
+    }
+  };
+
+  const formatDate = (rawDate: Date) => {
+    const date = new Date(rawDate);
+    const year = date.getFullYear();
+    let month: string | number = date.getMonth() + 1;
+    let day: string | number = date.getDate();
+
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+
+    return `${day}/${month}/${year}`;
+  };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={values => console.log(values)}>
-      {({handleChange, handleBlur, handleSubmit, values}) => (
-        <View>
-          <Text style={[fonts.secondary, fontColors.primary, styles.mb10]}>
-            TU NOMBRE
-          </Text>
+    <View>
+      <View>
+        <Text style={[fonts.secondary, fontColors.primary, styles.mb10]}>
+          TU NOMBRE
+        </Text>
+        <View style={styles.horizontalAlign}>
           <TextInput
             style={[fontColors.primary, fonts.primary, styles.mb10]}
             onChangeText={handleChange('name')}
@@ -61,12 +80,34 @@ export default function EditProfileForm(props): JSX.Element {
             autoComplete="name"
             maxLength={50}
           />
+          {errors.name && (
+            <CustomAppIcon name="invalid" size={20} color={colors.danger} />
+          )}
+        </View>
+        <View style={styles.mb10}>
+          <View
+            style={[
+              !errors.name
+                ? componentStyles.blackLine
+                : componentStyles.blackLineDanger,
+              ,
+              styles.mb10,
+            ]}
+          />
+          {errors.name && (
+            <>
+              <Text style={[fontColors.danger, fonts.primary12]}>
+                {errors.name}
+              </Text>
+            </>
+          )}
+        </View>
 
-          <View style={[componentStyles.blackLine, styles.mb20]} />
+        <Text style={[fonts.secondary, fontColors.primary, styles.mb10]}>
+          TU E-MAIL
+        </Text>
 
-          <Text style={[fonts.secondary, fontColors.primary, styles.mb10]}>
-            TU E-MAIL
-          </Text>
+        <View style={styles.horizontalAlign}>
           <TextInput
             style={[fontColors.primary, fonts.primary, styles.mb10]}
             onChangeText={handleChange('email')}
@@ -77,12 +118,34 @@ export default function EditProfileForm(props): JSX.Element {
             inputMode="email"
             autoComplete="email"
           />
+          {errors.email && (
+            <CustomAppIcon name="invalid" size={20} color={colors.danger} />
+          )}
+        </View>
 
-          <View style={[componentStyles.blackLine, styles.mb20]} />
+        <View style={styles.mb10}>
+          <View
+            style={[
+              !errors.email
+                ? componentStyles.blackLine
+                : componentStyles.blackLineDanger,
+              ,
+              styles.mb10,
+            ]}
+          />
+          {errors.email && (
+            <>
+              <Text style={[fontColors.danger, fonts.primary12]}>
+                {errors.email}
+              </Text>
+            </>
+          )}
+        </View>
 
-          <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
-            TU TELEFONO
-          </Text>
+        <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
+          TU TELEFONO
+        </Text>
+        <View style={styles.horizontalAlign}>
           <TextInput
             style={[fontColors.primary, fonts.primary, styles.mb10]}
             onChangeText={handleChange('phone')}
@@ -93,44 +156,109 @@ export default function EditProfileForm(props): JSX.Element {
             autoComplete="tel-country-code"
             inputMode="tel"
             maxLength={20}
+            name="phone"
           />
+          {errors.phone && (
+            <CustomAppIcon name="invalid" size={20} color={colors.danger} />
+          )}
+        </View>
 
-          <View style={[componentStyles.blackLine, styles.mb20]} />
+        <View style={styles.mb10}>
+          <View
+            style={[
+              !errors.phone
+                ? componentStyles.blackLine
+                : componentStyles.blackLineDanger,
+              ,
+              styles.mb10,
+            ]}
+          />
+          {errors.phone && (
+            <>
+              <Text style={[fontColors.danger, fonts.primary12]}>
+                {errors.phone}
+              </Text>
+            </>
+          )}
+        </View>
 
-          <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
-            TU FECHA DE NACIMIENTO
-          </Text>
+        <Text style={[fonts.secondary, fontColors.primary, styles.mb20]}>
+          TU FECHA DE NACIMIENTO
+        </Text>
 
-          <Pressable onPress={() => setShowCalendar(true)}>
-            <Text style={[fontColors.primary, fonts.primary, styles.mb10]}>
-              {text}
-            </Text>
+        <Pressable onPress={toggleCalendar}>
+          <View style={styles.horizontalAlign}>
             <TextInput
               style={[fontColors.primary, fonts.primary, styles.mb10]}
-              value={values.birthdate}
+              value={newDate}
               placeholder="01/01/1999"
               placeholderTextColor={colors.lightGray}
+              editable={false}
+              onChangeText={setNewDate}
+              onPressIn={toggleCalendar}
+              name="birthDate"
             />
-          </Pressable>
-          {showCalendar && (
-            <RNDateTimePicker
-              mode="date"
-              maximumDate={new Date(2023, 31, 12)}
-              themeVariant="light"
-              value={date}
-              onChange={onBirthDayChange}
-              testID="cumpleanios"
-            />
+            {errors.birthDate && (
+              <CustomAppIcon name="invalid" size={20} color={colors.danger} />
+            )}
+          </View>
+        </Pressable>
+
+        {showCalendar && (
+          <RNDateTimePicker
+            mode="date"
+            display="default"
+            maximumDate={new Date(2023, 31, 12)}
+            value={date}
+            onChange={onDateChange}
+          />
+        )}
+
+        <View style={styles.mb60}>
+          <View
+            style={[
+              !errors.birthDate
+                ? componentStyles.blackLine
+                : componentStyles.blackLineDanger,
+              ,
+              styles.mb10,
+            ]}
+          />
+          {errors.birthDate && (
+            <>
+              <Text style={[fontColors.danger, fonts.primary12]}>
+                {errors.birthDate}
+              </Text>
+            </>
           )}
-
-          <View style={[componentStyles.blackLine, {marginBottom: 80}]} />
-
+        </View>
+        <View style={{marginTop: 'auto', marginBottom: 150}}>
+          {editMsg && (
+            <View style={[styles.horizontalAlign, styles.horizontalPadding]}>
+              <Text
+                style={[fontColors.success, fonts.primarySmall, styles.mb10]}>
+                {editMsg}
+              </Text>
+            </View>
+          )}
+          {errorMsg && (
+            <View style={[styles.horizontalAlign, styles.horizontalPadding]}>
+              <Text
+                style={[fontColors.danger, fonts.primarySmall, styles.mb10]}>
+                {errorMsg}
+              </Text>
+            </View>
+          )}
           <Pressable
             style={[
               componentStyles.secondaryButton,
-              backgroundColors.quaternary,
-              {marginTop: 'auto', marginBottom: 150, maxWidth: 330},
+              styles.mb10,
+              !isValid
+                ? backgroundColors.lightGray
+                : backgroundColors.quaternary,
+              {maxWidth: 330},
             ]}
+            disabled={!isValid}
             onPress={() => handleSubmit()}>
             <Text
               style={[
@@ -143,7 +271,7 @@ export default function EditProfileForm(props): JSX.Element {
             </Text>
           </Pressable>
         </View>
-      )}
-    </Formik>
+      </View>
+    </View>
   );
 }
