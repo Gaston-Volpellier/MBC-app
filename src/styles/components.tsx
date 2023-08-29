@@ -1,15 +1,21 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColors, colors} from './variables';
+import {colors} from './variables';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const componentStyles = StyleSheet.create({
   primaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
     borderColor: colors.primary,
-    backgroundColor: colors.quaternary,
     borderWidth: 2,
     borderRadius: 30,
     alignItems: 'center',
+    minWidth: 280,
+    maxWidth: 350,
+    width: '100%',
   },
   secondaryButton: {
     paddingHorizontal: 28,
@@ -17,12 +23,18 @@ const componentStyles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 30,
     alignItems: 'center',
+    minWidth: 280,
+    maxWidth: 350,
+    width: '100%',
   },
   terciaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
     borderRadius: 30,
     alignItems: 'center',
+    minWidth: 200,
+    maxWidth: 350,
+    width: '100%',
   },
   whiteButton: {
     paddingHorizontal: 28,
@@ -30,17 +42,12 @@ const componentStyles = StyleSheet.create({
     backgroundColor: colors.secondary,
     borderRadius: 30,
     alignItems: 'center',
-    marginBottom: 18,
+    marginBottom: 8,
+    minWidth: 280,
+    maxWidth: 350,
+    width: '100%',
   },
-  navigationContainer: {
-    backgroundColor: colors.primary,
-    position: 'absolute',
-    bottom: 23,
-    left: 30,
-    right: 30,
-    borderRadius: 20,
-    height: 83,
-  },
+
   loadingContainer: {
     width: '100%',
     height: '100%',
@@ -70,13 +77,6 @@ const componentStyles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 170,
   },
-  sectionContainer: {
-    width: '100%',
-    marginBottom: 40,
-  },
-  sectionSizeLarge: {
-    height: 417,
-  },
   sectionOptions: {
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -91,8 +91,9 @@ const componentStyles = StyleSheet.create({
   },
   imageContainerLarge: {
     width: '100%',
-    height: 220,
+    height: 250,
     borderRadius: 20,
+    overflow: 'hidden',
   },
   imageFormat: {
     width: '100%',
@@ -138,11 +139,10 @@ const componentStyles = StyleSheet.create({
     top: 25,
     left: 40,
   },
-
   cardThumbnailPositionRight: {
     position: 'absolute',
     top: 25,
-    right: 40,
+    right: 20,
   },
   cardThumbnailCentral: {
     position: 'absolute',
@@ -150,7 +150,6 @@ const componentStyles = StyleSheet.create({
     left: '50%',
     transform: [{translateX: -60}, {translateY: -20}],
   },
-
   cardThumbnailPill: {
     borderRadius: 14,
     textTransform: 'uppercase',
@@ -189,25 +188,23 @@ const componentStyles = StyleSheet.create({
     paddingTop: 30,
     paddingHorizontal: 30,
     paddingBottom: 36,
+    overflow: 'hidden',
   },
   qrModalContainer: {
     paddingTop: 14,
     paddingHorizontal: 31,
   },
   QRContainer: {
-
     backgroundColor: colors.lightGray,
     padding: 23,
     marginBottom: 13,
     alignItems: 'center',
     borderRadius: 10,
-
   },
   QRFormat: {
     height: 171,
     width: 171,
   },
-
   CheckIcon: {
     height: 71,
     width: 71,
@@ -218,17 +215,14 @@ const componentStyles = StyleSheet.create({
   IconSizeLarge: {
     height: 41,
   },
-
   backDrop: {
     backgroundColor: colors.backdrop,
     flex: 1,
   },
-
   backDropBlack: {
     backgroundColor: colors.black,
     flex: 1,
   },
-
   grayLine: {
     width: '100%',
     borderBottomWidth: 1,
@@ -239,10 +233,14 @@ const componentStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colors.primary,
   },
+  blackLineDanger: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: colors.danger,
+  },
   switchSize: {
     transform: [{scaleX: 1.2}, {scaleY: 1.2}],
   },
-
   popupContainer: {
     width: 330,
     borderRadius: 20,
@@ -259,7 +257,69 @@ const componentStyles = StyleSheet.create({
     width: 0,
     opacity: 0,
   },
-
+  CodeInputContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  hiddenCodeInput: {
+    position: 'absolute',
+    height: 0,
+    width: 0,
+    opacity: 0,
+  },
+  inputsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  inputContainer: {
+    borderRadius: 10,
+    height: 67,
+    width: 67,
+    backgroundColor: colors.lightGrayAlt,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputContainerFocused: {
+    borderColor: colors.terciary,
+    borderWidth: 1,
+  },
+  filledInput: {
+    backgroundColor: colors.terciaryLighter,
+  },
+  carouselButton: {
+    borderColor: colors.primary,
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 32,
+    paddingVertical: 5,
+    marginEnd: 10,
+  },
+  navigationContainer: {
+    backgroundColor: colors.primary,
+    position: 'absolute',
+    justifyContent: 'center',
+    bottom: 23,
+    left: wp('5%'),
+    right: wp('5%'),
+    height: hp('9.83%'),
+    borderRadius: 20,
+    borderTopWidth: 0,
+    alignContent: 'center',
+    paddingHorizontal: 0,
+    paddingStart: 0,
+    paddingEnd: 10,
+  },
+  bottomNavigatorItem: {
+    alignItems: 'center',
+    maxWidth: 300,
+    margin: 0,
+    padding: 0,
+    width: '100%',
+    paddingHorizontal: 0,
+    marginHorizontal: 0,
+  },
 });
 
 export default componentStyles;

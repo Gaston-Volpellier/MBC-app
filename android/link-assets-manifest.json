@@ -8,6 +8,14 @@
     {
       "path": "assets/fonts/BreeSerif.ttf",
       "sha1": "ea3f71be40587c7cd87daefd082ef53ce916b3cd"
+    },
+    {
+      "path": "assets/fonts/config.json",
+      "sha1": "9afe85273f8aed60184143014029b02c05cc5864"
+    },
+    {
+      "path": "assets/fonts/custom_icons.ttf",
+      "sha1": "f9627c429ff50054e15ea699f6c3601360bed921"
     }
   ]
 }

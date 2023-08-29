@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {PixelRatio} from 'react-native';
+
+const getFontSize = (size: number) => size / PixelRatio.getFontScale();
 
 const fonts = StyleSheet.create({
   primary: {
@@ -16,17 +19,20 @@ const fonts = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
   },
-
   primary12: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 12,
   },
-
   primaryLarge: {
     fontFamily: 'BreeSerif',
     fontWeight: '400',
     fontSize: 20,
+  },
+  primaryLarger: {
+    fontFamily: 'BreeSerif',
+    fontWeight: '400',
+    fontSize: 26,
   },
   secondary: {
     fontFamily: 'Anton',
@@ -55,23 +61,21 @@ const fonts = StyleSheet.create({
   secondaryVeryLarge: {
     fontFamily: 'Anton',
     fontWeight: '400',
-    fontSize: 40,
+    fontSize: getFontSize(40),
     textAlign: 'center',
     textTransform: 'uppercase',
   },
-
   secondary50: {
     fontFamily: 'Anton',
     fontWeight: '400',
     fontSize: 50,
-
     textAlign: 'center',
     textTransform: 'uppercase',
   },
   secondaryMain: {
     fontFamily: 'Anton',
     fontWeight: '400',
-    fontSize: 30,
+    fontSize: getFontSize(30),
     textTransform: 'uppercase',
   },
 
@@ -80,6 +84,9 @@ const fonts = StyleSheet.create({
   },
   lh35: {
     lineHeight: 35,
+  },
+  lh70: {
+    lineHeight: 70,
   },
 });
 

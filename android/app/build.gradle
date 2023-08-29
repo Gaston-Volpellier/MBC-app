@@ -112,11 +112,20 @@ android {
     }
     signingConfigs {
         debug {
+            // Debug key Config:
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
+    }
+        release {
+        if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+            storeFile file(MYAPP_UPLOAD_STORE_FILE)
+            storePassword MYAPP_UPLOAD_STORE_PASSWORD
+            keyAlias MYAPP_UPLOAD_KEY_ALIAS
+            keyPassword MYAPP_UPLOAD_KEY_PASSWORD
         }
+    }
     }
     buildTypes {
         debug {
@@ -166,6 +175,13 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.android.application'
+
+    dependencies {
+        implementation 'com.google.android.gms:play-services-auth:20.6.0'
+        implementation "androidx.browser:browser:1.2.0"
+    }
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

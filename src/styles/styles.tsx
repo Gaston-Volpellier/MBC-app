@@ -1,12 +1,17 @@
 import {StyleSheet} from 'react-native';
 import {colors} from './variables';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
   horizontalPadding: {
-    paddingHorizontal: 30,
+    paddingHorizontal: wp('5%'),
   },
   paddingRegular: {
-    paddingBottom: 14,
+    paddingHorizontal: 28,
+    paddingVertical: 20,
   },
   centerContainer: {
     alignItems: 'center',
@@ -20,23 +25,15 @@ const styles = StyleSheet.create({
     height: 59,
     width: 128,
   },
-  loginLogo: {
-    marginTop: 50,
-    marginBottom: 41,
-  },
-  loginSection: {
-    marginBottom: 30,
-  },
   spinner: {
-    height: '100%',
-    width: '100%',
+    maxHeight: 68,
   },
   pressableText: {
     alignItems: 'center',
   },
   homePadding: {
-    paddingTop: 35,
-    paddingBottom: 29,
+    paddingTop: 45,
+    paddingBottom: 40,
   },
   previewScreen: {
     backgroundColor: colors.quaternary,
@@ -53,15 +50,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
-
   },
   borderRadius: {
     borderRadius: 20,
   },
+  borderRadiusTop: {
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
   textAlignC: {
     textAlign: 'center',
   },
-
   justifyC: {
     justifyContent: 'center',
   },
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.5,
     elevation: 5,
   },
-
   mb10: {
     marginBottom: 10,
   },
@@ -93,6 +91,17 @@ const styles = StyleSheet.create({
   },
   mb50: {
     marginBottom: 50,
+  },
+  mb60: {
+    marginBottom: 60,
+  },
+  w100: {
+    width: '100%',
+  },
+  iconStack: {
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

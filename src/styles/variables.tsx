@@ -5,14 +5,15 @@ export const colors = {
   secondary: '#FFFFFF',
   terciary: '#FA821E',
   terciaryLight: '#FFE8D4',
+  terciaryLighter: '#FEF8E5',
   quaternary: '#F0BE1E',
   gray: '#A9A9A9',
   darkGray: '#1F1F1F',
   lightGray: '#E3E3E3',
-  lightGrayAlt: '#E4E4E4',
+  lightGrayAlt: '#F3F3F3',
   success: '#1BA048',
   danger: '#CB1A1A',
-  backdrop: 'rgba(243, 243, 243, 0.96)',
+  backdrop: 'rgba(243, 243, 243, 1)',
   black: '#020202',
 };
 
@@ -58,6 +59,9 @@ export const fontColors = StyleSheet.create({
   },
   danger: {
     color: colors.danger,
+  },
+  success: {
+    color: colors.success,
   },
   lightGray: {
     color: '#CCCCCC',

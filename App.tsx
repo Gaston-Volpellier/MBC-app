@@ -1,25 +1,18 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import BottomNavigator from './src/navigators/BottomNavigator';
-import LoginNavigator from './src/navigators/LoginNavigator';
-import DrawerNavigator from './src/navigators/DrawerNavigator';
-import Loading from './src/screens/Loading';
+import SessionProvider from './src/utils/SessionProvider';
+import Main from './src/screens/Main';
+import DataProvider from './src/utils/DataProvider';
 
 function App(): JSX.Element {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   return (
     <NavigationContainer>
-      {/* <Loading /> */}
-      {isAuthenticated ? (
-        <DrawerNavigator
-          authenticated={isAuthenticated}
-          authenticate={setIsAuthenticated}
-        />
-      ) : (
-        <LoginNavigator authenticate={setIsAuthenticated} />
-      )}
+      <SessionProvider>
+        <DataProvider>
+          <Main />
+        </DataProvider>
+      </SessionProvider>
     </NavigationContainer>
   );
 }
