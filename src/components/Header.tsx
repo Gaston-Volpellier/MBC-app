@@ -5,23 +5,39 @@ import componentStyles from '../styles/components';
 import {Ionicons} from '../libs/vector-icons';
 import {colors} from '../styles/variables';
 import LoginModal from './LoginModal';
+import {useSession} from '../utils/SessionProvider';
+import {CustomAppIcon} from '../libs/Custom.App.Icon';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Header({openDrawer, closeDrawer}): JSX.Element {
-  const [modalVisible, setModalVisible] = useState(false);
+  const {photo, isAuthenticated, setLoginModalVisible} = useSession();
+  const navigation = useNavigation();
 
   return (
     <View style={componentStyles.headerContainer}>
       <Pressable onPress={openDrawer}>
-        <Ionicons name="md-menu-sharp" size={24} color={colors.primary} />
+        <CustomAppIcon name="menu" size={20} color={colors.primary} />
       </Pressable>
       <Image
         source={require('../../assets/images/MBC_logo.png')}
         style={styles.mainLogo}
       />
-      <Pressable onPress={() => setModalVisible(!modalVisible)}>
-        <Ionicons name="person-circle" size={42} color={colors.terciary} />
+      <Pressable
+        onPress={() =>
+          isAuthenticated
+            ? navigation.navigate('Settings_Profile')
+            : setLoginModalVisible(true)
+        }>
+        {photo ? (
+          <Image
+            source={{uri: photo}}
+            style={{width: 44, height: 44, borderRadius: 50}}
+          />
+        ) : (
+          <Ionicons name="person-circle" size={44} color={colors.terciary} />
+        )}
       </Pressable>
-      <LoginModal modalVisible={modalVisible} toggleModal={setModalVisible} />
+      <LoginModal />
     </View>
   );
 }

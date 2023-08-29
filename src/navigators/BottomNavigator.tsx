@@ -8,6 +8,8 @@ import componentStyles from '../styles/components';
 import {colors, fontColors} from '../styles/variables';
 import {Ionicons, MaterialCommunityIcons} from '../libs/vector-icons';
 import {View, Text} from 'react-native';
+import styles from '../styles/styles';
+import {useSession} from '../utils/SessionProvider';
 
 type BottomStackParamList = {
   HomeNavigator: undefined;
@@ -20,20 +22,34 @@ const Tab = createBottomTabNavigator<BottomStackParamList>();
 
 export default function BottomNavigator({route}): JSX.Element {
   const routeName = route.params.routeName;
+  const {isAuthenticated} = useSession();
 
   return (
     <Tab.Navigator
       initialRouteName={routeName}
-      screenOptions={({route}) => ({
+      screenOptions={() => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: componentStyles.navigationContainer,
+        tabBarIconStyle: [
+          {
+            flexGrow: 1,
+            justifyContent: 'center',
+            paddingHorizontal: 0,
+            marginHorizontal: 0,
+            width: '100%',
+          },
+        ],
       })}>
       <Tab.Screen
         name="HomeNavigator"
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center'}}>
+            <View
+              style={[
+                componentStyles.bottomNavigatorItem,
+                {position: 'relative', right: -15},
+              ]}>
               <Ionicons
                 name={focused ? 'home-sharp' : 'md-home-outline'}
                 size={22}
@@ -42,8 +58,9 @@ export default function BottomNavigator({route}): JSX.Element {
               <Text
                 style={[
                   componentStyles.bottomLableFont,
-                  {textAlign: 'center'},
-                  {color: focused ? colors.quaternary : colors.secondary},
+                  {
+                    color: focused ? colors.quaternary : colors.secondary,
+                  },
                 ]}>
                 Home
               </Text>
@@ -56,7 +73,7 @@ export default function BottomNavigator({route}): JSX.Element {
         name="Offers"
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center'}}>
+            <View style={componentStyles.bottomNavigatorItem}>
               <Ionicons
                 name={focused ? 'gift-sharp' : 'md-gift-outline'}
                 size={22}
@@ -65,7 +82,6 @@ export default function BottomNavigator({route}): JSX.Element {
               <Text
                 style={[
                   componentStyles.bottomLableFont,
-                  {textAlign: 'center'},
                   {color: focused ? colors.quaternary : colors.secondary},
                 ]}>
                 OFERTAS
@@ -75,38 +91,41 @@ export default function BottomNavigator({route}): JSX.Element {
         }}
         component={Offers}
       />
-      <Tab.Screen
-        name="Coupons"
-        options={{
-          tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center'}}>
-              <MaterialCommunityIcons
-                name={
-                  focused
-                    ? 'credit-card-multiple'
-                    : 'credit-card-multiple-outline'
-                }
-                size={22}
-                color={focused ? colors.quaternary : colors.secondary}
-              />
-              <Text
-                style={[
-                  componentStyles.bottomLableFont,
-                  {textAlign: 'center'},
-                  {color: focused ? colors.quaternary : colors.secondary},
-                ]}>
-                Mis cupones
-              </Text>
-            </View>
-          ),
-        }}
-        component={Coupons}
-      />
+      {isAuthenticated ? (
+        <Tab.Screen
+          name="Coupons"
+          options={{
+            tabBarIcon: ({focused}) => (
+              <View style={componentStyles.bottomNavigatorItem}>
+                <MaterialCommunityIcons
+                  name={
+                    focused
+                      ? 'credit-card-multiple'
+                      : 'credit-card-multiple-outline'
+                  }
+                  size={22}
+                  color={focused ? colors.quaternary : colors.secondary}
+                />
+                <Text
+                  style={[
+                    componentStyles.bottomLableFont,
+                    styles.textAlignC,
+                    {color: focused ? colors.quaternary : colors.secondary},
+                  ]}>
+                  Mis cupones
+                </Text>
+              </View>
+            ),
+          }}
+          component={Coupons}
+        />
+      ) : null}
+
       <Tab.Screen
         name="Stores"
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center'}}>
+            <View style={componentStyles.bottomNavigatorItem}>
               <Ionicons
                 name={focused ? 'ios-location' : 'ios-location-outline'}
                 size={22}
@@ -115,7 +134,6 @@ export default function BottomNavigator({route}): JSX.Element {
               <Text
                 style={[
                   componentStyles.bottomLableFont,
-                  {textAlign: 'center'},
                   {color: focused ? colors.quaternary : colors.secondary},
                 ]}>
                 Locales

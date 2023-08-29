@@ -6,32 +6,53 @@ import {
 } from '@react-navigation/drawer';
 import {colors, fontColors} from '../styles/variables';
 import styles from '../styles/styles';
-import {AntDesign, Entypo, EvilIcons} from '../libs/vector-icons';
+import {AntDesign, Entypo, FontAwesome} from '../libs/vector-icons';
 import HeaderSecondary from './HeaderSecondary';
 import componentStyles from '../styles/components';
 import fonts from '../styles/fonts';
+import {CustomAppIcon} from '../libs/Custom.App.Icon';
+import {useSession} from '../utils/SessionProvider';
 
 export default function MenuDrawer(props): JSX.Element {
+  const {isAuthenticated} = useSession();
+
   return (
     <ScrollView style={[{flex: 1}]}>
-      <View style={{justifyContent: 'space-between'}}>
+      <View style={[{justifyContent: 'space-between'}, styles.mb30]}>
         <HeaderSecondary
-          title="Menu"
+          title="MENÚ"
           iconLeft={
-            <Pressable>
-              <EvilIcons
-                name="gear"
-                size={35}
-                color={colors.primary}
-                style={componentStyles.IconSizeRegular}
-              />
-            </Pressable>
+            isAuthenticated ? (
+              <Pressable
+                onPress={() => props.navigation.navigate('Settings_Settings')}>
+                <View
+                  style={{
+                    position: 'relative',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 40,
+                    height: 40,
+                  }}>
+                  <FontAwesome
+                    name="circle"
+                    size={40}
+                    color={colors.lightGray}
+                  />
+                  <CustomAppIcon
+                    name="gear"
+                    size={18}
+                    color={colors.primary}
+                    style={{position: 'absolute', zIndex: 99}}
+                  />
+                </View>
+              </Pressable>
+            ) : null
           }
           iconRight={
             <Pressable onPress={() => props.closeDrawer()}>
               <AntDesign
                 name="closecircle"
-                size={35}
+                size={34}
                 color={colors.terciary}
                 style={componentStyles.IconSizeRegular}
               />
@@ -39,10 +60,12 @@ export default function MenuDrawer(props): JSX.Element {
           }
         />
       </View>
-      <DrawerContentScrollView {...props} style={{paddingStart: 13}}>
+      <DrawerContentScrollView
+        {...props}
+        style={[{paddingStart: 13}, styles.mb40]}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
-      <View style={[styles.horizontalPadding, {paddingBottom: 50}]}>
+      <View style={[styles.horizontalPadding, styles.mb30]}>
         <Text style={[fontColors.primary, fonts.primarySmall]}>
           Términos y Condiciones
         </Text>
@@ -50,15 +73,15 @@ export default function MenuDrawer(props): JSX.Element {
           Lorem Ipsum
         </Text>
         <View
-          style={[{flexDirection: 'row', alignItems: 'center'}, styles.mb40]}>
-          <Entypo
-            name="instagram-with-circle"
-            color={colors.primary}
-            size={50}
-            style={{marginEnd: 10}}
-          />
+          style={[{flexDirection: 'row'}, styles.centerContainer, styles.mb40]}>
           <Entypo
             name="facebook-with-circle"
+            color={colors.primary}
+            style={{marginEnd: 10}}
+            size={50}
+          />
+          <Entypo
+            name="instagram-with-circle"
             color={colors.primary}
             size={50}
           />
@@ -67,7 +90,7 @@ export default function MenuDrawer(props): JSX.Element {
           source={require('../../assets/images/MBC_logo.png')}
           style={[styles.mb14, {height: 48, width: 102}]}
         />
-        <Text style={[fontColors.lightGray, fonts.primarySmall]}>
+        <Text style={[fontColors.lightGray, fonts.primarySmaller]}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Text>
