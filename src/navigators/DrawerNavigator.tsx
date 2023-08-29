@@ -1,20 +1,20 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Profile from '../screens/Profile';
-import Settings from '../screens/Settings';
 import BottomNavigator from './BottomNavigator';
 import componentStyles from '../styles/components';
 import MenuDrawer from '../components/MenuDrawer';
 import SettingsNavigator from './SettingsNavigator';
 import fonts from '../styles/fonts';
 import {colors, fontColors} from '../styles/variables';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
+import {useSession} from '../utils/SessionProvider';
 
 type RootStackParamList = {
   Home_bottom: undefined;
   Offers_bottom: undefined;
   Coupons_bottom: undefined;
   Stores_bottom: undefined;
+  Online_store: undefined;
   Settings_Profile: undefined;
   Settings_Settings: undefined;
 };
@@ -22,12 +22,18 @@ type RootStackParamList = {
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
 export default function DrawerNavigator(props) {
+  const {isAuthenticated} = useSession();
+
   return (
     <Drawer.Navigator
       initialRouteName="Home_bottom"
       screenOptions={{
         headerShown: false,
         drawerStyle: componentStyles.drawerStyle,
+        drawerItemStyle: {
+          padding: -5,
+          marginVertical: -5,
+        },
       }}
       drawerContent={props => (
         <MenuDrawer
@@ -41,13 +47,15 @@ export default function DrawerNavigator(props) {
           drawerLabel: ({focused}) => (
             <Text
               style={[
-                fonts.secondaryLarge,
+                fonts.secondaryMain,
                 focused ? fonts.underlined : null,
                 focused ? fontColors.terciary : fontColors.primary,
+                {marginVertical: -10},
               ]}>
-              Home
+              INICIO
             </Text>
           ),
+          drawerActiveTintColor: colors.secondary,
         }}
         initialParams={{routeName: 'HomeNavigator'}}
         component={BottomNavigator}
@@ -58,85 +66,121 @@ export default function DrawerNavigator(props) {
           drawerLabel: ({focused}) => (
             <Text
               style={[
-                fonts.secondaryLarge,
+                fonts.secondaryMain,
                 focused ? fonts.underlined : null,
                 focused ? fontColors.terciary : fontColors.primary,
+                {marginVertical: -10},
               ]}>
               Ofertas
             </Text>
           ),
+          drawerActiveTintColor: colors.secondary,
         }}
         initialParams={{routeName: 'Offers'}}
         component={BottomNavigator}
       />
-      <Drawer.Screen
-        name="Coupons_bottom"
-        options={{
-          drawerLabel: ({focused}) => (
-            <Text
-              style={[
-                fonts.secondaryLarge,
-                focused ? fonts.underlined : null,
-                focused ? fontColors.terciary : fontColors.primary,
-              ]}>
-              Mis cupones
-            </Text>
-          ),
-        }}
-        initialParams={{routeName: 'Coupons'}}
-        component={BottomNavigator}
-      />
+      {isAuthenticated ? (
+        <Drawer.Screen
+          name="Coupons_bottom"
+          options={{
+            drawerLabel: ({focused}) => (
+              <Text
+                style={[
+                  fonts.secondaryMain,
+                  focused ? fonts.underlined : null,
+                  focused ? fontColors.terciary : fontColors.primary,
+                  {marginVertical: -10},
+                ]}>
+                Mis cupones
+              </Text>
+            ),
+            drawerActiveTintColor: colors.secondary,
+          }}
+          initialParams={{routeName: 'Coupons'}}
+          component={BottomNavigator}
+        />
+      ) : null}
+
       <Drawer.Screen
         name="Stores_bottom"
         options={{
           drawerLabel: ({focused}) => (
             <Text
               style={[
-                fonts.secondaryLarge,
+                fonts.secondaryMain,
                 focused ? fonts.underlined : null,
                 focused ? fontColors.terciary : fontColors.primary,
+                {marginVertical: -10},
               ]}>
               Locales
             </Text>
           ),
+          drawerActiveTintColor: colors.secondary,
         }}
         initialParams={{routeName: 'Stores'}}
         component={BottomNavigator}
       />
       <Drawer.Screen
-        name="Settings_Profile"
+        name="Online_store"
         options={{
           drawerLabel: ({focused}) => (
             <Text
               style={[
-                fonts.secondaryLarge,
+                fonts.secondaryMain,
                 focused ? fonts.underlined : null,
                 focused ? fontColors.terciary : fontColors.primary,
+                {marginVertical: -10},
               ]}>
-              Perfil y cuenta
+              Tienda Online
             </Text>
           ),
+          drawerActiveTintColor: colors.secondary,
         }}
-        initialParams={{routeName: 'Profile'}}
-        component={SettingsNavigator}
+        initialParams={{routeName: 'HomeNavigator'}}
+        component={BottomNavigator}
       />
-      <Drawer.Screen
-        name="Settings_Settings"
-        options={{
-          drawerLabel: ({focused}) => (
-            <Text
-              style={[
-                fonts.secondaryLarge,
-                focused ? fonts.underlined : null,
-                focused ? fontColors.terciary : fontColors.primary,
-              ]}>
-              Ajustes
-            </Text>
-          ),
-        }}
-        initialParams={{routeName: 'Settings'}}
-        component={SettingsNavigator}
-      />
+      {isAuthenticated ? (
+        <Drawer.Screen
+          name="Settings_Profile"
+          options={{
+            drawerLabel: ({focused}) => (
+              <Text
+                style={[
+                  fonts.secondaryMain,
+                  focused ? fonts.underlined : null,
+                  focused ? fontColors.terciary : fontColors.primary,
+                  {marginVertical: -10},
+                ]}>
+                Perfil y cuenta
+              </Text>
+            ),
+            drawerActiveTintColor: colors.secondary,
+          }}
+          initialParams={{routeName: 'Profile'}}
+          component={SettingsNavigator}
+        />
+      ) : null}
+      {isAuthenticated ? (
+        <Drawer.Screen
+          name="Settings_Settings"
+          options={{
+            drawerLabel: ({focused}) => (
+              <Text
+                style={[
+                  fonts.secondaryMain,
+                  focused ? fonts.underlined : null,
+                  focused ? fontColors.terciary : fontColors.primary,
+                  {marginVertical: -10},
+                ]}>
+                Ajustes
+              </Text>
+            ),
+            drawerActiveTintColor: colors.secondary,
+          }}
+          initialParams={{routeName: 'Settings'}}
+          component={SettingsNavigator}
+        />
+      ) : null}
     </Drawer.Navigator>
   );
 }
