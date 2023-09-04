@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -13,22 +13,39 @@ import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import {MaterialCommunityIcons} from '../libs/vector-icons';
 import {useSession} from '../utils/SessionProvider';
+import * as api from '../services/api';
 
 export default function CashierCoupon(props): JSX.Element {
-  const [couponState, setCouponState] = useState(0);
-  const {logout} = useSession();
+  const [scanResult, setScanResult] = useState(0);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const {idToken, logout, scannedCoupon} = useSession();
+
+  const validate = async () => {
+    const couponCode = scannedCoupon.code;
+
+    try {
+      const response = await api.validateCoupon(idToken, couponCode);
+      if (!response.error) {
+        console.log('Coupon: ', response.cupon);
+        setScanResult(1);
+      } else {
+        setScanResult(2);
+        setErrorMsg(response.error);
+        console.log('Error validando el cupon: ', response.error);
+      }
+    } catch (error) {
+      console.log('Error al intentar validar en el servidor: ', error);
+    }
+  };
 
   const qrImage =
-    couponState == 1
+    scanResult == 1
       ? require(`../../assets/images/QR_icon_success.png`)
       : require(`../../assets/images/QR_icon_danger.png`);
 
-  const title = '2X1 EN IPA';
+  const title = scannedCoupon.title;
   const description = 'LUNES A JUEVES DE 18 A 20 HS';
-  const legal =
-    'Este es un espacio de texto para legales o cualquier tipo de información importante que el cajero o cajera deba tener';
-  const error =
-    'Este código ya fue utilizado el 12/6/2023 a las 19.43 hs en el local MBC Carrasco.';
+  const legal = scannedCoupon.detail;
 
   return (
     <SafeAreaView
@@ -48,15 +65,15 @@ export default function CashierCoupon(props): JSX.Element {
           <View
             style={[
               styles.borderRadiusTop,
-              couponState == 0
+              scanResult == 0
                 ? backgroundColors.lightGray
-                : couponState == 1
+                : scanResult == 1
                 ? backgroundColors.succsess
                 : backgroundColors.danger,
             ]}>
             <Text
               style={[
-                couponState == 0 ? fontColors.primary : fontColors.secondary,
+                scanResult == 0 ? fontColors.primary : fontColors.secondary,
                 fonts.primary12,
                 styles.textAlignC,
                 styles.paddingRegular,
@@ -92,7 +109,7 @@ export default function CashierCoupon(props): JSX.Element {
               ]}>
               {description}
             </Text>
-            {couponState == 0 ? (
+            {scanResult == 0 ? (
               <View>
                 <Text
                   style={[
@@ -109,7 +126,7 @@ export default function CashierCoupon(props): JSX.Element {
                     backgroundColors.quaternary,
                     styles.mb10,
                   ]}
-                  onPress={() => setCouponState(2)}>
+                  onPress={() => validate()}>
                   <Text
                     style={[
                       fonts.primarySmall,
@@ -137,18 +154,16 @@ export default function CashierCoupon(props): JSX.Element {
                     fontColors.primary,
                     styles.mb10,
                   ]}>
-                  {couponState == 1
-                    ? 'CUPÓN VALIDADO EXITOSAMENTE'
-                    : 'ERROR AL ESCANEAR EL CUPÓN'}
+                  {scanResult == 1 ? 'CUPÓN VALIDADO EXITOSAMENTE' : null}
                 </Text>
-                {couponState == 2 ? (
+                {scanResult == 2 ? (
                   <Text
                     style={[
                       fontColors.danger,
                       styles.textAlignC,
                       fonts.primary,
                     ]}>
-                    {error}
+                    {errorMsg}
                   </Text>
                 ) : null}
               </View>
@@ -159,21 +174,19 @@ export default function CashierCoupon(props): JSX.Element {
                 backgroundColors.secondary,
                 styles.mb10,
               ]}
-              onPress={() => {
-                couponState == 0 ? setCouponState(1) : setCouponState(0);
-              }}>
+              onPress={() => props.navigation.navigate('AdminView')}>
               <Text
                 style={[
                   fonts.primarySmall,
                   styles.textAlignC,
                   fontColors.primary,
                 ]}>
-                {couponState == 0
+                {scanResult == 0
                   ? 'VOLVER A ESCANEAR'
                   : 'ESCANEAR NUEVO CODIGO'}
               </Text>
             </Pressable>
-            <Pressable onPress={() => props.navigation.navigate('Login')}>
+            <Pressable onPress={() => props.navigation.navigate('AdminView')}>
               <Text
                 style={[
                   fonts.primary,
