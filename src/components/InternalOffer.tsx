@@ -12,24 +12,26 @@ import {useSession} from '../utils/SessionProvider';
 export default function InternalOffer({
   toggleOffer,
   offerVisible,
-  toggleModal,
   offerData,
   handleModalData,
 }): JSX.Element {
   const {idToken} = useSession();
 
-  //borrar, solo para desarrollo
-  useEffect(() => {
-    console.log('Datos de oferta!! ', offerData);
-  }, []);
-
   const handleCoupon = async () => {
     try {
       const couponData = await api.generateCoupon(idToken, offerData.id);
       if (!couponData.error) {
-        console.log('Coupon Generated!: ', couponData.data);
+        console.log('Coupon Generated!: ', couponData);
 
-        // toggleOffer(!offerVisible), toggleModal(true);
+        toggleOffer(!offerVisible);
+
+        handleModalData(
+          offerData.titulo,
+          couponData.cupon.codigo,
+          couponData.cupon.fecha_fin,
+          couponData.cupon.estado,
+          couponData.cupon_qr,
+        );
       } else {
         console.log('error with coupon: ', couponData);
       }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, View, Text} from 'react-native';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';

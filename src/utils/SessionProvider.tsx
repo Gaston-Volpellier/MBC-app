@@ -28,13 +28,14 @@ function useSessionProvider() {
   const [phone, setPhone] = useState('');
   const [google_id, setGoogleId] = useState('');
   const [isAdmin, setIsAdmin] = useState(0);
-  const [notEmail, setNotEmail] = useState(0);
-  const [notPush, setNotPush] = useState(0);
-  const [showAd, setShowAd] = useState(1);
+  const [notEmail, setNotEmail] = useState(false);
+  const [notPush, setNotPush] = useState(false);
+  const [showAd, setShowAd] = useState(true);
   const [passwordCode, setPasswordCode] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasAccess, setHasAccess] = useState(isAuthenticated);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [scannedCoupon, setScannedCoupon] = useState();
 
   const clearSession = () => {
     console.log('Clearing session...');
@@ -45,8 +46,8 @@ function useSessionProvider() {
     setBirthDate('');
     setPhone('');
     setGoogleId('');
-    setNotEmail(0);
-    setNotPush(0);
+    setNotEmail(false);
+    setNotPush(false);
     setIsAdmin(0);
     clearAllAsyncData();
   };
@@ -70,9 +71,11 @@ function useSessionProvider() {
     const birthDate: string | null = await AsyncStorage.getItem('birthDate');
     const phone: string | null = await AsyncStorage.getItem('phone');
     const google_id: string | null = await AsyncStorage.getItem('google_id');
-    const notEmail: integer | null = await AsyncStorage.getItem('notEmail');
-    const notPush: integer | null = await AsyncStorage.getItem('notPush');
-    const isAdmin: integer | null = await AsyncStorage.getItem('isAdmin');
+    const notEmail: string | null = await AsyncStorage.getItem('notEmail');
+    const notPush: string | null = await AsyncStorage.getItem('notPush');
+    const isadminString: string | null = await AsyncStorage.getItem('isAdmin');
+
+    const isAdmin = parseInt(isadminString);
 
     userName && setUserName(userName);
     email && setEmail(email);
@@ -83,7 +86,7 @@ function useSessionProvider() {
     notEmail && setNotEmail(notEmail);
     notPush && setNotPush(notPush);
     isAdmin && setIsAdmin(isAdmin);
-    !isAdmin && setShowAd(0);
+    !isAdmin && setShowAd(false);
   };
 
   const storeUserData = async (
@@ -96,7 +99,7 @@ function useSessionProvider() {
     notEmail?: boolean,
     notPush?: boolean,
     photo?: string,
-    isAdmin?: string,
+    isAdmin?: number,
   ) => {
     //Stores data from the api into async storage & session state.
     storeData('name', name);
@@ -111,8 +114,8 @@ function useSessionProvider() {
     notEmail && (storeData('notEmail', notEmail), setNotEmail(notEmail));
     notPush && (storeData('notPush', notPush), setNotPush(notPush));
     photo && (storeData('photo', photo), setPhoto(photo));
-    isAdmin && (storeData('isAdmin', isAdmin), setIsAdmin(isAdmin));
-    setShowAd(1);
+    isAdmin && (storeData('isAdmin', isAdmin.toString()), setIsAdmin(isAdmin));
+    setShowAd(true);
   };
 
   return {
@@ -146,5 +149,7 @@ function useSessionProvider() {
     setHasAccess,
     loginModalVisible,
     setLoginModalVisible,
+    scannedCoupon,
+    setScannedCoupon,
   };
 }

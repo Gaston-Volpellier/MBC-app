@@ -1,5 +1,13 @@
-import React from 'react';
-import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  SafeAreaView,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
 import {AntDesign, FontAwesome} from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
@@ -9,12 +17,66 @@ import HeaderSecondary from '../components/HeaderSecondary';
 import ImageSectionAlt from '../components/ImageSectionAlt';
 import {useSession} from '../utils/SessionProvider';
 import {CustomAppIcon} from '../libs/Custom.App.Icon';
+import * as api from '../services/api';
+import Spinner from '../components/Spinner';
 
 export default function Profile(props): JSX.Element {
-  const image1 = 'MBC_ofertas4.png';
-  const image2 = 'MBC_ofertas5.png';
+  const {logout, userName, email, phone, birthDate, idToken} = useSession();
+  const [isLoading, setIsLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [couponsList, setCouponsList] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalData, setModalData] = useState({
+    title: '',
+    number: '',
+    expiration: '',
+    status: 0,
+    url: '',
+  });
 
-  const {logout, userName, email, phone, birthDate} = useSession();
+  const onRefresh = React.useCallback(() => {
+    setIsLoading(true);
+    getCoupons();
+  }, []);
+
+  const getCoupons = async () => {
+    try {
+      const data = await api.fetchHistory(idToken, 0);
+
+      console.log('Cupones fetched ', data.cupones);
+
+      if (data?.error == false) {
+        const couponsLength = Object.keys(data.cupones).length;
+        couponsLength > 0 ? setCouponsList(data.cupones) : null;
+
+        setIsLoading(false);
+      } else {
+        console.log('Data error: ', data);
+      }
+    } catch (error) {
+      console.log('Error fetching coupons: ', error);
+    }
+  };
+
+  const handleModalData = (title, number, expiration, status, url) => {
+    setModalData({
+      title: title,
+      number: number,
+      expiration: expiration,
+      status: status,
+      url: url,
+    });
+    setModalVisible(!modalVisible);
+  };
+
+  const processLogout = () => {
+    setButtonLoading(true);
+    logout();
+  };
+
+  useEffect(() => {
+    getCoupons();
+  }, []);
 
   return (
     <SafeAreaView style={backgroundColors.secondary}>
@@ -56,7 +118,10 @@ export default function Profile(props): JSX.Element {
           componentStyles.mainContainer,
           styles.horizontalPadding,
           backgroundColors.secondary,
-        ]}>
+        ]}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+        }>
         <View
           style={{
             justifyContent: 'space-between',
@@ -122,25 +187,53 @@ export default function Profile(props): JSX.Element {
         <Text style={[fonts.secondary, fontColors.primary, {marginBottom: 14}]}>
           Mis Cupones
         </Text>
+
         <View style={styles.mb20}>
-          <View style={styles.mb20}>
-            <ImageSectionAlt
-              image={require('../../assets/images/' + image1)}
-              altDescription="Section image"
-              title="20% EN TODOS LOS TRAGOS"
-              description="TODOS LOS DÍAS DESDE LAS 18 HS"
-              status={1}
-            />
-          </View>
-          <View style={styles.mb20}>
-            <ImageSectionAlt
-              image={require('../../assets/images/' + image2)}
-              altDescription="Section image"
-              title="2X1 EN HAMBURGUESAS"
-              description="TODOS LOS DÍAS DESDE LAS 19 HS"
-              status={2}
-            />
-          </View>
+          {isLoading ? (
+            <View style={{paddingTop: 50, minHeight: 300}}>
+              <Spinner />
+            </View>
+          ) : (
+            <View>
+              {couponsList ? (
+                couponsList.map(coupon =>
+                  coupon.estado == 0 ? (
+                    <Pressable
+                      key={coupon.id}
+                      onPress={() => {
+                        handleModalData(
+                          coupon.promocion.titulo,
+                          coupon.codigo,
+                          coupon.fecha_fin,
+                          coupon.estado,
+                          coupon.cupon_qr,
+                        );
+                      }}
+                      style={styles.mb20}>
+                      <ImageSectionAlt
+                        imageURL={coupon.promocion.foto}
+                        altDescription={coupon.promocion.extracto}
+                        title={coupon.promocion.titulo}
+                        description={coupon.promocion.validez}
+                        status={coupon.estado}
+                      />
+                    </Pressable>
+                  ) : null,
+                )
+              ) : (
+                <Text
+                  style={[
+                    fonts.primary,
+                    styles.horizontalPadding,
+                    styles.homePadding,
+                    fontColors.primary,
+                    styles.textAlignC,
+                  ]}>
+                  Aun no tiene Cupones en su perfil.
+                </Text>
+              )}
+            </View>
+          )}
         </View>
         <View style={[componentStyles.grayLine, styles.mb20]} />
         <View
@@ -149,15 +242,19 @@ export default function Profile(props): JSX.Element {
             backgroundColors.lightGray,
             {marginBottom: 150},
           ]}>
-          <Pressable onPress={() => logout()}>
-            <Text
-              style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-              ]}>
-              CERRAR SESIÓN
-            </Text>
+          <Pressable onPress={() => processLogout()} disabled={buttonLoading}>
+            {buttonLoading ? (
+              <ActivityIndicator size={25} />
+            ) : (
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                ]}>
+                CERRAR SESIÓN
+              </Text>
+            )}
           </Pressable>
         </View>
       </ScrollView>

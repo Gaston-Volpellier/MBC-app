@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import styles from '../../styles/styles';
 import fonts from '../../styles/fonts';
@@ -26,10 +33,10 @@ export default function EditProfileForm(props): JSX.Element {
     isValid,
     editMsg,
     errorMsg,
+    buttonLoading,
   } = props;
 
   const {birthDate} = useSession();
-
   const [showCalendar, setShowCalendar] = useState(false);
   const [date, setDate] = useState(new Date());
   const [newDate, setNewDate] = useState(birthDate);
@@ -258,17 +265,21 @@ export default function EditProfileForm(props): JSX.Element {
                 : backgroundColors.quaternary,
               {maxWidth: 330},
             ]}
-            disabled={!isValid}
+            disabled={!isValid || buttonLoading}
             onPress={() => handleSubmit()}>
-            <Text
-              style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Guardar Cambios
-            </Text>
+            {buttonLoading ? (
+              <ActivityIndicator size={25} color={colors.primary} />
+            ) : (
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Guardar Cambios
+              </Text>
+            )}
           </Pressable>
         </View>
       </View>

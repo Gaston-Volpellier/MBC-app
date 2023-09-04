@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Pressable,
   SafeAreaView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
@@ -20,15 +21,20 @@ import {revokeGoogleAccess} from '../utils/GoogleAuth';
 export default function DeleteAccount(props: Props): JSX.Element {
   const {idToken, setIsAuthenticated, clearSession, setHasAccess} =
     useSession();
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const confirmDelete = () => {
+    setButtonLoading(true);
     Alert.alert(
       'Cuidado!',
-      'Esta seguro que quiere borrar su cuenta? se perderan todos sus datos.',
+      '¿Esta seguro que quiere borrar su cuenta? Se perderan todos sus datos.',
       [
         {
           text: 'Cancelar',
-          onPress: () => console.log('Accion cancelada'),
+          onPress: () => {
+            console.log('Accion cancelada');
+            setButtonLoading(false);
+          },
           style: 'cancel',
         },
         {
@@ -54,8 +60,10 @@ export default function DeleteAccount(props: Props): JSX.Element {
         setHasAccess(false);
       } else {
         console.log('Error deleting account from server: ', response);
+        setButtonLoading(false);
       }
     } catch (error) {
+      setButtonLoading(false);
       console.log('Error deleting account: ', error);
     }
   };
@@ -168,11 +176,20 @@ export default function DeleteAccount(props: Props): JSX.Element {
             componentStyles.secondaryButton,
             backgroundColors.terciary,
             {marginBottom: 150},
-          ]}>
-          <Text
-            style={[fonts.primarySmall, styles.textAlignC, fontColors.primary]}>
-            BORRAR CUENTA
-          </Text>
+          ]}
+          disabled={buttonLoading}>
+          {buttonLoading ? (
+            <ActivityIndicator size={25} color={colors.primary} />
+          ) : (
+            <Text
+              style={[
+                fonts.primarySmall,
+                styles.textAlignC,
+                fontColors.primary,
+              ]}>
+              BORRAR CUENTA
+            </Text>
+          )}
         </Pressable>
       </ScrollView>
     </SafeAreaView>

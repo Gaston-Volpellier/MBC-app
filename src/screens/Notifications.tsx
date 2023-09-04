@@ -41,8 +41,6 @@ export default function Notifications(props: Props): JSX.Element {
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
-    console.log('promos ', promos);
-    console.log('email ', email);
     const response = await api.notifications(idToken, promos, email);
 
     if (!response.error) {

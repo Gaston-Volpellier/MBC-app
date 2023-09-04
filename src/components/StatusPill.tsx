@@ -17,9 +17,9 @@ export default function PillComponent({status}: PillInterface): JSX.Element {
         fonts.primarySmaller,
         fontColors.secondary,
         backgroundColors.succsess,
-        status == 1 ? backgroundColors.succsess : backgroundColors.danger,
+        status == 0 ? backgroundColors.succsess : backgroundColors.danger,
       ]}>
-      {status == 1 ? 'Activo' : 'Vencido'}
+      {status == 0 ? 'Activo' : 'Vencido'}
     </Text>
   );
 }

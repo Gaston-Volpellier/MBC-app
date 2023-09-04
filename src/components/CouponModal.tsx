@@ -4,7 +4,6 @@ import UsedCoupon from './UsedCoupon';
 import QrCoupon from './QrModal';
 
 export default function CouponModal(props): JSX.Element {
-  // for testing purposes
   const toggleModal = props.toggleModal;
   const modalVisible = props.modalVisible;
 

@@ -17,7 +17,6 @@ export const login = async (email: String, clave: String) => {
 
   try {
     const response = await axios(options);
-    console.log('Login config ', response.config);
     console.log('Login data ', response.data);
     return response.data;
   } catch (error) {
@@ -282,7 +281,6 @@ export const generateCoupon = async (token: String, promoId: Number) => {
   try {
     const response = await axios(options);
 
-    console.log('Coupon config: ', response.config);
     return response.data;
   } catch (error) {
     console.error('Error generating coupon: ', error);
@@ -337,7 +335,7 @@ export const fetchStores = async () => {
   }
 };
 
-export const couponScan = async (token: String, coupon: String) => {
+export const scanCoupon = async (token: String, coupon: String) => {
   const data = {token: token, cupon: coupon};
 
   const options = {
@@ -350,7 +348,6 @@ export const couponScan = async (token: String, coupon: String) => {
   try {
     const response = await axios(options);
 
-    console.log('Coupon scaned: ', response.data);
     return response.data;
   } catch (error) {
     console.error('Error scanning coupon: ', error);
@@ -370,7 +367,6 @@ export const validateCoupon = async (token: String, coupon: String) => {
   try {
     const response = await axios(options);
 
-    console.log('Coupon validated: ', response.data);
     return response.data;
   } catch (error) {
     console.error('Error validating coupon: ', error);
@@ -390,7 +386,6 @@ export const fetchAd = async (token: String) => {
   try {
     const response = await axios(options);
 
-    console.log('Advertisement: ', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching ad: ', error);

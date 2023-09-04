@@ -81,7 +81,7 @@ export default function AdminView(props): JSX.Element {
               componentStyles.secondaryButton,
               styles.horizontalPadding,
               backgroundColors.quaternary,
-              styles.mb10,
+              styles.mb20,
             ]}
             onPress={() => props.navigation.navigate('ScanCoupon')}>
             <Text
@@ -94,30 +94,28 @@ export default function AdminView(props): JSX.Element {
               ESCANEAR CÓDIGO QR
             </Text>
           </Pressable>
-          <View>
-            <Pressable
-              style={[
-                styles.mb30,
-                styles.centerContainer,
-                {
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  flex: 1,
-                },
-              ]}
-              onPress={() => logout()}>
-              <MaterialCommunityIcons
-                name="logout-variant"
-                size={18}
-                color={colors.secondary}
-                style={{marginEnd: 15}}
-              />
-              <Text
-                style={[fonts.primary, fontColors.secondary, fonts.underlined]}>
-                Cerrar sesion
-              </Text>
-            </Pressable>
-          </View>
+          <Pressable
+            style={[
+              styles.mb30,
+              styles.centerContainer,
+              {
+                justifyContent: 'center',
+                flexDirection: 'row',
+                flex: 1,
+              },
+            ]}
+            onPress={logout}>
+            <MaterialCommunityIcons
+              name="logout-variant"
+              size={18}
+              color={colors.secondary}
+              style={{marginEnd: 15}}
+            />
+            <Text
+              style={[fonts.primary, fontColors.secondary, fonts.underlined]}>
+              Cerrar sesion
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

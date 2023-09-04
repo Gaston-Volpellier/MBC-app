@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ActivityIndicator,
+} from 'react-native';
 import styles from '../../styles/styles';
 import fonts from '../../styles/fonts';
 import componentStyles from '../../styles/components';
@@ -34,8 +40,11 @@ export default function AccessForm(props): JSX.Element {
   } = useSession();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const handleForm = async values => {
+    setButtonLoading(true);
+
     setLoginError(null);
     try {
       const user = await api.login(values.email, values.password);
@@ -48,7 +57,7 @@ export default function AccessForm(props): JSX.Element {
           await storeData('idToken', user.token);
           await storeData('name', user.admin.nombre ? user.admin.nombre : '');
           await storeData('email', user.admin.email);
-          await storeData('isAdmin', 1);
+          await storeData('isAdmin', '1');
 
           setEmail(user.admin.email);
           setUserName(user.admin.nombre ? user.admin.nombre : '');
@@ -76,9 +85,11 @@ export default function AccessForm(props): JSX.Element {
       } else {
         console.log('error logging in: ', user.error);
         setLoginError(user.error);
+        setButtonLoading(false);
       }
     } catch (error) {
       console.log('Error registering: ', error);
+      setButtonLoading(false);
     }
   };
 
@@ -191,16 +202,22 @@ export default function AccessForm(props): JSX.Element {
                 styles.mb20,
                 {marginTop: 'auto', maxWidth: 330},
               ]}
-              disabled={!isValid}
+              disabled={!isValid && buttonLoading}
               onPress={() => handleSubmit()}>
-              <Text
-                style={[
-                  fonts.primarySmall,
-                  styles.textAlignC,
-                  fontColors.primary,
-                ]}>
-                CONTINUAR
-              </Text>
+              {buttonLoading ? (
+                <ActivityIndicator size={25} />
+              ) : (
+                <View style={[styles.horizontalAlignAlt]}>
+                  <Text
+                    style={[
+                      fonts.primarySmall,
+                      styles.textAlignC,
+                      fontColors.primary,
+                    ]}>
+                    CONTINUAR
+                  </Text>
+                </View>
+              )}
             </Pressable>
             {loginError && (
               <View style={[styles.horizontalAlign]}>

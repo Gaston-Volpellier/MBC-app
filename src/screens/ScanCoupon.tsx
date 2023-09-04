@@ -11,11 +11,48 @@ import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
-import {MaterialCommunityIcons} from '../libs/vector-icons';
+import QRScanner from './QRScanner';
+import {useSession} from '../utils/SessionProvider';
+import * as api from '../services/api';
+import Spinner from '../components/Spinner';
 
 export default function ScanCoupon(props): JSX.Element {
-  // Reemplazar por la camara
-  const qrImage = require(`../../assets/images/QR_icon_success.png`);
+  const {idToken, setScannedCoupon} = useSession();
+  const [scanningCoupon, setScanningCoupon] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const readQR = async e => {
+    setErrorMsg(null);
+
+    try {
+      setScanningCoupon(true);
+      const response = await api.scanCoupon(idToken, e.data);
+
+      if (!response.error) {
+        console.log('Response cupon: ', response.cupon);
+        console.log('Response promocion: ', response.promocion);
+
+        const couponData = {
+          code: response.cupon.codigo,
+          detail: response.promocion.descripcion,
+          extract: response.promocion.extracto,
+          title: response.promocion.titulo,
+          validity: response.promocion.validez,
+        };
+
+        setScannedCoupon(couponData);
+        props.navigation.navigate('CashierCoupon');
+        setScanningCoupon(false);
+      } else {
+        setScanningCoupon(false);
+        setErrorMsg(response.error);
+        console.log('Coupon scanned error: ', response.error);
+      }
+    } catch (error) {
+      setScanningCoupon(false);
+      console.log('Error escaneando cupon.', error);
+    }
+  };
 
   return (
     <SafeAreaView
@@ -34,25 +71,46 @@ export default function ScanCoupon(props): JSX.Element {
         <View
           style={[
             componentStyles.mainContainer,
-            styles.mb60,
-            {height: '100%'},
+            styles.mb30,
+            styles.horizontalPadding,
           ]}>
-          <View>
-            <View>
-              <Image
-                style={[
-                  styles.mb40,
-                  {
-                    alignSelf: 'center',
-                    height: 300,
-                    width: 250,
-                    tintColor: colors.secondary,
-                  },
-                ]}
-                source={qrImage}
-              />
-            </View>
+          <Text
+            style={[
+              fonts.primary,
+              fontColors.secondary,
+              styles.textAlignC,
+              styles.mb14,
+            ]}>
+            Enfoque el codigo de promocion con la camara.
+          </Text>
+          <View
+            style={[
+              styles.mb10,
+              {
+                minWidth: 275,
+                minHeight: 370,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignContent: 'center',
+              },
+            ]}>
+            {scanningCoupon ? <Spinner /> : <QRScanner readQR={readQR} />}
           </View>
+          {errorMsg && (
+            <View
+              style={[
+                styles.horizontalAlign,
+                styles.horizontalPadding,
+                styles.mb20,
+              ]}>
+              <Text style={[fontColors.secondary, fonts.primarySmall]}>
+                Escaneo incorrecto:{'\n'}
+                <Text style={[fontColors.danger, fonts.primarySmall]}>
+                  {errorMsg}
+                </Text>
+              </Text>
+            </View>
+          )}
           <Pressable
             style={[
               componentStyles.secondaryButton,

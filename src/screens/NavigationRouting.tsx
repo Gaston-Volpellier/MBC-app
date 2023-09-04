@@ -7,10 +7,7 @@ import AdminNavigator from '../navigators/AdminNavigator';
 
 function NavigatorRouter(): JSX.Element {
   const {isAdmin, hasAccess} = useSession();
-  useEffect(() => {
-    console.log('is admin? ', isAdmin);
-    console.log('has access? ', hasAccess);
-  }, []);
+
   return (
     <>
       {!hasAccess ? (

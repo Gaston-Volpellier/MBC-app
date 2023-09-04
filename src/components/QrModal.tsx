@@ -15,14 +15,6 @@ export default function QrCoupon(props): JSX.Element {
   const modalData = props.modalData;
   const status = props.modalData.status;
 
-  // for testing purposes
-  const useCoupon = () => {
-    if (status === 1) {
-      setQrLoading(true);
-      //Validate coupon on the api
-    }
-  };
-
   return (
     <ScrollView style={componentStyles.qrModalContainer}>
       <Text
@@ -53,24 +45,26 @@ export default function QrCoupon(props): JSX.Element {
       </Text>
       <View style={[componentStyles.QRContainer]}>
         {qrLoading ? (
-          <Spinner />
+          <View style={[componentStyles.QRFormat, styles.justifyC]}>
+            <Spinner />
+          </View>
         ) : (
-          <Pressable onPress={useCoupon}>
+          <Pressable>
             <Image
               style={componentStyles.QRFormat}
-              source={require('../../assets/images/qr/QR.png')}
-              blurRadius={status === 2 ? 3 : 0}
+              source={{uri: modalData.url}}
+              blurRadius={status == 0 ? 0 : 3}
             />
-            {status === 2 ? (
+            {status != 0 ? (
               <View style={[componentStyles.cardThumbnailCentral]}>
-                <PillComponent status={2} />
+                <PillComponent status={status} />
               </View>
             ) : null}
           </Pressable>
         )}
       </View>
 
-      {status === 2 ? (
+      {status != 0 ? (
         <View>
           <Text
             style={[
@@ -115,7 +109,7 @@ export default function QrCoupon(props): JSX.Element {
             VÁLIDO POR 24 HS
           </Text>
           <View style={[styles.mb10, styles.centerContainer]}>
-            <PillComponent status={1} />
+            <PillComponent status={status} />
           </View>
           <Text
             style={[
@@ -124,7 +118,7 @@ export default function QrCoupon(props): JSX.Element {
               fontColors.primary,
               styles.mb10,
             ]}>
-            {modalData.expiration}
+            {`Disponible hasta ${modalData.expiration}`}
           </Text>
         </View>
       )}

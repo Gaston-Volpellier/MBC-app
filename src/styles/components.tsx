@@ -76,6 +76,7 @@ const componentStyles = StyleSheet.create({
     overflow: 'hidden',
     paddingTop: 50,
     paddingBottom: 170,
+    flex: 1,
   },
   sectionOptions: {
     justifyContent: 'space-between',
@@ -188,7 +189,6 @@ const componentStyles = StyleSheet.create({
     paddingTop: 30,
     paddingHorizontal: 30,
     paddingBottom: 36,
-    overflow: 'hidden',
   },
   qrModalContainer: {
     paddingTop: 14,

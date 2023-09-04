@@ -57,5 +57,7 @@
 		<string>BreeSerif.ttf</string>
 		<string>custom_icons.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Esta aplicacion utiliza la camara del celular</string>
 </dict>
 </plist>
