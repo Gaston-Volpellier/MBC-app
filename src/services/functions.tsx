@@ -21,5 +21,4 @@ export const clearAllAsyncData = async () => {
   } catch (e) {
     console.log('Error clearing Async data: ', e);
   }
-  console.log('Done.');
 };

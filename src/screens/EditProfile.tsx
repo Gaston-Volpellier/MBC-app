@@ -23,10 +23,13 @@ export default function EditProfile({navigation}: Props): JSX.Element {
     useSession();
   const [errorMsg, setErrorMsg] = useState(null);
   const [editMsg, setEditMsg] = useState(null);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const handleForm = async values => {
+    setButtonLoading(true);
     setErrorMsg(null);
     setEditMsg(null);
+
     try {
       const response = await api.editProfile(
         idToken,
@@ -40,15 +43,19 @@ export default function EditProfile({navigation}: Props): JSX.Element {
           idToken,
           values.name,
           values.email,
-          values.phone,
           values.birthDate,
+          values.phone,
         );
+        setButtonLoading(false);
         console.log('edit profile Response: ', response);
         setEditMsg('Perfil actualizado exitosamente!');
-        navigation.goBack();
+      } else {
+        console.log('Edit profile Error: ', response);
+        setErrorMsg('El perfil no pudo ser actualizado');
       }
     } catch (error) {
       error && setErrorMsg(error);
+      setButtonLoading(false);
       console.log('Error editing data:', error);
     }
   };
@@ -106,6 +113,7 @@ export default function EditProfile({navigation}: Props): JSX.Element {
               isValid={isValid}
               editMsg={editMsg}
               errorMsg={errorMsg}
+              buttonLoading={buttonLoading}
             />
           )}
         </Formik>

@@ -54,9 +54,11 @@ export default function Stores({navigation}: Props): JSX.Element {
         </Text>
         <View style={[componentStyles.cardContainer]}>
           {isLoading ? (
-            <Spinner />
+            <View style={{minHeight: 400}}>
+              <Spinner />
+            </View>
           ) : (
-            <View>
+            <View style={{minHeight: 400}}>
               {storesList &&
                 storesList.map(store => (
                   <StoresSection

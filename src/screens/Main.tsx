@@ -24,8 +24,9 @@ function Main(): JSX.Element {
       } else {
         console.log('It is not authenticated yet.');
       }
+      setIsLoading(false);
     } catch (e) {
-      console.log('Authentication error.');
+      console.log('Authentication error.', e);
     }
   };
 
@@ -35,9 +36,6 @@ function Main(): JSX.Element {
     } catch (error) {
       console.log('Error fetching data: ', error);
     }
-
-    // borrar, solo para mostrar loading screen en testing
-    setTimeout(() => setIsLoading(false), 1000);
   }, []);
 
   React.useEffect(() => {
