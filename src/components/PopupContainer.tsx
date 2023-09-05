@@ -1,15 +1,26 @@
 import React from 'react';
-import {Modal, Text, View, Pressable, Image, ScrollView} from 'react-native';
+import {
+  Modal,
+  Text,
+  View,
+  Pressable,
+  Image,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import componentStyles from '../styles/components';
 import styles from '../styles/styles';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
 import fonts from '../styles/fonts';
 import {AntDesign, FontAwesome} from '../libs/vector-icons';
+import {useSession} from '../utils/SessionProvider';
 
 export default function PopUpContainer({
   togglePopUp,
   popUpVisible,
 }): JSX.Element {
+  const {adData} = useSession();
+
   return (
     <Modal
       animationType="fade"
@@ -27,7 +38,7 @@ export default function PopUpContainer({
           <ScrollView>
             <Image
               style={{width: 330, height: 350}}
-              source={require('../../assets/images/popup_Image.png')}
+              source={{uri: adData.foto}}
             />
             <Pressable
               onPress={() => togglePopUp(!popUpVisible)}
@@ -67,7 +78,7 @@ export default function PopUpContainer({
                   styles.mb14,
                   fonts.lh35,
                 ]}>
-                titular de una noticia o evento especial
+                {adData.titulo}
               </Text>
               <Text
                 style={[
@@ -76,7 +87,7 @@ export default function PopUpContainer({
                   styles.textAlignC,
                   styles.mb20,
                 ]}>
-                Lorem ipsum dolor et sim
+                {adData.descripcion}
               </Text>
               <View style={{alignItems: 'center'}}>
                 <Pressable
@@ -84,14 +95,14 @@ export default function PopUpContainer({
                     componentStyles.primaryButton,
                     backgroundColors.quaternary,
                   ]}
-                  onPress={() => togglePopUp(!popUpVisible)}>
+                  onPress={() => Linking.openURL(adData.btn_link)}>
                   <Text
                     style={[
                       fonts.primarySmall,
                       styles.textAlignC,
                       fontColors.primary,
                     ]}>
-                    CALL TO ACTION
+                    {adData.btn_txt}
                   </Text>
                 </Pressable>
               </View>

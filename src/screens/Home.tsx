@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, Pressable, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  SafeAreaView,
+  Linking,
+} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -8,6 +15,7 @@ import ImageSection from '../components/ImageSection';
 import {backgroundColors, fontColors} from '../styles/variables';
 import PopUpContainer from '../components/PopupContainer';
 import {useSession} from '../utils/SessionProvider';
+import * as api from '../services/api';
 
 export default function Home({navigation}: Props): JSX.Element {
   const offersImage = 'Rectangle2.png';
@@ -15,17 +23,43 @@ export default function Home({navigation}: Props): JSX.Element {
   const storesImage = 'Rectangle4.png';
   const onlineStoreImage = 'Holding-Hand-Smart-Phone-Mockup.png';
   const [popUpVisible, setPopUpVisible] = useState(false);
-  const {showAd, setShowAd, isAuthenticated, setLoginModalVisible} =
-    useSession();
+  const {
+    showAd,
+    idToken,
+    setShowAd,
+    isAuthenticated,
+    setLoginModalVisible,
+    setAdData,
+    adData,
+  } = useSession();
 
   useEffect(() => {
-    const triggerPopUp = () => {
-      setTimeout(() => setPopUpVisible(true), 1000);
+    const loadAdData = async () => {
+      try {
+        const response = await api.fetchAd(idToken);
+
+        if (!response.error) {
+          setAdData(response.publicidad);
+        } else {
+          console.log('Ad error: ', response.error);
+        }
+      } catch (error) {
+        console.log('Error fetching ad from server: ', error);
+      }
       setShowAd(0);
     };
 
-    showAd ? triggerPopUp() : null;
+    showAd ? loadAdData() : null;
   }, []);
+
+  useEffect(() => {
+    adData != undefined
+      ? setTimeout(() => {
+          console.log('Triggering popup: ', adData);
+          setPopUpVisible(true);
+        }, 1000)
+      : null;
+  }, [adData]);
 
   return (
     <SafeAreaView>
@@ -81,7 +115,10 @@ export default function Home({navigation}: Props): JSX.Element {
               imageDescription="CONOCÉ NUESTROS LOCALES"
             />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate('Home')}>
+          <Pressable
+            onPress={() =>
+              Linking.openURL('https://linktr.ee/MontevideoBeerCompany')
+            }>
             <ImageSection
               title="Tienda online"
               image={require('../../assets/images/' + onlineStoreImage)}

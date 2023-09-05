@@ -36,6 +36,13 @@ function useSessionProvider() {
   const [hasAccess, setHasAccess] = useState(isAuthenticated);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [scannedCoupon, setScannedCoupon] = useState();
+  const [adData, setAdData] = useState({
+    foto: '',
+    btn_link: '',
+    btn_txt: '',
+    descripcion: '',
+    titulo: '',
+  });
 
   const clearSession = () => {
     console.log('Clearing session...');
@@ -151,5 +158,7 @@ function useSessionProvider() {
     setLoginModalVisible,
     scannedCoupon,
     setScannedCoupon,
+    adData,
+    setAdData,
   };
 }
