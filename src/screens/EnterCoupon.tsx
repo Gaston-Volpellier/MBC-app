@@ -5,29 +5,32 @@ import {
   ScrollView,
   Pressable,
   Image,
+  TextInput,
   SafeAreaView,
 } from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
 import {backgroundColors, colors, fontColors} from '../styles/variables';
-import QRScanner from './QRScanner';
 import {useSession} from '../utils/SessionProvider';
 import * as api from '../services/api';
 import Spinner from '../components/Spinner';
+import {CustomAppIcon} from '../libs/Custom.App.Icon';
 
-export default function ScanCoupon(props): JSX.Element {
+export default function EnterCoupon(props): JSX.Element {
   const {idToken, setScannedCoupon} = useSession();
-  const [scanningCoupon, setScanningCoupon] = useState(false);
+  const [processingCoupon, setProcessingCoupon] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [coupon, setCoupon] = useState('');
 
-  const readQR = async e => {
+  const handleCoupon = async () => {
     setErrorMsg(null);
 
     try {
-      setScanningCoupon(true);
-      const response = await api.scanCoupon(idToken, e.data);
+      setProcessingCoupon(true);
+      const response = await api.scanCoupon(idToken, coupon);
 
+      console.log('Response ', response);
       if (!response.error) {
         console.log('Response cupon: ', response.cupon);
         console.log('Response promocion: ', response.promocion);
@@ -42,14 +45,14 @@ export default function ScanCoupon(props): JSX.Element {
 
         setScannedCoupon(couponData);
         props.navigation.navigate('CashierCoupon');
-        setScanningCoupon(false);
+        setProcessingCoupon(false);
       } else {
-        setScanningCoupon(false);
+        setProcessingCoupon(false);
         setErrorMsg(response.error);
         console.log('Coupon scanned error: ', response.error);
       }
     } catch (error) {
-      setScanningCoupon(false);
+      setProcessingCoupon(false);
       console.log('Error escaneando cupon.', error);
     }
   };
@@ -67,35 +70,67 @@ export default function ScanCoupon(props): JSX.Element {
           style={{width: 120, height: 65}}
         />
       </View>
-      <ScrollView>
-        <View
+      <ScrollView
+        style={[
+          componentStyles.mainContainer,
+          styles.horizontalPadding,
+          {flexDirection: 'row', flex: 1},
+        ]}>
+        <Text
           style={[
-            componentStyles.mainContainer,
-            styles.mb10,
-            styles.horizontalPadding,
+            fonts.primary,
+            fontColors.secondary,
+            styles.textAlignC,
+            styles.mb14,
           ]}>
-          <Text
+          Ingrese el codigo de promocion:
+        </Text>
+        <View style={[styles.mb20]}>
+          {processingCoupon ? (
+            <View style={{minHeight: 80}}>
+              <Spinner />
+            </View>
+          ) : (
+            <View style={[styles.horizontalAlign, {minHeight: 80}]}>
+              <TextInput
+                style={[
+                  fontColors.primary,
+                  backgroundColors.secondary,
+                  fonts.primary,
+                  styles.mb10,
+                  styles.w100,
+                  componentStyles.qrInput,
+                ]}
+                placeholder="NXCZT"
+                placeholderTextColor={colors.lightGray}
+                autoCapitalize={'characters'}
+                onChangeText={setCoupon}
+                value={coupon}
+              />
+              {errorMsg && (
+                <CustomAppIcon name="invalid" size={20} color={colors.danger} />
+              )}
+            </View>
+          )}
+
+          <Pressable
             style={[
-              fonts.primary,
-              fontColors.secondary,
-              styles.textAlignC,
-              styles.mb14,
-            ]}>
-            Enfoque el codigo de promocion con la camara.
-          </Text>
-          <View
-            style={[
-              styles.mb10,
-              {
-                minWidth: 275,
-                minHeight: 370,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignContent: 'center',
-              },
-            ]}>
-            {scanningCoupon ? <Spinner /> : <QRScanner readQR={readQR} />}
-          </View>
+              componentStyles.secondaryButton,
+              styles.horizontalPadding,
+              backgroundColors.terciary,
+              styles.mb20,
+            ]}
+            onPress={() => handleCoupon()}>
+            <Text
+              style={[
+                fonts.primarySmall,
+                styles.textAlignC,
+                fontColors.primary,
+                {textTransform: 'uppercase'},
+              ]}>
+              Validar codigo
+            </Text>
+          </Pressable>
           {errorMsg && (
             <View
               style={[
@@ -104,21 +139,23 @@ export default function ScanCoupon(props): JSX.Element {
                 styles.mb20,
               ]}>
               <Text style={[fontColors.secondary, fonts.primarySmall]}>
-                Escaneo incorrecto:{'\n'}
+                Error:{'\n'}
                 <Text style={[fontColors.danger, fonts.primarySmall]}>
                   {errorMsg}
                 </Text>
               </Text>
             </View>
           )}
+        </View>
+        <View style={[{flex: 1, justifyContent: 'flex-end', minHeight: 200}]}>
           <Pressable
             style={[
               componentStyles.secondaryButton,
               styles.horizontalPadding,
               backgroundColors.quaternary,
-              styles.mb10,
+              styles.mb20,
             ]}
-            onPress={() => props.navigation.navigate('EnterCoupon')}>
+            onPress={() => props.navigation.navigate('ScanCoupon')}>
             <Text
               style={[
                 fonts.primarySmall,
@@ -126,14 +163,13 @@ export default function ScanCoupon(props): JSX.Element {
                 fontColors.primary,
                 {textTransform: 'uppercase'},
               ]}>
-              Escribir codigo
+              Escanear con QR
             </Text>
           </Pressable>
           <Pressable
             style={[
-              componentStyles.secondaryButton,
-              styles.horizontalPadding,
-              backgroundColors.lightGray,
+              componentStyles.primaryButton,
+              backgroundColors.secondary,
               styles.mb10,
             ]}
             onPress={() => props.navigation.navigate('AdminView')}>

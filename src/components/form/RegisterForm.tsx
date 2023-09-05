@@ -324,7 +324,12 @@ export default function RegisterForm(props): JSX.Element {
           )}
         </View>
 
-        <View style={{marginTop: 'auto', marginBottom: 160, maxWidth: 330}}>
+        <View
+          style={{
+            marginTop: 'auto',
+            marginBottom: 160,
+            maxWidth: 330,
+          }}>
           <Pressable
             style={[
               componentStyles.secondaryButton,
