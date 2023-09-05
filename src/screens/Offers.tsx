@@ -56,6 +56,7 @@ export default function Offers({navigation}: Props): JSX.Element {
 
   const handleOfferData = data => {
     const {titulo, extracto, descripcion, tyc, foto, validez, id} = data;
+
     isAuthenticated
       ? (setOfferData({
           titulo,

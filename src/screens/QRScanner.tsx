@@ -3,7 +3,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {Text} from 'react-native';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
-import {fontColors} from '../styles/variables';
+import {colors, fontColors} from '../styles/variables';
 
 export default function QRScanner(props) {
   return (
@@ -14,7 +14,7 @@ export default function QRScanner(props) {
       cameraContainerStyle={{
         width: 275,
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: colors.secondary,
         alignSelf: 'center',
       }}
       cameraStyle={{width: '99%', alignSelf: 'center'}}

@@ -33,14 +33,15 @@ export default function Settings({navigation}): JSX.Element {
           Gestionar
         </Text>
 
-        <View style={[styles.horizontalAlign, styles.mb20]}>
+        {/* <View style={[styles.horizontalAlign, styles.mb20]}>
           <Text style={[fonts.primary, styles.textAlignC, fontColors.primary]}>
             Ubicacion
           </Text>
           <Entypo name="chevron-right" size={20} color={colors.primary} />
-        </View>
+        </View> */}
 
-        <View style={[componentStyles.grayLine, styles.mb20]} />
+        {/* <View style={[componentStyles.grayLine, styles.mb20]} /> */}
+
         <Pressable onPress={() => navigation.navigate('Notifications')}>
           <View style={[styles.horizontalAlign, styles.mb20]}>
             <Text

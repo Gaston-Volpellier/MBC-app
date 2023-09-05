@@ -43,8 +43,6 @@ export default function Profile(props): JSX.Element {
     try {
       const data = await api.fetchHistory(idToken, 0);
 
-      console.log('Cupones fetched ', data.cupones);
-
       if (data?.error == false) {
         const couponsLength = Object.keys(data.cupones).length;
         couponsLength > 0 ? setCouponsList(data.cupones) : null;
@@ -236,26 +234,28 @@ export default function Profile(props): JSX.Element {
           )}
         </View>
         <View style={[componentStyles.grayLine, styles.mb20]} />
-        <View
-          style={[
-            componentStyles.secondaryButton,
-            backgroundColors.lightGray,
-            {marginBottom: 150},
-          ]}>
-          <Pressable onPress={() => processLogout()} disabled={buttonLoading}>
-            {buttonLoading ? (
-              <ActivityIndicator size={25} />
-            ) : (
-              <Text
-                style={[
-                  fonts.primarySmall,
-                  styles.textAlignC,
-                  fontColors.primary,
-                ]}>
-                CERRAR SESIÓN
-              </Text>
-            )}
-          </Pressable>
+        <View style={{alignItems: 'center'}}>
+          <View
+            style={[
+              componentStyles.secondaryButton,
+              backgroundColors.lightGray,
+              {marginBottom: 150},
+            ]}>
+            <Pressable onPress={() => processLogout()} disabled={buttonLoading}>
+              {buttonLoading ? (
+                <ActivityIndicator size={25} />
+              ) : (
+                <Text
+                  style={[
+                    fonts.primarySmall,
+                    styles.textAlignC,
+                    fontColors.primary,
+                  ]}>
+                  CERRAR SESIÓN
+                </Text>
+              )}
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

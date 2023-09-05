@@ -281,6 +281,7 @@ export const generateCoupon = async (token: String, promoId: Number) => {
   try {
     const response = await axios(options);
 
+    console.log('Coupon data: ', response.data);
     return response.data;
   } catch (error) {
     console.error('Error generating coupon: ', error);

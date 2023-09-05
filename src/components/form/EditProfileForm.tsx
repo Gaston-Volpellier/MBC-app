@@ -256,31 +256,33 @@ export default function EditProfileForm(props): JSX.Element {
               </Text>
             </View>
           )}
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.mb10,
-              !isValid
-                ? backgroundColors.lightGray
-                : backgroundColors.quaternary,
-              {maxWidth: 330},
-            ]}
-            disabled={!isValid || buttonLoading}
-            onPress={() => handleSubmit()}>
-            {buttonLoading ? (
-              <ActivityIndicator size={25} color={colors.primary} />
-            ) : (
-              <Text
-                style={[
-                  fonts.primarySmall,
-                  styles.textAlignC,
-                  fontColors.primary,
-                  {textTransform: 'uppercase'},
-                ]}>
-                Guardar Cambios
-              </Text>
-            )}
-          </Pressable>
+          <View style={{alignItems: 'center'}}>
+            <Pressable
+              style={[
+                componentStyles.secondaryButton,
+                styles.mb10,
+                !isValid
+                  ? backgroundColors.lightGray
+                  : backgroundColors.quaternary,
+                {maxWidth: 330},
+              ]}
+              disabled={!isValid || buttonLoading}
+              onPress={() => handleSubmit()}>
+              {buttonLoading ? (
+                <ActivityIndicator size={25} color={colors.primary} />
+              ) : (
+                <Text
+                  style={[
+                    fonts.primarySmall,
+                    styles.textAlignC,
+                    fontColors.primary,
+                    {textTransform: 'uppercase'},
+                  ]}>
+                  Guardar Cambios
+                </Text>
+              )}
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>

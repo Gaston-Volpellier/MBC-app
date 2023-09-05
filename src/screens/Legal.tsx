@@ -28,14 +28,13 @@ export default function Legal({navigation}): JSX.Element {
           componentStyles.mainContainer,
           styles.horizontalPadding,
           backgroundColors.secondary,
-          {marginBottom: 150},
         ]}>
         <Text
           style={[
             fonts.primary,
             styles.textAlignC,
             fontColors.primary,
-            {textAlign: 'auto'},
+            {textAlign: 'auto', marginBottom: 150},
           ]}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

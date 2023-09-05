@@ -40,9 +40,6 @@ export default function Coupons({navigation}: Props): JSX.Element {
   const getCoupons = async () => {
     try {
       const data = await api.fetchHistory(idToken, 0);
-
-      console.log('Cupones fetched ', data.cupones);
-
       if (data?.error == false) {
         const couponsLength = Object.keys(data.cupones).length;
         couponsLength > 0 ? setCouponsList(data.cupones) : null;

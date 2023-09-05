@@ -172,11 +172,7 @@ export default function DeleteAccount(props: Props): JSX.Element {
         </View>
         <Pressable
           onPress={confirmDelete}
-          style={[
-            componentStyles.secondaryButton,
-            backgroundColors.terciary,
-            {marginBottom: 150},
-          ]}
+          style={[componentStyles.secondaryButton, backgroundColors.terciary]}
           disabled={buttonLoading}>
           {buttonLoading ? (
             <ActivityIndicator size={25} color={colors.primary} />

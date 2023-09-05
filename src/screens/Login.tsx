@@ -51,6 +51,7 @@ export default function Login(props): JSX.Element {
           googleResponse.user.photo,
         );
         setIsAdmin(0);
+
         setIsAuthenticated(true);
         setHasAccess(true);
       } else {
@@ -97,7 +98,7 @@ export default function Login(props): JSX.Element {
           </Text>
         </View>
         <View style={[styles.mb30, styles.itemsC]}>
-          <View style={[styles.mb10, styles.w100]}>
+          <View style={[styles.mb10, styles.w100, {alignItems: 'center'}]}>
             <Pressable
               style={[componentStyles.whiteButton]}
               onPress={signInWithGoogle}

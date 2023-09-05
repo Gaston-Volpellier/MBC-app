@@ -28,12 +28,10 @@ export default function LoginModal(): JSX.Element {
 
     try {
       const googleResponse = await GoogleSingUp();
-      //Devolver solo el usuario de google y despues llamar a la api desde aca
       const apiResponse = await googleLogin(
         googleResponse.idToken,
         googleResponse.user.email,
       );
-      console.log('API object', apiResponse);
 
       if (!apiResponse.error) {
         await storeUserData(
@@ -46,6 +44,7 @@ export default function LoginModal(): JSX.Element {
           apiResponse.usuario.not_email,
           apiResponse.usuario.not_push,
           googleResponse.user.photo,
+          0,
         );
         setIsAdmin(0);
         setIsAuthenticated(true);

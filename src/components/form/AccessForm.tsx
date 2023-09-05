@@ -68,6 +68,10 @@ export default function AccessForm(props): JSX.Element {
         } else {
           console.log('Its not admin!');
 
+          const nameArray = user.usuario.nombre.split(' ');
+          const avatarColor = 'FA821E';
+          const photoURL = `https://ui-avatars.com/api/?background=${avatarColor}&bold=true&color=fff&name=${nameArray[0]}+${nameArray[1]}`;
+
           await storeUserData(
             user.token,
             user.usuario.nombre,
@@ -77,6 +81,7 @@ export default function AccessForm(props): JSX.Element {
             user.usuario.google_id,
             user.usuario.not_email,
             user.usuario.not_push,
+            photoURL,
             user.admin,
           );
           setIsAuthenticated(true);

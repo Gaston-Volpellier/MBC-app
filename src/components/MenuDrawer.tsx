@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Pressable, ScrollView, Image} from 'react-native';
+import {View, Text, Pressable, ScrollView, Image, Linking} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -16,6 +16,8 @@ import {useSession} from '../utils/SessionProvider';
 export default function MenuDrawer(props): JSX.Element {
   const {isAuthenticated} = useSession();
 
+  const instagramUrl = 'https://www.instagram.com/montevideobeercompany/';
+  const facebookUrl = 'https://www.facebook.com/montevideobeercompany/';
   return (
     <ScrollView style={[{flex: 1}]}>
       <View style={[{justifyContent: 'space-between'}, styles.mb30]}>
@@ -74,17 +76,21 @@ export default function MenuDrawer(props): JSX.Element {
         </Text>
         <View
           style={[{flexDirection: 'row'}, styles.centerContainer, styles.mb40]}>
-          <Entypo
-            name="facebook-with-circle"
-            color={colors.primary}
-            style={{marginEnd: 10}}
-            size={50}
-          />
-          <Entypo
-            name="instagram-with-circle"
-            color={colors.primary}
-            size={50}
-          />
+          <Pressable onPress={() => Linking.openURL(facebookUrl)}>
+            <Entypo
+              name="facebook-with-circle"
+              color={colors.primary}
+              style={{marginEnd: 10}}
+              size={50}
+            />
+          </Pressable>
+          <Pressable onPress={() => Linking.openURL(instagramUrl)}>
+            <Entypo
+              name="instagram-with-circle"
+              color={colors.primary}
+              size={50}
+            />
+          </Pressable>
         </View>
         <Image
           source={require('../../assets/images/MBC_logo.png')}

@@ -20,8 +20,8 @@ const componentStyles = StyleSheet.create({
   secondaryButton: {
     paddingHorizontal: 28,
     paddingVertical: 20,
-    backgroundColor: colors.primary,
     borderRadius: 30,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     minWidth: 280,
     maxWidth: 350,
@@ -42,12 +42,10 @@ const componentStyles = StyleSheet.create({
     backgroundColor: colors.secondary,
     borderRadius: 30,
     alignItems: 'center',
-    marginBottom: 8,
     minWidth: 280,
     maxWidth: 350,
     width: '100%',
   },
-
   loadingContainer: {
     width: '100%',
     height: '100%',
@@ -69,7 +67,7 @@ const componentStyles = StyleSheet.create({
     alignItems: 'center',
   },
   cardContainer: {
-    backgroundColor: 'white',
+    backgroundColor: colors.secondary,
     width: '100%',
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
@@ -320,6 +318,7 @@ const componentStyles = StyleSheet.create({
     paddingHorizontal: 0,
     marginHorizontal: 0,
   },
+  qrInput: {borderRadius: 20, paddingHorizontal: 10, minHeight: 60},
 });
 
 export default componentStyles;
