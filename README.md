@@ -13,3 +13,9 @@ npm install
 
 npx react-native start
 ```
+
+## Profiles
+If the profile recieved from the server is administrator, the app will automatically render the administrator view. In this view the user can only scan and validate coupons.
+
+The normal user will get an advertisement the first time it opens the app and will have the full functionalities of the app.
+
