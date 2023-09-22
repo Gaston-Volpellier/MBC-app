@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal, Text, View, Pressable, Image, ScrollView} from 'react-native';
 import componentStyles from '../styles/components';
 import styles from '../styles/styles';
@@ -17,6 +17,8 @@ export default function InternalOffer({
 }): JSX.Element {
   const {idToken} = useSession();
 
+  const [offerError, setOfferError] = useState(null);
+
   const handleCoupon = async () => {
     try {
       const couponData = await api.generateCoupon(idToken, offerData.id);
@@ -33,9 +35,11 @@ export default function InternalOffer({
           couponData.cupon_qr,
         );
       } else {
+        setOfferError(couponData.error);
         console.log('error with coupon: ', couponData);
       }
     } catch (error) {
+      setOfferError(error);
       console.log('error generating coupon!', error);
     }
   };
@@ -46,7 +50,7 @@ export default function InternalOffer({
       transparent={false}
       visible={offerVisible}
       onRequestClose={() => toggleOffer(!offerVisible)}>
-      <ScrollView>
+      <ScrollView style={{flex: 1}}>
         <View
           style={[
             componentStyles.backDrop,
@@ -55,19 +59,17 @@ export default function InternalOffer({
             styles.itemsC,
             {paddingVertical: 37},
           ]}>
-          <View style={[styles.shadow, {borderRadius: 20}]}>
+          <View style={[styles.shadow, {borderRadius: 20, alignItems: 'center', position:'relative'}]}>
             <View
               style={{
                 width: 46,
                 height: 46,
                 borderRadius: 50,
-                backgroundColor: colors.backdrop,
+                backgroundColor: colors.backdropSolid,
                 zIndex: 20,
                 position: 'absolute',
-                top: 0,
+                top: -23,
                 overflow: 'hidden',
-                left: '50%',
-                transform: [{translateX: -23}, {translateY: -23}],
               }}
             />
             <View
@@ -78,10 +80,8 @@ export default function InternalOffer({
                 backgroundColor: colors.backdrop,
                 zIndex: 20,
                 position: 'absolute',
-                bottom: 0,
+                bottom: -23,
                 overflow: 'hidden',
-                left: '50%',
-                transform: [{translateX: -23}, {translateY: 23}],
               }}>
               <InsetShadow
                 shadowRadius={3.5}
@@ -193,6 +193,17 @@ export default function InternalOffer({
                     CANJEALO EN CAJA
                   </Text>
                 </Pressable>
+                { offerError ?
+                <Text
+                  style={[
+                    fontColors.danger,
+                    fonts.primarySmall,
+                    styles.textAlignC
+                  ]}>
+                  {offerError}
+                </Text>
+                : null
+                }
                 <Text
                   style={[
                     fonts.primarySmaller,
