@@ -1,5 +1,5 @@
-import 'react-native-gesture-handler';
 import React, {useState} from 'react';
+import 'react-native-gesture-handler';
 import {useSession} from '../utils/SessionProvider';
 import Loading from './Loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';

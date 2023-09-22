@@ -39,6 +39,9 @@ export default function Login(props): JSX.Element {
       console.log('API object', apiResponse);
 
       if (!apiResponse.error) {
+        let parts = apiResponse.usuario.fecha_nacimiento ? apiResponse.usuario.fecha_nacimiento.split('-') : [];
+        if (parts.length == 3) apiResponse.usuario.fecha_nacimiento = parts.reverse().join('/');
+
         await storeUserData(
           apiResponse.token,
           apiResponse.usuario.nombre,

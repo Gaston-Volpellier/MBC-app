@@ -62,7 +62,7 @@ export const editProfileValidationSchema = yup.object().shape({
     .required('Ingrese su Email'),
   phone: yup
     .string()
-    .min(7, 'El numero debe ser de al menos 6 digitos.')
-    .max(9, 'El numero debe ser de hasta 8 digitos.'),
+    .min(7, 'El número debe ser de al menos 6 digitos.')
+    .max(15, 'El número debe ser de hasta 15 digitos.'),
   birthDate: yup.string().required('Ingresa tu fecha de nacimiento'),
 });

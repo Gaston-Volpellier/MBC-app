@@ -13,7 +13,8 @@ export const colors = {
   lightGrayAlt: '#F3F3F3',
   success: '#1BA048',
   danger: '#CB1A1A',
-  backdrop: 'rgba(243, 243, 243, 1)',
+  backdrop: 'rgba(243, 243, 243, 0.8)',
+  backdropSolid: 'rgba(243, 243, 243, 1)',
   black: '#020202',
 };
 

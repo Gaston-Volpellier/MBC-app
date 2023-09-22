@@ -8,7 +8,7 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-import {AntDesign, FontAwesome} from '../libs/vector-icons';
+import {AntDesign, FontAwesome, Feather } from '../libs/vector-icons';
 import styles from '../styles/styles';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -77,7 +77,7 @@ export default function Profile(props): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView style={backgroundColors.secondary}>
+    <SafeAreaView style={[backgroundColors.secondary, {flex: 1}]}>
       <HeaderSecondary
         title="Perfil y cuenta"
         iconLeft={
@@ -156,8 +156,8 @@ export default function Profile(props): JSX.Element {
         </View>
         <View
           style={[{flexDirection: 'row', alignItems: 'center'}, styles.mb20]}>
-          <CustomAppIcon
-            name="phone"
+          <Feather
+            name="phone-call"
             size={22}
             color={colors.primary}
             style={{marginEnd: 17}}
@@ -239,7 +239,7 @@ export default function Profile(props): JSX.Element {
             style={[
               componentStyles.secondaryButton,
               backgroundColors.lightGray,
-              {marginBottom: 150},
+              {marginBottom: 50},
             ]}>
             <Pressable onPress={() => processLogout()} disabled={buttonLoading}>
               {buttonLoading ? (

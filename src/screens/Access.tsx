@@ -13,14 +13,14 @@ export default function Access(props): JSX.Element {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={backgroundColors.secondary}>
+    <SafeAreaView style={[backgroundColors.secondary, {flex: 1}]}>
       <HeaderSecondary
         title="ACCEDÉ A TU CUENTA"
         iconRight={
           <Pressable onPress={() => navigation.goBack()}>
             <AntDesign
               name="closecircle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />
@@ -39,9 +39,9 @@ export default function Access(props): JSX.Element {
             style={[
               fonts.primarySmall,
               fontColors.primary,
-              styles.mb20,
               fonts.underlined,
               styles.textAlignC,
+              {marginBottom: 160},
             ]}>
             ¿Olvidaste tu usuario o contraseña?
           </Text>

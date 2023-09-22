@@ -256,7 +256,7 @@ export default function EditProfileForm(props): JSX.Element {
               </Text>
             </View>
           )}
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.itemsC}>
             <Pressable
               style={[
                 componentStyles.secondaryButton,

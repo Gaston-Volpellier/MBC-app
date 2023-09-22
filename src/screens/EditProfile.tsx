@@ -48,10 +48,12 @@ export default function EditProfile({navigation}: Props): JSX.Element {
         );
         setButtonLoading(false);
         console.log('edit profile Response: ', response);
-        setEditMsg('Perfil actualizado exitosamente!');
+        const message = 'El perfil pudo ser actualizado exitosamente';
+        setEditMsg(message);
       } else {
         console.log('Edit profile Error: ', response);
-        setErrorMsg('El perfil no pudo ser actualizado');
+        const message = 'El perfil no pudo ser actualizado ' + response.error;
+        setErrorMsg(message);
       }
     } catch (error) {
       error && setErrorMsg(error);
@@ -75,7 +77,7 @@ export default function EditProfile({navigation}: Props): JSX.Element {
           <Pressable onPress={() => navigation.goBack()}>
             <AntDesign
               name="closecircle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />
@@ -92,8 +94,8 @@ export default function EditProfile({navigation}: Props): JSX.Element {
           initialValues={initialValues}
           validationSchema={editProfileValidationSchema}
           onSubmit={values => handleForm(values)}
-          validateOnChange={false}
-          validateOnBlur={false}>
+          validateOnChange={true}
+          validateOnBlur={true}>
           {({
             handleSubmit,
             values,

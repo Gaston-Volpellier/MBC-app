@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useContext, useState} from 'react';
 import {clearAllAsyncData, storeData} from '../services/functions';
 import {googleLogOut} from './GoogleAuth';
-import {serverLogout} from '../services/api';
+import {serverLogout, validateApi} from '../services/api';
 
 const SessionContext = createContext();
 
@@ -43,6 +43,13 @@ function useSessionProvider() {
     descripcion: '',
     titulo: '',
   });
+  const [socialData, setSocialData] = useState({
+    facebook: '',
+    instagram: '',
+    terminos: '',
+    politicas: '',
+    tienda: ''
+  });
 
   const clearSession = () => {
     console.log('Clearing session...');
@@ -69,31 +76,42 @@ function useSessionProvider() {
   };
 
   const handleUserData = async (idToken: string) => {
-    //Loads async storage data into the session state.
-    setIdToken(idToken);
+    const response = await validateApi(idToken);
 
-    const userName: string | null = await AsyncStorage.getItem('name');
-    const email: string | null = await AsyncStorage.getItem('email');
-    const photo: string | null = await AsyncStorage.getItem('photo');
-    const birthDate: string | null = await AsyncStorage.getItem('birthDate');
-    const phone: string | null = await AsyncStorage.getItem('phone');
-    const google_id: string | null = await AsyncStorage.getItem('google_id');
-    const notEmail: string | null = await AsyncStorage.getItem('notEmail');
-    const notPush: string | null = await AsyncStorage.getItem('notPush');
-    const isadminString: string | null = await AsyncStorage.getItem('isAdmin');
+    if (!response.error && response.cliente) {
+      setIdToken(idToken);
 
-    const isAdmin = parseInt(isadminString);
+      const userName: string | null = response.cliente.nombre;
+      const email: string | null = response.cliente.email;
+      const photo: string | null = await AsyncStorage.getItem('photo');
+      let birthDate: string | null = response.cliente.fecha_nacimiento;;
+      const phone: string | null = response.cliente.telefono;;
+      const google_id: string | null = response.cliente.google_id;;
+      const notEmail: string | null = response.cliente.not_email;;
+      const notPush: string | null = response.cliente.not_push;;
+      const isadminString: string | null = await AsyncStorage.getItem('isAdmin');
+      const isAdmin = parseInt(isadminString);
 
-    userName && setUserName(userName);
-    email && setEmail(email);
-    photo && setPhoto(photo);
-    birthDate && setBirthDate(birthDate);
-    phone && setPhone(phone);
-    google_id && setGoogleId(google_id);
-    notEmail && setNotEmail(notEmail);
-    notPush && setNotPush(notPush);
-    isAdmin && setIsAdmin(isAdmin);
-    !isAdmin && setShowAd(false);
+      let parts = birthDate ? birthDate.split('-') : [];
+      if (parts.length == 3) birthDate = parts.reverse().join('/');
+
+      userName && setUserName(userName);
+      email && setEmail(email);
+      photo && setPhoto(photo);
+      birthDate && setBirthDate(birthDate);
+      phone && setPhone(phone);
+      google_id && setGoogleId(google_id);
+      notEmail && setNotEmail(notEmail == '1' ? true : false);
+      notPush && setNotPush(notPush == '1' ? true : false);
+      isAdmin && setIsAdmin(isAdmin);
+      !isAdmin && setShowAd(false);
+    }else {
+      serverLogout(idToken);
+      googleLogOut();
+      clearSession();
+      setIsAuthenticated(false);
+      setHasAccess(false);
+    }
   };
 
   const storeUserData = async (
@@ -160,5 +178,7 @@ function useSessionProvider() {
     setScannedCoupon,
     adData,
     setAdData,
+    socialData,
+    setSocialData
   };
 }

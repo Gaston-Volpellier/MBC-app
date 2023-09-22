@@ -52,7 +52,7 @@ export default function CashierCoupon(props): JSX.Element {
       style={[
         backgroundColors.primary,
         styles.horizontalPadding,
-        {paddingTop: 30},
+        {paddingTop: 30, flex: 1},
       ]}>
       <View style={[styles.centerContainer, styles.mb30]}>
         <Image

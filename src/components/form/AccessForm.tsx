@@ -166,6 +166,7 @@ export default function AccessForm(props): JSX.Element {
               placeholder="************"
               placeholderTextColor={colors.lightGray}
               secureTextEntry={!passwordVisible}
+              autoCapitalize='none'
               name="password"
             />
             {errors.password && (
@@ -197,7 +198,7 @@ export default function AccessForm(props): JSX.Element {
             )}
           </View>
 
-          <View>
+          <View style={styles.itemsC}>
             <Pressable
               style={[
                 componentStyles.secondaryButton,
@@ -212,7 +213,7 @@ export default function AccessForm(props): JSX.Element {
               {buttonLoading ? (
                 <ActivityIndicator size={25} />
               ) : (
-                <View style={[styles.horizontalAlignAlt]}>
+                <View>
                   <Text
                     style={[
                       fonts.primarySmall,

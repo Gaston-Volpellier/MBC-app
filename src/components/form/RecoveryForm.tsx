@@ -80,7 +80,7 @@ export default function RecoveryForm(props): JSX.Element {
               </Text>
             )}
           </View>
-          <View>
+          <View style={[styles.itemsC, {marginBottom: 150}]}>
             <Pressable
               style={[
                 componentStyles.secondaryButton,

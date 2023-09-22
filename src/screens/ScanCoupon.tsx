@@ -59,7 +59,7 @@ export default function ScanCoupon(props): JSX.Element {
       style={[
         backgroundColors.primary,
         styles.horizontalPadding,
-        {paddingTop: 30, height: '100%'},
+        {paddingTop: 30, flex: 1},
       ]}>
       <View style={[styles.centerContainer, styles.mb40]}>
         <Image
@@ -111,42 +111,44 @@ export default function ScanCoupon(props): JSX.Element {
               </Text>
             </View>
           )}
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.horizontalPadding,
-              backgroundColors.quaternary,
-              styles.mb10,
-            ]}
-            onPress={() => props.navigation.navigate('EnterCoupon')}>
-            <Text
+          <View style={styles.itemsC}>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Escribir codigo
-            </Text>
-          </Pressable>
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.horizontalPadding,
-              backgroundColors.lightGray,
-              styles.mb10,
-            ]}
-            onPress={() => props.navigation.navigate('AdminView')}>
-            <Text
+                componentStyles.secondaryButton,
+                styles.horizontalPadding,
+                backgroundColors.quaternary,
+                styles.mb10,
+              ]}
+              onPress={() => props.navigation.navigate('EnterCoupon')}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Escribir codigo
+              </Text>
+            </Pressable>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Volver
-            </Text>
-          </Pressable>
+                componentStyles.secondaryButton,
+                styles.horizontalPadding,
+                backgroundColors.lightGray,
+                styles.mb10,
+              ]}
+              onPress={() => props.navigation.navigate('AdminView')}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Volver
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -9,7 +9,7 @@ export default function CouponModal(props): JSX.Element {
 
   return (
     <ModalContainer toggleModal={toggleModal} modalVisible={modalVisible}>
-      {props.status ? <UsedCoupon /> : <QrCoupon modalData={props.modalData} />}
+      <QrCoupon modalData={props.modalData} />
     </ModalContainer>
   );
 }

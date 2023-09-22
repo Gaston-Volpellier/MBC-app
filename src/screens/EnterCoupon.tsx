@@ -15,7 +15,6 @@ import {backgroundColors, colors, fontColors} from '../styles/variables';
 import {useSession} from '../utils/SessionProvider';
 import * as api from '../services/api';
 import Spinner from '../components/Spinner';
-import {CustomAppIcon} from '../libs/Custom.App.Icon';
 
 export default function EnterCoupon(props): JSX.Element {
   const {idToken, setScannedCoupon} = useSession();
@@ -62,7 +61,8 @@ export default function EnterCoupon(props): JSX.Element {
       style={[
         backgroundColors.primary,
         styles.horizontalPadding,
-        {paddingTop: 30, height: '100%'},
+
+        {paddingTop: 30, flex: 1},
       ]}>
       <View style={[styles.centerContainer, styles.mb40]}>
         <Image
@@ -70,119 +70,114 @@ export default function EnterCoupon(props): JSX.Element {
           style={{width: 120, height: 65}}
         />
       </View>
-      <ScrollView
-        style={[
-          componentStyles.mainContainer,
-          styles.horizontalPadding,
-          {flexDirection: 'row', flex: 1},
-        ]}>
-        <Text
-          style={[
-            fonts.primary,
-            fontColors.secondary,
-            styles.textAlignC,
-            styles.mb14,
-          ]}>
-          Ingrese el codigo de promocion:
-        </Text>
-        <View style={[styles.mb20]}>
-          {processingCoupon ? (
-            <View style={{minHeight: 80}}>
-              <Spinner />
-            </View>
-          ) : (
-            <View style={[styles.horizontalAlign, {minHeight: 80}]}>
-              <TextInput
-                style={[
-                  fontColors.primary,
-                  backgroundColors.secondary,
-                  fonts.primary,
-                  styles.mb10,
-                  styles.w100,
-                  componentStyles.qrInput,
-                ]}
-                placeholder="NXCZT"
-                placeholderTextColor={colors.lightGray}
-                autoCapitalize={'characters'}
-                onChangeText={setCoupon}
-                value={coupon}
-              />
-              {errorMsg && (
-                <CustomAppIcon name="invalid" size={20} color={colors.danger} />
-              )}
-            </View>
-          )}
+      <ScrollView style={{flex: 1}}>
+        <View style={[componentStyles.mainContainer, styles.horizontalPadding]}>
+          <Text
+            style={[
+              fonts.primary,
+              fontColors.secondary,
+              styles.textAlignC,
+              styles.mb14,
+            ]}>
+            Ingrese el codigo de promocion:
+          </Text>
+          <View style={[styles.mb20, styles.itemsC]}>
+            {processingCoupon ? (
+              <View style={{minHeight: 80}}>
+                <Spinner />
+              </View>
+            ) : (
+              <View style={[styles.horizontalAlign, {minHeight: 80}]}>
+                <TextInput
+                  style={[
+                    fontColors.primary,
+                    backgroundColors.secondary,
+                    fonts.primary,
+                    styles.mb10,
+                    styles.w100,
+                    componentStyles.qrInput,
+                    {maxWidth: 350},
+                  ]}
+                  placeholder="NXCZT"
+                  placeholderTextColor={colors.lightGray}
+                  autoCapitalize={'characters'}
+                  onChangeText={setCoupon}
+                  value={coupon}
+                />
+              </View>
+            )}
 
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.horizontalPadding,
-              backgroundColors.terciary,
-              styles.mb20,
-            ]}
-            onPress={() => handleCoupon()}>
-            <Text
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Validar codigo
-            </Text>
-          </Pressable>
-          {errorMsg && (
-            <View
-              style={[
-                styles.horizontalAlign,
+                componentStyles.secondaryButton,
                 styles.horizontalPadding,
+                backgroundColors.terciary,
                 styles.mb20,
-              ]}>
-              <Text style={[fontColors.secondary, fonts.primarySmall]}>
-                Error:{'\n'}
-                <Text style={[fontColors.danger, fonts.primarySmall]}>
-                  {errorMsg}
-                </Text>
+              ]}
+              onPress={() => handleCoupon()}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Validar codigo
               </Text>
-            </View>
-          )}
-        </View>
-        <View style={[{flex: 1, justifyContent: 'flex-end', minHeight: 200}]}>
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.horizontalPadding,
-              backgroundColors.quaternary,
-              styles.mb20,
-            ]}
-            onPress={() => props.navigation.navigate('ScanCoupon')}>
-            <Text
+            </Pressable>
+            {errorMsg && (
+              <View
+                style={[
+                  styles.horizontalAlign,
+                  styles.horizontalPadding,
+                  styles.mb20,
+                ]}>
+                <Text style={[fontColors.secondary, fonts.primarySmall]}>
+                  Error:{'\n'}
+                  <Text style={[fontColors.danger, fonts.primarySmall]}>
+                    {errorMsg}
+                  </Text>
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={[{flex: 1, justifyContent: 'flex-end', minHeight: 200}]}>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Escanear con QR
-            </Text>
-          </Pressable>
-          <Pressable
-            style={[
-              componentStyles.primaryButton,
-              backgroundColors.secondary,
-              styles.mb10,
-            ]}
-            onPress={() => props.navigation.navigate('AdminView')}>
-            <Text
+                componentStyles.secondaryButton,
+                styles.horizontalPadding,
+                backgroundColors.quaternary,
+                styles.mb20,
+              ]}
+              onPress={() => props.navigation.navigate('ScanCoupon')}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Escanear con QR
+              </Text>
+            </Pressable>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-                {textTransform: 'uppercase'},
-              ]}>
-              Volver
-            </Text>
-          </Pressable>
+                componentStyles.primaryButton,
+                backgroundColors.secondary,
+                styles.mb10,
+              ]}
+              onPress={() => props.navigation.navigate('AdminView')}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                  {textTransform: 'uppercase'},
+                ]}>
+                Volver
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

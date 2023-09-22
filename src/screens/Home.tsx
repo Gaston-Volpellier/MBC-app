@@ -16,6 +16,7 @@ import {backgroundColors, fontColors} from '../styles/variables';
 import PopUpContainer from '../components/PopupContainer';
 import {useSession} from '../utils/SessionProvider';
 import * as api from '../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home({navigation}: Props): JSX.Element {
   const offersImage = 'Rectangle2.png';
@@ -36,27 +37,33 @@ export default function Home({navigation}: Props): JSX.Element {
   useEffect(() => {
     const loadAdData = async () => {
       try {
-        const response = await api.fetchAd(idToken);
+        if (isAuthenticated) {
+          const response = await api.fetchAd(idToken);
 
-        if (!response.error) {
-          setAdData(response.publicidad);
-        } else {
-          console.log('Ad error: ', response.error);
+          if (!response.error) {
+            setAdData(response.publicidad);
+            setShowAd(0);
+          } else {
+            console.log('Ad error: ', response.error);
+          }
         }
       } catch (error) {
         console.log('Error fetching ad from server: ', error);
       }
-      setShowAd(0);
     };
 
-    showAd ? loadAdData() : null;
+    showAd ? isAuthenticated && loadAdData() : null;
   }, []);
 
   useEffect(() => {
-    adData != undefined
-      ? setTimeout(() => {
-          console.log('Triggering popup: ', adData);
-          setPopUpVisible(true);
+    isAuthenticated && adData != undefined && showAd
+      ? setTimeout(async () => {
+          const adStorage = await AsyncStorage.getItem('adStorage');
+          console.log('Triggering popup: ', adData, showAd);
+          if (!adStorage) {
+            setPopUpVisible(true);
+            await AsyncStorage.setItem('adStorage', '1');
+          }
         }, 1000)
       : null;
   }, [adData]);

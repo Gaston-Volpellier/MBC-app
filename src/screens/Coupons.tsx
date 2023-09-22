@@ -95,12 +95,7 @@ export default function Coupons({navigation}: Props): JSX.Element {
           ]}>
           MIS CUPONES
         </Text>
-        <View
-          style={[
-            componentStyles.cardContainer,
-            styles.horizontalPadding,
-            styles.mb20,
-          ]}>
+        <View style={[componentStyles.cardContainer, styles.horizontalPadding]}>
           <ScrollView style={[{flexDirection: 'row'}, styles.mb20]} horizontal>
             <Pressable
               onPress={() => setFilter(3)}
@@ -156,7 +151,7 @@ export default function Coupons({navigation}: Props): JSX.Element {
               <Spinner />
             </View>
           ) : (
-            <View style={{minHeight: 300}}>
+            <View style={{minHeight: 200}}>
               {couponsList ? (
                 couponsList.map(coupon =>
                   filter == 3 || filter == coupon.estado ? (

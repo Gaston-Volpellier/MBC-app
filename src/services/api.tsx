@@ -70,10 +70,13 @@ export const register = async (
   fecha_nac: String,
   password: String,
 ) => {
+  const parts = fecha_nac.split('/');
+  const fn =
+    parts.length == 3 ? parts[2] + '-' + parts[1] + '-' + parts[0] : null;
   const data = {
     nombre: nombre,
     email: email,
-    fecha_nac: fecha_nac,
+    fecha_nac: fn,
     password: hashPassword(password),
   };
 
@@ -101,12 +104,16 @@ export const editProfile = async (
   phone: String,
   birthDate: String,
 ) => {
+  const parts = birthDate.split('/');
+  const fn =
+    parts.length == 3 ? parts[2] + '-' + parts[1] + '-' + parts[0] : null;
+
   const data = {
     token: token,
     nombre: name,
     email: email,
     telefono: phone,
-    fecha_nac: birthDate,
+    fecha_nac: fn,
   };
 
   const options = {
@@ -390,5 +397,40 @@ export const fetchAd = async (token: String) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching ad: ', error);
+  }
+};
+
+export const fetchSocialTerms = async () => {
+  const options = {
+    method: 'POST',
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    url: `${baseUrl}/redes-sociales.php`,
+  };
+
+  try {
+    const response = await axios(options);
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching social: ', error);
+  }
+};
+
+export const validateApi = async (token: String) => {
+  const data = {token: token};
+
+  const options = {
+    method: 'POST',
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    data: qs.stringify(data),
+    url: `${baseUrl}/validar-token.php`,
+  };
+
+  try {
+    const response = await axios(options);
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching validate: ', error);
   }
 };
