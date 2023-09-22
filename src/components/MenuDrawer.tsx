@@ -14,10 +14,13 @@ import {CustomAppIcon} from '../libs/Custom.App.Icon';
 import {useSession} from '../utils/SessionProvider';
 
 export default function MenuDrawer(props): JSX.Element {
-  const {isAuthenticated} = useSession();
+  const {
+    isAuthenticated,
+    socialData
+  } = useSession();
 
-  const instagramUrl = 'https://www.instagram.com/montevideobeercompany/';
-  const facebookUrl = 'https://www.facebook.com/montevideobeercompany/';
+  const instagramUrl = socialData['instagram'];
+  const facebookUrl = socialData['facebook'];
   return (
     <ScrollView style={[{flex: 1}]}>
       <View style={[{justifyContent: 'space-between'}, styles.mb30]}>
@@ -62,17 +65,12 @@ export default function MenuDrawer(props): JSX.Element {
           }
         />
       </View>
-      <DrawerContentScrollView
-        {...props}
-        style={[{paddingStart: 13}, styles.mb40]}>
+      <DrawerContentScrollView {...props} style={[styles.mb40]}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
       <View style={[styles.horizontalPadding, styles.mb30]}>
         <Text style={[fontColors.primary, fonts.primarySmall]}>
           Términos y Condiciones
-        </Text>
-        <Text style={[fontColors.primary, fonts.primarySmall, styles.mb20]}>
-          Lorem Ipsum
         </Text>
         <View
           style={[{flexDirection: 'row'}, styles.centerContainer, styles.mb40]}>

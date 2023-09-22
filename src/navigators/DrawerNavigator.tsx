@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import BottomNavigator from './BottomNavigator';
 import componentStyles from '../styles/components';
@@ -8,6 +8,8 @@ import fonts from '../styles/fonts';
 import {colors, fontColors} from '../styles/variables';
 import {Text} from 'react-native';
 import {useSession} from '../utils/SessionProvider';
+import {Pressable, Linking} from 'react-native';
+import * as api from '../services/api';
 
 type RootStackParamList = {
   Home_bottom: undefined;
@@ -22,7 +24,30 @@ type RootStackParamList = {
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
 export default function DrawerNavigator(props) {
-  const {isAuthenticated} = useSession();
+  const {
+    isAuthenticated,
+    setSocialData,
+    socialData
+  } = useSession();
+
+  useEffect(() => {
+    const loadSocial = async () => {
+      try {
+        const response = await api.fetchSocialTerms();
+
+        if (!response.error) {
+          setSocialData(response.data);
+        } else {
+          console.log('Soaicl error: ', response.error);
+        }
+        
+      } catch (error) {
+        console.log('Error fetching ad from server: ', error);
+      }
+    };
+
+    loadSocial();
+  }, []);
 
   return (
     <Drawer.Navigator
@@ -124,15 +149,20 @@ export default function DrawerNavigator(props) {
         name="Online_store"
         options={{
           drawerLabel: ({focused}) => (
-            <Text
-              style={[
-                fonts.secondaryMain,
-                focused ? fonts.underlined : null,
-                focused ? fontColors.terciary : fontColors.primary,
-                {marginVertical: -10},
-              ]}>
-              Tienda Online
-            </Text>
+            <Pressable
+              onPress={() =>
+                Linking.openURL(socialData['tienda'])
+              }>
+              <Text
+                style={[
+                  fonts.secondaryMain,
+                  focused ? fonts.underlined : null,
+                  focused ? fontColors.terciary : fontColors.primary,
+                  {marginVertical: -10},
+                ]}>
+                Tienda Online
+              </Text>
+            </Pressable>
           ),
           drawerActiveTintColor: colors.secondary,
         }}
