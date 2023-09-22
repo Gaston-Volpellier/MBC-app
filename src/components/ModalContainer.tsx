@@ -15,8 +15,7 @@ export default function ModalContainer({
       onRequestClose={() => toggleModal(!modalVisible)}>
       <TouchableOpacity
         style={componentStyles.backDrop}
-        onPress={() => toggleModal(!modalVisible)}
-      />
+        onPress={() => toggleModal(!modalVisible)}></TouchableOpacity>
       <View style={componentStyles.modalView}>{children}</View>
     </Modal>
   );

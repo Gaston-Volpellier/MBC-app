@@ -17,8 +17,7 @@ export default function UsedCoupon(props): JSX.Element {
           source={require('../../assets/images/Coupon_check.png')}
         />
       </View>
-      {/* for testing purposes */}
-      <Pressable onPress={() => props.setIsUsed(false)}>
+      <View>
         <Text
           style={[fonts.secondaryVeryLarge, fontColors.primary, styles.mb14]}>
           CUPÓN UTILIZADO
@@ -32,7 +31,7 @@ export default function UsedCoupon(props): JSX.Element {
           ]}>
           ¡MUCHAS GRACIAS!
         </Text>
-      </Pressable>
+      </View>
       <Pressable onPress={() => navigation.navigate('Offers')}>
         <Text
           style={[

@@ -231,6 +231,7 @@ export default function RegisterForm(props): JSX.Element {
             value={values.password}
             placeholder="************"
             placeholderTextColor={colors.lightGray}
+            autoCapitalize='none'
             secureTextEntry={!passwordVisible}
           />
           {errors.password && (
@@ -289,6 +290,7 @@ export default function RegisterForm(props): JSX.Element {
             value={values.confirmpassword}
             placeholder="************"
             placeholderTextColor={colors.lightGray}
+            autoCapitalize='none'
             secureTextEntry={!confirmPasswordVisible}
           />
           {errors.confirmpassword && (
@@ -326,29 +328,32 @@ export default function RegisterForm(props): JSX.Element {
 
         <View
           style={{
-            marginTop: 'auto',
             marginBottom: 160,
-            maxWidth: 330,
           }}>
-          <Pressable
-            style={[
-              componentStyles.secondaryButton,
-              styles.mb10,
-              !isValid
-                ? backgroundColors.lightGray
-                : backgroundColors.quaternary,
-            ]}
-            disabled={!isValid}
-            onPress={() => handleSubmit()}>
-            <Text
+          <View style={styles.itemsC}>
+            <Pressable
               style={[
-                fonts.primarySmall,
-                styles.textAlignC,
-                fontColors.primary,
-              ]}>
-              Registrate
-            </Text>
-          </Pressable>
+                componentStyles.secondaryButton,
+                styles.mb10,
+                !isValid
+                  ? backgroundColors.lightGray
+                  : backgroundColors.quaternary,
+                {
+                  maxWidth: 330,
+                },
+              ]}
+              disabled={!isValid}
+              onPress={() => handleSubmit()}>
+              <Text
+                style={[
+                  fonts.primarySmall,
+                  styles.textAlignC,
+                  fontColors.primary,
+                ]}>
+                Registrate
+              </Text>
+            </Pressable>
+          </View>
           {registerError && (
             <View style={[styles.horizontalAlign]}>
               <Text style={[fontColors.danger, fonts.primarySmaller]}>

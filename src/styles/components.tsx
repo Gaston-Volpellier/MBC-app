@@ -145,9 +145,12 @@ const componentStyles = StyleSheet.create({
   },
   cardThumbnailCentral: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{translateX: -60}, {translateY: -20}],
+    top: 0,
+    left: 0,
+    right:0,
+    bottom:0,
+    alignItems: 'center', 
+    justifyContent:'center'
   },
   cardThumbnailPill: {
     borderRadius: 14,
@@ -179,21 +182,21 @@ const componentStyles = StyleSheet.create({
     overflow: 'hidden',
   },
   modalView: {
-    backgroundColor: colors.quaternary,
-    width: '100%',
-    maxHeight: '90%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingTop: 30,
-    paddingHorizontal: 30,
-    paddingBottom: 36,
+    backgroundColor: colors.backdrop,
   },
   qrModalContainer: {
-    paddingTop: 14,
-    paddingHorizontal: 31,
+    width: '100%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 44,
+    paddingHorizontal: 60,
+    paddingBottom: 36,
+    overflow: 'hidden',
+    backgroundColor: colors.quaternary,
   },
   QRContainer: {
     backgroundColor: colors.lightGray,
+    position: 'relative',
     padding: 23,
     marginBottom: 13,
     alignItems: 'center',
@@ -216,6 +219,8 @@ const componentStyles = StyleSheet.create({
   backDrop: {
     backgroundColor: colors.backdrop,
     flex: 1,
+    zIndex: 10,
+    height: hp(100),
   },
   backDropBlack: {
     backgroundColor: colors.black,

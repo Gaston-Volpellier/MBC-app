@@ -11,11 +11,13 @@ export default function HeaderSecondary(props): JSX.Element {
       style={[
         styles.horizontalAlign,
         styles.horizontalPadding,
-        styles.mb20,
         backgroundColors.secondary,
         {paddingVertical: 20},
       ]}>
-      <Text style={[fonts.secondaryMain, fontColors.terciary]}>{title}</Text>
+      <Text
+        style={[fonts.secondaryMain, fontColors.terciary, {maxWidth: '85%'}]}>
+        {title}
+      </Text>
       <View style={[styles.centerContainer, {flexDirection: 'row'}]}>
         <View style={{marginRight: 8}}>{props.iconLeft}</View>
         <View>{props.iconRight}</View>

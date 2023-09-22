@@ -10,14 +10,14 @@ import RecoveryCodeForm from '../components/form/RecoveryCodeForm';
 
 export default function RecoveryCode({navigation}: Props): JSX.Element {
   return (
-    <SafeAreaView style={backgroundColors.secondary}>
+    <SafeAreaView style={[backgroundColors.secondary, {flex: 1}]}>
       <HeaderSecondary
         title="RECUPERÁ TU USUARIO Y/O CONTRASEÑA"
         iconRight={
           <Pressable onPress={() => navigation.goBack()}>
             <AntDesign
               name="closecircle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />

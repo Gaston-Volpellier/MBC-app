@@ -59,7 +59,7 @@ export default function Notifications(props: Props): JSX.Element {
           <Pressable onPress={() => navigation.goBack()}>
             <Ionicons
               name="arrow-back-circle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />

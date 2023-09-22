@@ -8,6 +8,7 @@ import ImageSectionAlt from './ImageSectionAlt';
 
 export default function Offer(props): JSX.Element {
   const {image, title, description, status, altDescription, pressable} = props;
+
   return (
     <Pressable onPress={() => pressable} style={styles.mb20}>
       <ImageSectionAlt

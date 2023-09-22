@@ -31,11 +31,11 @@ export default function RecoveryCodeForm(props): JSX.Element {
   };
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.mb50}>
         <CodeInput code={code} setCode={setCode} />
       </View>
-      <View style={styles.mb10}>
+      <View style={[styles.mb10, styles.itemsC]}>
         <Pressable
           style={[
             componentStyles.secondaryButton,
@@ -49,14 +49,14 @@ export default function RecoveryCodeForm(props): JSX.Element {
             CONTINUAR
           </Text>
         </Pressable>
-        {errorMsg && (
-          <View style={[styles.horizontalAlign]}>
-            <Text style={[fontColors.danger, fonts.primarySmall, styles.mb10]}>
-              {errorMsg}
-            </Text>
-          </View>
-        )}
       </View>
+      {errorMsg && (
+        <View style={[styles.horizontalAlign]}>
+          <Text style={[fontColors.danger, fonts.primarySmall, styles.mb10]}>
+            {errorMsg}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

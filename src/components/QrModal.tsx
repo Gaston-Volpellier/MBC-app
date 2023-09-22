@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, Image, View, ScrollView, Pressable} from 'react-native';
-import {fontColors} from '../styles/variables';
+import {backgroundColors, fontColors} from '../styles/variables';
 import PillComponent from './StatusPill';
 import fonts from '../styles/fonts';
 import componentStyles from '../styles/components';
@@ -49,7 +49,7 @@ export default function QrCoupon(props): JSX.Element {
             <Spinner />
           </View>
         ) : (
-          <Pressable>
+          <View style={{position:'relative'}}>
             <Image
               style={componentStyles.QRFormat}
               source={{uri: modalData.url}}
@@ -60,7 +60,7 @@ export default function QrCoupon(props): JSX.Element {
                 <PillComponent status={status} />
               </View>
             ) : null}
-          </Pressable>
+          </View>
         )}
       </View>
 

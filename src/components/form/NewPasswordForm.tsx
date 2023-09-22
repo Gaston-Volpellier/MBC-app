@@ -176,25 +176,28 @@ export default function NewPasswordForm(): JSX.Element {
             )}
           </View>
           <View style={{marginBottom: 150}}>
-            <Pressable
-              style={[
-                componentStyles.secondaryButton,
-                !isValid
-                  ? backgroundColors.lightGray
-                  : backgroundColors.quaternary,
-                {marginTop: 'auto', maxWidth: 330},
-              ]}
-              disabled={!isValid}
-              onPress={() => handleSubmit()}>
-              <Text
+            <View style={styles.itemsC}>
+              <Pressable
                 style={[
-                  fonts.primarySmall,
-                  styles.textAlignC,
-                  fontColors.primary,
-                ]}>
-                CONTINUAR
-              </Text>
-            </Pressable>
+                  componentStyles.secondaryButton,
+                  !isValid
+                    ? backgroundColors.lightGray
+                    : backgroundColors.quaternary,
+                  {marginTop: 'auto', maxWidth: 330},
+                ]}
+                disabled={!isValid}
+                onPress={() => handleSubmit()}>
+                <Text
+                  style={[
+                    fonts.primarySmall,
+                    styles.textAlignC,
+                    fontColors.primary,
+                  ]}>
+                  CONTINUAR
+                </Text>
+              </Pressable>
+            </View>
+
             {passwordMsg && (
               <View style={[styles.horizontalAlign]}>
                 <Text

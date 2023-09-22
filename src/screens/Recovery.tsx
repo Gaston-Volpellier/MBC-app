@@ -17,7 +17,7 @@ export default function Recovery({navigation}: Props): JSX.Element {
           <Pressable onPress={() => navigation.goBack()}>
             <AntDesign
               name="closecircle"
-              size={35}
+              size={34}
               color={colors.terciary}
               style={componentStyles.IconSizeRegular}
             />
